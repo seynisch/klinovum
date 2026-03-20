@@ -285,17 +285,10 @@ function renderContent(c) {
     }
   }
 
-  // Logos
+  // Logos — only update label text, keep image logos from HTML intact
   if (c.logos) {
     setText('[data-cms="logos.label"]', c.logos.label);
-    var logosSlide = $('[data-cms="logos.items"]');
-    if (logosSlide && c.logos.items) {
-      var logosHTML = c.logos.items.map(function(name) {
-        return '<div class="logo-item logo-item-text"><span>' + name + '</span></div>';
-      });
-      // Duplicate for seamless loop
-      logosSlide.innerHTML = logosHTML.join('') + logosHTML.join('');
-    }
+    // Don't overwrite logos.items — images are hardcoded in HTML
   }
 
   // Problem
