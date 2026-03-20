@@ -1666,10 +1666,10 @@ p { font-size: 1.1rem; line-height: 1.5; }
 
   /* Numbers */
   .numbers { padding: 3rem 0; }
-  .numbers-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-  .number-card { padding: 1.25rem 0.75rem; }
-  .number-value { font-size: 2rem; }
-  .number-label { font-size: 0.7rem; }
+  .numbers-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .number-card { padding: 1rem 0.5rem; }
+  .number-value { font-size: 1.6rem; }
+  .number-label { font-size: 0.6rem; word-break: break-word; hyphens: auto; }
 
   /* Cases */
   .cases { padding: 4rem 0; }
