@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "title": "Klinovum — Organisationsentwicklung für Kliniken, MVZ und Pflegeeinrichtungen",
+    "description": "Klinovum begleitet Kliniken und Gesundheitseinrichtungen durch Strategie-, Führungs- und Kulturprozesse. Seit 1994, über 350 Kunden. Ein Angebot der Freiburger Akademie."
+  },
+  "hero": {
+    "badge": "Für Kliniken, MVZ & Pflegeeinrichtungen",
+    "headline": "Veränderungsprozesse im Gesundheitswesen —",
+    "headline_accent_1": "strukturiert begleitet,",
+    "headline_accent_2": "nachhaltig verankert.",
+    "subline": "Strategie, Führung und Kultur gehören zusammen. Wir begleiten Ihre Organisation von der Analyse bis zur messbaren Wirkung im Betrieb — mit über 30 Jahren Erfahrung und 350+ abgeschlossenen Projekten.",
+    "cta_text": "Kostenfreies Erstgespräch vereinbaren",
+    "cta_note": "30 Min. — vertraulich, ohne Verkaufsdruck",
+    "image_main": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
+    "image_secondary": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
+    "stat_number": "350+",
+    "stat_label": "Kunden seit 1994",
+    "proof_items": [
+      "Uniklinikum Ulm: Intensivbetten von 24 auf 32 in einem Jahr",
+      "Bosch Health Campus: Strategieprozess mit 50 Führungskräften",
+      "20–25% Prozesseffizienzsteigerung im Durchschnitt"
+    ]
+  },
+  "logos": {
+    "label": "Vertrauen von Entscheidern in führenden Gesundheitseinrichtungen",
+    "items": [
+      "Universitätsklinikum Ulm",
+      "Robert-Bosch-Krankenhaus",
+      "Deutsches Rotes Kreuz",
+      "Landespflegerat Baden-Württemberg",
+      "Franziskanerinnen von Reute",
+      "Diakonissenmutterhaus Olgaschwestern"
+    ]
+  },
+  "problem": {
+    "badge": "Die Ausgangslage",
+    "headline": "Transformation unter Druck",
+    "items": [
+      "Krankenhausstrukturreform, Ambulantisierung, Fachkräftemangel — der Veränderungsdruck war nie höher.",
+      "Ungelöste Konflikte zwischen Medizin, Pflege und Verwaltung blockieren strategische Entscheidungen.",
+      "Veränderungsprojekte werden gestartet, aber nicht zu Ende gebracht — weil Führungsstrukturen und Beteiligung fehlen.",
+      "Leistungsträger verlassen das Haus, Fluktuation steigt, die verbleibenden Teams arbeiten am Limit."
+    ],
+    "quote": "Wir wissen, dass sich etwas ändern muss. Aber wir schaffen es nicht aus eigener Kraft.",
+    "closing": "Das hören wir in fast jedem Erstgespräch. Der Wille ist da — was fehlt, ist ein strukturierter Weg und Begleitung von außen.",
+    "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80"
+  },
+  "solution": {
+    "badge": "Unser Ansatz",
+    "headline": "Verstehen. Verändern. Verankern.",
+    "intro": "Drei Phasen, ein Ziel: Veränderung, die im laufenden Betrieb funktioniert und von den Beteiligten selbst getragen wird.",
+    "steps": [
+      {
+        "title": "Verstehen",
+        "description": "Strukturierte Interviews, Ist-Analysen und Stakeholder-Mapping. Wir schaffen Klarheit über Dynamiken, Blockaden und tatsächliche Handlungsoptionen.",
+        "image": "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80"
+      },
+      {
+        "title": "Verändern",
+        "description": "Moderierte Workshops, neue Führungs- und Kommunikationsformate, begleitetes Projektmanagement — gemeinsam mit Ihren Führungskräften und Teams, nicht an ihnen vorbei.",
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80"
+      },
+      {
+        "title": "Verankern",
+        "description": "Reflexionsformate, Führungskräfte-Coaching und systematische Nachbegleitung stellen sicher, dass Veränderungen im 24/7-Betrieb bestehen bleiben.",
+        "image": "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=80"
+      }
+    ],
+    "differentiator": "Wir liefern keine Strategie-Folien und verschwinden. Wir begleiten die Umsetzung — auch wenn es politisch wird, Widerstände auftreten und Konflikte offen angesprochen werden müssen."
+  },
+  "numbers": [
+    { "value": "30+", "label": "Jahre aktiv", "count": 30 },
+    { "value": "350+", "label": "Kunden begleitet", "count": 350 },
+    { "value": "20–25%", "label": "Prozesseffizienzsteigerung", "count": null },
+    { "value": "22", "label": "Berater & Fachexperten", "count": 22 }
+  ],
+  "cases": {
+    "badge": "Referenzen",
+    "headline": "Ausgewählte Projekte aus dem Gesundheitswesen",
+    "items": [
+      {
+        "tag": "Universitätsklinikum",
+        "name": "Universitätsklinikum Ulm",
+        "subtitle": "Neuausrichtung der interdisziplinären Intensivversorgung",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&q=80",
+        "problem": "Hohe Belastung im Intensivbetrieb, unklare Führungsstrukturen zwischen Medizin, Pflege und Administration. Fehlende Formate für interdisziplinäre Zusammenarbeit.",
+        "results": [
+          "120+ Beteiligte aus Medizin, Pflege, Verwaltung",
+          "Intensivbetten von 24 auf 32 in einem Jahr",
+          "15+ Workshops und neue Führungsformate",
+          "Neues pflegerisches Leitungsteam etabliert"
+        ]
+      },
+      {
+        "tag": "Klinikverbund",
+        "name": "Bosch Health Campus",
+        "subtitle": "Gemeinsame Strategieentwicklung über Einrichtungsgrenzen hinweg",
+        "image": "https://images.unsplash.com/photo-1504439468489-c8920d796a29?w=800&q=80",
+        "problem": "Unterschiedliche strategische Zielbilder zwischen Medizin, Pflege und Verwaltung. Fehlende Plattform für die Abstimmung über Einrichtungen hinweg.",
+        "results": [
+          "50 Führungskräfte aktiv beteiligt",
+          "Gemeinsame Strategieplattform entwickelt",
+          "Alle Führungskräfte für Veränderung aktiviert"
+        ]
+      },
+      {
+        "tag": "Kirchlicher Träger",
+        "name": "Franziskanerinnen von Reute",
+        "subtitle": "Zukunftsvision und Reorganisation einer Ordensgemeinschaft",
+        "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80",
+        "problem": "Tiefgreifender struktureller Wandel. Unterschiedliche Interessen von Orden, Mitarbeitenden und regionalen Stakeholdern. Keine gemeinsame Zukunftsvision.",
+        "results": [
+          "40+ Interviews mit Stakeholdern",
+          "2 Visionsworkshops à 5 Tage",
+          "Zukunftskonzept für 35.000 m² Gebäudefläche"
+        ]
+      }
+    ]
+  },
+  "testimonial": {
+    "quote": "Die Zusammenarbeit mit der Freiburger Akademie hat bei uns einen echten Kulturwandel ausgelöst. Zum ersten Mal hatten alle Berufsgruppen das Gefühl, an einem Strang zu ziehen.",
+    "author": "Pflegedirektion, Universitätsklinikum",
+    "note": "Name auf Anfrage"
+  },
+  "video": {
+    "badge": "Persönlich",
+    "headline": "Lernen Sie uns kennen — in 2 Minuten",
+    "description": "Leon Mast erklärt, wie Klinovum arbeitet und warum klassische Beratung im Gesundheitswesen oft scheitert.",
+    "thumbnail": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
+    "video_url": ""
+  },
+  "about": {
+    "badge": "Über uns",
+    "headline": "Freiburger Akademie — seit 1994",
+    "lead": "Klinovum ist das Gesundheitswesen-Angebot der Freiburger Akademie — einem inhabergeführten Beratungsunternehmen mit Sitz in Stuttgart und über 30 Jahren Erfahrung in der Organisationsentwicklung.",
+    "body": "Unsere Berater vereinen Hintergründe aus Sozialwirtschaft, Klinikmanagement und Industrie. Wir kennen die Realität von Schichtdienst, Budgetdruck und interdisziplinären Spannungsfeldern — nicht aus Lehrbüchern, sondern aus über 350 Kundenprojekten.",
+    "image_1": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
+    "image_2": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+    "usps": [
+      "Erfahrung aus Sozialwirtschaft und Industrie — wir verstehen sowohl die menschliche als auch die betriebswirtschaftliche Seite von Veränderung.",
+      "Partizipativer Ansatz: Betroffene werden zu Beteiligten. Veränderung entsteht im System, nicht am Schreibtisch des Beraters.",
+      "Spezialisiert auf hochkomplexe Umgebungen: 24/7-Betriebe, Schichtdienst, politische Gremien und interdisziplinäre Spannungsfelder."
+    ]
+  },
+  "faq": {
+    "badge": "Häufige Fragen",
+    "headline": "Das werden wir oft gefragt",
+    "intro": "Transparenz ist Teil unseres Ansatzes — auch schon vor dem ersten Gespräch.",
+    "items": [
+      {
+        "question": "Was kostet eine Zusammenarbeit?",
+        "answer": "Das hängt vom Umfang ab. Typische Projekte bewegen sich zwischen 10.000 und 100.000 EUR. Im Erstgespräch klären wir Ihren Bedarf und geben eine realistische Einschätzung — bevor ein Angebot entsteht."
+      },
+      {
+        "question": "Wie lange dauert ein Veränderungsprozess?",
+        "answer": "Erste spürbare Ergebnisse sehen wir in der Regel nach 8–12 Wochen. Nachhaltige Verankerung braucht 6–18 Monate, je nach Komplexität und Größe der Organisation."
+      },
+      {
+        "question": "Funktioniert das auch im laufenden Klinikbetrieb?",
+        "answer": "Ja — das ist unser Spezialgebiet. Wir haben über 30 Jahre Erfahrung mit 24/7-Betrieben, Schichtdienst und Akutversorgung. Unsere Formate sind auf minimale Betriebsunterbrechung ausgelegt."
+      },
+      {
+        "question": "Wir hatten schon Berater — ohne Ergebnis. Was macht ihr anders?",
+        "answer": "Wir liefern keine PowerPoint-Strategie und gehen. Wir bleiben in der Umsetzung, arbeiten direkt mit Ihren Führungskräften und Teams, und messen Fortschritt an konkreten Ergebnissen — nicht an Workshop-Teilnehmerzahlen."
+      },
+      {
+        "question": "Was passiert nach dem Erstgespräch?",
+        "answer": "Nichts, wozu Sie nicht bereit sind. Nach dem Gespräch entscheiden Sie in Ruhe. Wenn es passt, erarbeiten wir ein konkretes Angebot. Wenn nicht, war es ein gutes Gespräch — ohne Nachfass-Telefonate."
+      }
+    ]
+  },
+  "contact": {
+    "headline": "Kostenfreies Erstgespräch",
+    "subline": "30 Minuten, vertraulich. Wir hören zu, ordnen Ihre Situation ein und geben eine erste fachliche Einschätzung — ohne Verkaufsdruck.",
+    "portrait": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80",
+    "portrait_name": "Leon Mast",
+    "portrait_role": "Geschäftsführer",
+    "phone": "+49 178 529 5565",
+    "process_steps": [
+      "Formular ausfüllen",
+      "Rückmeldung innerhalb 24h",
+      "30-Min-Gespräch mit Leon Mast",
+      "Erste fachliche Einschätzung"
+    ]
+  },
+  "footer": {
+    "address": "Hackländerstraße 23\n70184 Stuttgart",
+    "phone": "+49 711 5049 6603",
+    "email": "verwaltung@freiburger-akademie.de"
+  }
+}
