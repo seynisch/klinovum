@@ -412,29 +412,17 @@ p { font-size: 1.1rem; line-height: 1.5; }
 @media (max-width: 1024px) {
   .hero-layout {
     grid-template-columns: 1fr;
-    padding: 8rem 0 3rem;
+    padding: 7rem 0 2.5rem;
     min-height: auto;
     gap: 0;
   }
 
-  .hero-right { display: none; }
-}
-
-@media (max-width: 768px) {
-  .hero-layout {
-    padding: 6rem 0 2.5rem;
-    gap: 0;
-  }
-
-  .hero h1 { font-size: 1.8rem; line-height: 1.18; }
-  .hero-sub { font-size: 0.95rem; margin-bottom: 1.5rem; }
-
-  .hero-right { display: none; }
-
-  /* Hide proof bullets on mobile — cases section covers this */
+  .hero-right { display: none !important; }
   .hero-proof { display: none; }
 
-  /* Clean headline accent on mobile — no background highlight, just color */
+  .hero h1 { font-size: 2rem; line-height: 1.15; }
+  .hero-sub { font-size: 1rem; margin-bottom: 1.5rem; }
+
   .h1-accent {
     background: none;
     padding: 0;
@@ -443,12 +431,10 @@ p { font-size: 1.1rem; line-height: 1.5; }
     font-weight: 600;
   }
 
-  /* Shorten header CTA */
-  .btn-nav span { display: none; }
-  .btn-nav { font-size: 0.75rem; padding: 0.45rem 0.9rem; }
+  .btn-nav { font-size: 0.78rem; padding: 0.5rem 1rem; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .hero-layout { padding: 5.5rem 0 2rem; }
   .hero h1 { font-size: 1.5rem; line-height: 1.2; }
   .hero-sub { font-size: 0.88rem; line-height: 1.5; margin-bottom: 1.25rem; }
@@ -1704,13 +1690,20 @@ p { font-size: 1.1rem; line-height: 1.5; }
   .process-steps { flex-wrap: wrap; }
   .process-arrow { display: none; }
   .process-steps { justify-content: space-between; }
+
+  /* Logos smaller on tablet */
+  .logos { padding: 2rem 0; }
+  .logos-label { font-size: 0.65rem; margin-bottom: 1rem; }
+  .logos-slide { gap: 2.5rem; }
+  .logo-item img { height: 28px; max-width: 120px; }
+  .logo-item-text { padding: 0.3rem 0.75rem; }
+  .logo-item-text span { font-size: 0.7rem; }
 }
 
 @media (max-width: 768px) {
   .approach-grid { grid-template-columns: 1fr; }
   .usps-grid { grid-template-columns: 1fr; }
   .trust-row { flex-wrap: wrap; gap: 1.5rem; }
-  .hero-image-stack { max-width: 100%; }
   .about-image-grid { grid-template-columns: 1fr 1fr; }
   .about-img-1 { grid-row: auto; }
   .about-img { min-height: 180px; }
