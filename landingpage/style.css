@@ -414,17 +414,10 @@ p { font-size: 1.1rem; line-height: 1.5; }
     grid-template-columns: 1fr;
     padding: 8rem 0 3rem;
     min-height: auto;
-    gap: 2.5rem;
+    gap: 0;
   }
 
-  .hero-right {
-    order: -1;
-    max-width: 560px;
-  }
-
-  .hero-image-stack {
-    aspect-ratio: 16 / 9;
-  }
+  .hero-right { display: none; }
 }
 
 @media (max-width: 768px) {
