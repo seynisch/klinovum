@@ -420,7 +420,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
   .hero-right { display: none !important; }
   .hero-proof { display: none; }
 
-  .hero h1 { font-size: 2rem; line-height: 1.15; }
+  .hero h1 { font-size: 2.4rem; line-height: 1.12; }
   .hero-sub { font-size: 1rem; margin-bottom: 1.5rem; }
 
   .h1-accent {
@@ -436,7 +436,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
 
 @media (max-width: 600px) {
   .hero-layout { padding: 5.5rem 0 2rem; }
-  .hero h1 { font-size: 1.5rem; line-height: 1.2; }
+  .hero h1 { font-size: 2.25rem; line-height: 1.12; }
   .hero-sub { font-size: 0.88rem; line-height: 1.5; margin-bottom: 1.25rem; }
   .hero-cta-note { font-size: 0.72rem; }
   .hero-actions .btn { font-size: 0.85rem; padding: 0.85rem 1.25rem; }
