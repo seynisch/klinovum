@@ -1,16 +1,16 @@
 {
   "meta": {
-    "title": "Klinovum — Organisationsentwicklung für Kliniken, MVZ und Pflegeeinrichtungen",
+    "title": "Klinovum | Organisationsentwicklung für Kliniken, MVZ und Pflegeeinrichtungen",
     "description": "Klinovum begleitet Kliniken und Gesundheitseinrichtungen durch Strategie-, Führungs- und Kulturprozesse. Seit 1994, über 350 Kunden. Ein Angebot der Freiburger Akademie."
   },
   "hero": {
     "badge": "Für Kliniken, MVZ & Pflegeeinrichtungen",
-    "headline": "Veränderungsprozesse im Gesundheitswesen —",
-    "headline_accent_1": "strukturiert begleitet,",
+    "headline": "Veränderungsprozesse im Gesundheitswesen.",
+    "headline_accent_1": "Strukturiert begleitet,",
     "headline_accent_2": "nachhaltig verankert.",
-    "subline": "Strategie, Führung und Kultur gehören zusammen. Wir begleiten Ihre Organisation von der Analyse bis zur messbaren Wirkung im Betrieb — mit über 30 Jahren Erfahrung und 350+ abgeschlossenen Projekten.",
+    "subline": "Strategie, Führung und Kultur gehören zusammen. Wir begleiten Ihre Organisation von der Analyse bis zur messbaren Wirkung im Betrieb. Mit über 30 Jahren Erfahrung und 350+ abgeschlossenen Projekten.",
     "cta_text": "Kostenfreies Erstgespräch vereinbaren",
-    "cta_note": "30 Min. — vertraulich, ohne Verkaufsdruck",
+    "cta_note": "30 Min., vertraulich, ohne Verkaufsdruck",
     "image_main": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
     "image_secondary": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
     "stat_number": "350+",
@@ -36,13 +36,13 @@
     "badge": "Die Ausgangslage",
     "headline": "Transformation unter Druck",
     "items": [
-      "Krankenhausstrukturreform, Ambulantisierung, Fachkräftemangel — der Veränderungsdruck war nie höher.",
+      "Krankenhausstrukturreform, Ambulantisierung, Fachkräftemangel: der Veränderungsdruck war nie höher.",
       "Ungelöste Konflikte zwischen Medizin, Pflege und Verwaltung blockieren strategische Entscheidungen.",
-      "Veränderungsprojekte werden gestartet, aber nicht zu Ende gebracht — weil Führungsstrukturen und Beteiligung fehlen.",
+      "Veränderungsprojekte werden gestartet, aber nicht zu Ende gebracht, weil Führungsstrukturen und Beteiligung fehlen.",
       "Leistungsträger verlassen das Haus, Fluktuation steigt, die verbleibenden Teams arbeiten am Limit."
     ],
     "quote": "Wir wissen, dass sich etwas ändern muss. Aber wir schaffen es nicht aus eigener Kraft.",
-    "closing": "Das hören wir in fast jedem Erstgespräch. Der Wille ist da — was fehlt, ist ein strukturierter Weg und Begleitung von außen.",
+    "closing": "Das hören wir in fast jedem Erstgespräch. Der Wille ist da. Was fehlt, ist ein strukturierter Weg und Begleitung von außen.",
     "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80"
   },
   "solution": {
@@ -57,7 +57,7 @@
       },
       {
         "title": "Verändern",
-        "description": "Moderierte Workshops, neue Führungs- und Kommunikationsformate, begleitetes Projektmanagement — gemeinsam mit Ihren Führungskräften und Teams, nicht an ihnen vorbei.",
+        "description": "Moderierte Workshops, neue Führungs- und Kommunikationsformate, begleitetes Projektmanagement. Gemeinsam mit Ihren Führungskräften und Teams, nicht an ihnen vorbei.",
         "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80"
       },
       {
@@ -66,13 +66,13 @@
         "image": "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=80"
       }
     ],
-    "differentiator": "Wir liefern keine Strategie-Folien und verschwinden. Wir begleiten die Umsetzung — auch wenn es politisch wird, Widerstände auftreten und Konflikte offen angesprochen werden müssen."
+    "differentiator": "Wir liefern keine Strategie-Folien und verschwinden. Wir begleiten die Umsetzung, auch wenn es politisch wird, Widerstände auftreten und Konflikte offen angesprochen werden müssen."
   },
   "numbers": [
     { "value": "30+", "label": "Jahre aktiv", "count": 30 },
     { "value": "350+", "label": "Kunden begleitet", "count": 350 },
     { "value": "20–25%", "label": "Prozesseffizienzsteigerung", "count": null },
-    { "value": "22", "label": "Berater & Fachexperten", "count": 22 }
+    { "value": "18", "label": "Berater & Fachexperten", "count": 18 }
   ],
   "cases": {
     "badge": "Referenzen",
@@ -104,11 +104,11 @@
         ]
       },
       {
-        "tag": "Kirchlicher Träger",
-        "name": "Franziskanerinnen von Reute",
-        "subtitle": "Zukunftsvision und Reorganisation einer Ordensgemeinschaft",
+        "tag": "Diakonischer Träger",
+        "name": "Olgaschwestern Stuttgart",
+        "subtitle": "Zukunftsvision und Neuausrichtung einer diakonischen Einrichtung",
         "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80",
-        "problem": "Tiefgreifender struktureller Wandel. Unterschiedliche Interessen von Orden, Mitarbeitenden und regionalen Stakeholdern. Keine gemeinsame Zukunftsvision.",
+        "problem": "Tiefgreifender struktureller Wandel. Unterschiedliche Interessen von Träger, Mitarbeitenden und regionalen Stakeholdern. Keine gemeinsame Zukunftsvision.",
         "results": [
           "40+ Interviews mit Stakeholdern",
           "2 Visionsworkshops à 5 Tage",
@@ -124,20 +124,20 @@
   },
   "video": {
     "badge": "Persönlich",
-    "headline": "Lernen Sie uns kennen — in 2 Minuten",
+    "headline": "Lernen Sie uns kennen, in 2 Minuten",
     "description": "Leon Mast erklärt, wie Klinovum arbeitet und warum klassische Beratung im Gesundheitswesen oft scheitert.",
     "thumbnail": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
     "video_url": ""
   },
   "about": {
     "badge": "Über uns",
-    "headline": "Freiburger Akademie — seit 1994",
-    "lead": "Klinovum ist das Gesundheitswesen-Angebot der Freiburger Akademie — einem inhabergeführten Beratungsunternehmen mit Sitz in Stuttgart und über 30 Jahren Erfahrung in der Organisationsentwicklung.",
-    "body": "Unsere Berater vereinen Hintergründe aus Sozialwirtschaft, Klinikmanagement und Industrie. Wir kennen die Realität von Schichtdienst, Budgetdruck und interdisziplinären Spannungsfeldern — nicht aus Lehrbüchern, sondern aus über 350 Kundenprojekten.",
+    "headline": "Freiburger Akademie, seit 1994",
+    "lead": "Klinovum ist das Gesundheitswesen-Angebot der Freiburger Akademie, einem inhabergeführten Beratungsunternehmen mit Sitz in Stuttgart und über 30 Jahren Erfahrung in der Organisationsentwicklung.",
+    "body": "Unsere Berater vereinen Hintergründe aus Sozialwirtschaft, Klinikmanagement und Industrie. Wir kennen die Realität von Schichtdienst, Budgetdruck und interdisziplinären Spannungsfeldern. Nicht aus Lehrbüchern, sondern aus über 350 Kundenprojekten.",
     "image_1": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
     "image_2": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
     "usps": [
-      "Erfahrung aus Sozialwirtschaft und Industrie — wir verstehen sowohl die menschliche als auch die betriebswirtschaftliche Seite von Veränderung.",
+      "Erfahrung aus Sozialwirtschaft und Industrie. Wir verstehen sowohl die menschliche als auch die betriebswirtschaftliche Seite von Veränderung.",
       "Partizipativer Ansatz: Betroffene werden zu Beteiligten. Veränderung entsteht im System, nicht am Schreibtisch des Beraters.",
       "Spezialisiert auf hochkomplexe Umgebungen: 24/7-Betriebe, Schichtdienst, politische Gremien und interdisziplinäre Spannungsfelder."
     ]
@@ -145,11 +145,11 @@
   "faq": {
     "badge": "Häufige Fragen",
     "headline": "Das werden wir oft gefragt",
-    "intro": "Transparenz ist Teil unseres Ansatzes — auch schon vor dem ersten Gespräch.",
+    "intro": "Transparenz ist Teil unseres Ansatzes, auch schon vor dem ersten Gespräch.",
     "items": [
       {
         "question": "Was kostet eine Zusammenarbeit?",
-        "answer": "Das hängt vom Umfang ab. Typische Projekte bewegen sich zwischen 10.000 und 100.000 EUR. Im Erstgespräch klären wir Ihren Bedarf und geben eine realistische Einschätzung — bevor ein Angebot entsteht."
+        "answer": "Das hängt vom Umfang ab. Typische Projekte bewegen sich zwischen 10.000 und 100.000 EUR. Im Erstgespräch klären wir Ihren Bedarf und geben eine realistische Einschätzung, bevor ein Angebot entsteht."
       },
       {
         "question": "Wie lange dauert ein Veränderungsprozess?",
@@ -157,25 +157,25 @@
       },
       {
         "question": "Funktioniert das auch im laufenden Klinikbetrieb?",
-        "answer": "Ja — das ist unser Spezialgebiet. Wir haben über 30 Jahre Erfahrung mit 24/7-Betrieben, Schichtdienst und Akutversorgung. Unsere Formate sind auf minimale Betriebsunterbrechung ausgelegt."
+        "answer": "Ja, das ist unser Spezialgebiet. Wir haben über 30 Jahre Erfahrung mit 24/7-Betrieben, Schichtdienst und Akutversorgung. Unsere Formate sind auf minimale Betriebsunterbrechung ausgelegt."
       },
       {
-        "question": "Wir hatten schon Berater — ohne Ergebnis. Was macht ihr anders?",
-        "answer": "Wir liefern keine PowerPoint-Strategie und gehen. Wir bleiben in der Umsetzung, arbeiten direkt mit Ihren Führungskräften und Teams, und messen Fortschritt an konkreten Ergebnissen — nicht an Workshop-Teilnehmerzahlen."
+        "question": "Wir hatten schon Berater, ohne Ergebnis. Was macht ihr anders?",
+        "answer": "Wir liefern keine PowerPoint-Strategie und gehen. Wir bleiben in der Umsetzung, arbeiten direkt mit Ihren Führungskräften und Teams, und messen Fortschritt an konkreten Ergebnissen, nicht an Workshop-Teilnehmerzahlen."
       },
       {
         "question": "Was passiert nach dem Erstgespräch?",
-        "answer": "Nichts, wozu Sie nicht bereit sind. Nach dem Gespräch entscheiden Sie in Ruhe. Wenn es passt, erarbeiten wir ein konkretes Angebot. Wenn nicht, war es ein gutes Gespräch — ohne Nachfass-Telefonate."
+        "answer": "Nichts, wozu Sie nicht bereit sind. Nach dem Gespräch entscheiden Sie in Ruhe. Wenn es passt, erarbeiten wir ein konkretes Angebot. Wenn nicht, war es ein gutes Gespräch, ohne Nachfass-Telefonate."
       }
     ]
   },
   "contact": {
     "headline": "Kostenfreies Erstgespräch",
-    "subline": "30 Minuten, vertraulich. Wir hören zu, ordnen Ihre Situation ein und geben eine erste fachliche Einschätzung — ohne Verkaufsdruck.",
+    "subline": "30 Minuten, vertraulich. Wir hören zu, ordnen Ihre Situation ein und geben eine erste fachliche Einschätzung. Ohne Verkaufsdruck.",
     "portrait": "assets/leon-mast.jpg",
     "portrait_name": "Leon Mast",
     "portrait_role": "Geschäftsführer",
-    "phone": "+49 178 529 5565",
+    "phone": "+49 163 847 1894",
     "process_steps": [
       "Formular ausfüllen",
       "Rückmeldung innerhalb 24h",
