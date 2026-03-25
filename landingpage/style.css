@@ -495,10 +495,10 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 .logo-item img {
-  height: 40px;
+  height: 52px;
   width: auto;
-  max-width: 180px;
-  max-height: 40px;
+  max-width: 200px;
+  max-height: 52px;
   object-fit: contain;
   filter: grayscale(100%) brightness(0.4) contrast(1.2);
   opacity: 0.6;
@@ -1687,7 +1687,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
   .logos { padding: 2rem 0; }
   .logos-label { font-size: 0.65rem; margin-bottom: 1rem; }
   .logos-slide { gap: 2.5rem; }
-  .logo-item img { height: 28px; max-width: 120px; }
+  .logo-item img { height: 38px; max-width: 150px; }
   .logo-item-text { padding: 0.3rem 0.75rem; }
   .logo-item-text span { font-size: 0.7rem; }
 }
