@@ -117,11 +117,22 @@
       }
     ]
   },
-  "testimonial": {
-    "quote": "Die Zusammenarbeit mit der Freiburger Akademie hat bei uns einen echten Kulturwandel ausgelöst. Zum ersten Mal hatten alle Berufsgruppen das Gefühl, an einem Strang zu ziehen.",
-    "author": "Pflegedirektion, Universitätsklinikum",
-    "note": "Name auf Anfrage"
-  },
+  "testimonials": [
+    {
+      "quote": "Mit der Freiburger Akademie konnten wir erstmals eine tragfähige strategische Ausrichtung entwickeln. Besonders wertvoll war die bedürfnisorientierte Einbindung von Medizin, Pflegedienst und Verwaltung in ein gemeinsames Zielbild. Damit konnten wir eine solide Grundlage für die zukünftige Entwicklung der Organisation schaffen. In weiteren Projekten gelang die Etablierung von Pflegeexpert*innen mit innovativen und bedarfsgerechten Rollenmodellen. Als zentrale Herausforderungen wurden die gemeinsame Ausrichtung, Kommunikation und Vernetzung auf allen Ebenen gemeistert und dadurch die erhoffte Wirksamkeit erreicht!",
+      "name": "Robert Jeske",
+      "role": "Pflegevorstand, Bosch Health Campus GmbH",
+      "logo": "assets/logos/bosch-health-campus.png",
+      "avatar": "assets/team/robert-jeske.jpg"
+    },
+    {
+      "quote": "Die Freiburger Akademie hat uns in einer Phase tiefgreifender Veränderung genau das gegeben, was wir gebraucht haben: Struktur, Klarheit und eine belastbare Zukunftsperspektive. Gemeinsam mit Führung und Mitarbeitenden haben wir unseren diakonischen Auftrag neu ausgerichtet – und eine Strategie entwickelt, die trägt. Die Umsetzung ist in vollem Gang: mit dem Aufbau zeitgemäßer Führungsstrukturen und einem wachsenden ambulanten Pflegedienst.",
+      "name": "Ronny Brosende",
+      "role": "Vorstand, Olgaschwestern Stuttgart e.V.",
+      "logo": "assets/logos/olgaschwestern-new.jpg",
+      "avatar": "assets/team/ronny-brosende.jpg"
+    }
+  ],
   "video": {
     "badge": "Persönlich",
     "headline": "Lernen Sie uns kennen, in 2 Minuten",

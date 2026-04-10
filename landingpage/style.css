@@ -936,68 +936,114 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 /* ============================================
-   TESTIMONIAL + MID-CTA
+   TESTIMONIALS + MID-CTA
    ============================================ */
 .testimonial {
   padding: 5rem 0;
   background: var(--bg-light);
 }
 
-.testimonial-layout {
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.testimonials-header h2 {
+  margin-top: 0.75rem;
+}
+
+.testimonials-grid {
   display: grid;
-  grid-template-columns: 1.4fr 0.6fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.testimonial-card-logo {
+  height: 44px;
+  display: flex;
   align-items: center;
 }
 
-.testimonial-quote {
+.testimonial-card-logo img {
+  max-height: 44px;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
+}
+
+.testimonial-card-body {
   position: relative;
-  padding: 2.5rem 3rem;
-  background: var(--white);
-  border-left: 4px solid var(--primary);
-  border-radius: var(--radius);
+  flex: 1;
 }
 
 .testimonial-mark {
   position: absolute;
-  top: 1.5rem;
-  right: 2rem;
+  top: 0;
+  right: 0;
 }
 
-.testimonial-quote blockquote {
-  font-size: 1.25rem;
-  line-height: 1.6;
+.testimonial-card-body blockquote {
+  font-size: 0.975rem;
+  line-height: 1.7;
   color: var(--black);
   font-weight: 400;
   font-style: italic;
-  margin-bottom: 1.5rem;
+  padding-right: 2.5rem;
 }
 
-.testimonial-name {
+.testimonial-card-person {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial-person-name {
   display: block;
   font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--primary);
+  font-size: 0.9rem;
+  color: var(--black);
 }
 
-.testimonial-note {
+.testimonial-person-role {
   display: block;
-  font-size: 0.8rem;
-  color: var(--grey-light);
+  font-size: 0.78rem;
+  color: var(--grey);
+  margin-top: 0.15rem;
 }
 
-.testimonial-cta {
+.testimonials-cta {
   text-align: center;
 }
 
-.testimonial-cta h3 {
+.testimonials-cta h3 {
   font-size: 1.6rem;
   font-weight: 400;
   color: var(--black);
   margin-bottom: 0.75rem;
 }
 
-.testimonial-cta p {
+.testimonials-cta p {
   font-size: 0.95rem;
   color: var(--grey);
   margin-bottom: 1.5rem;
@@ -1326,8 +1372,8 @@ p { font-size: 1.1rem; line-height: 1.5; }
    RESPONSIVE additions
    ============================================ */
 @media (max-width: 1024px) {
-  .testimonial-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-  .testimonial-cta { text-align: left; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .testimonials-cta { text-align: left; }
   .team-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
   .process-steps { flex-wrap: wrap; gap: 0.75rem; }
@@ -1335,8 +1381,8 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 @media (max-width: 600px) {
-  .testimonial-quote { padding: 1.5rem; }
-  .testimonial-quote blockquote { font-size: 1.05rem; }
+  .testimonial-card { padding: 1.5rem; }
+  .testimonial-card-body blockquote { font-size: 0.9rem; }
   .process-steps { gap: 1rem; }
   .process-step p { font-size: 0.7rem; }
 }
@@ -1677,8 +1723,8 @@ p { font-size: 1.1rem; line-height: 1.5; }
 
   .team-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .testimonial-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .testimonial-cta { text-align: left; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .testimonials-cta { text-align: left; }
 
   .process-steps { flex-wrap: wrap; }
   .process-arrow { display: none; }
@@ -1763,12 +1809,12 @@ p { font-size: 1.1rem; line-height: 1.5; }
   .case-details { grid-template-columns: 1fr; gap: 1.25rem; }
   .case-detail p, .case-detail li { font-size: 0.85rem; }
 
-  /* Testimonial */
+  /* Testimonials */
   .testimonial { padding: 3.5rem 0; }
-  .testimonial-quote { padding: 1.5rem; }
-  .testimonial-quote blockquote { font-size: 1rem; }
-  .testimonial-mark { width: 32px; height: 24px; top: 1rem; right: 1rem; }
-  .testimonial-cta h3 { font-size: 1.3rem; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .testimonial-card { padding: 1.5rem; }
+  .testimonial-card-body blockquote { font-size: 0.9rem; }
+  .testimonials-cta h3 { font-size: 1.3rem; }
 
   /* Video */
   .team-section { padding: 4rem 0; }

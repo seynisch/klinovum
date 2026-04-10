@@ -186,11 +186,15 @@ function transformStoryblokContent(sb) {
         };
       }),
     },
-    testimonial: {
-      quote: sb.testimonial_quote || '',
-      author: sb.testimonial_author || '',
-      note: sb.testimonial_note || '',
-    },
+    testimonials: (sb.testimonials_items || []).map(function(t) {
+      return {
+        quote: t.quote || '',
+        name: t.name || '',
+        role: t.role || '',
+        logo: t.logo?.filename || '',
+        avatar: t.avatar?.filename || '',
+      };
+    }),
     video: {
       badge: sb.video_badge || '',
       headline: sb.video_headline || '',
@@ -349,11 +353,27 @@ function renderContent(c) {
     }
   }
 
-  // Testimonial
-  if (c.testimonial) {
-    setText('[data-cms="testimonial.quote"]', c.testimonial.quote);
-    setText('[data-cms="testimonial.author"]', c.testimonial.author);
-    setText('[data-cms="testimonial.note"]', c.testimonial.note);
+  // Testimonials
+  if (c.testimonials && Array.isArray(c.testimonials)) {
+    var testimonialsGrid = $('[data-cms="testimonials"]');
+    if (testimonialsGrid) {
+      testimonialsGrid.innerHTML = c.testimonials.map(function(t) {
+        return '<div class="testimonial-card" data-reveal>' +
+          '<div class="testimonial-card-logo"><img src="' + t.logo + '" alt="' + t.name + '"></div>' +
+          '<div class="testimonial-card-body">' +
+            '<svg class="testimonial-mark" width="36" height="27" viewBox="0 0 48 36" fill="none"><path d="M0 36V20.4C0 14.4 1.2 9.6 3.6 6C6 2.4 10.2 0 16.2 0l1.8 7.2C14.4 7.8 12 10.8 12 15.6h7.2V36H0Zm28.8 0V20.4c0-6 1.2-10.8 3.6-14.4C34.8 2.4 39 0 45 0l1.8 7.2C43.2 7.8 40.8 10.8 40.8 15.6H48V36H28.8Z" fill="#268ced" fill-opacity="0.12"/></svg>' +
+            '<blockquote>' + t.quote + '</blockquote>' +
+          '</div>' +
+          '<div class="testimonial-card-person">' +
+            '<img src="' + t.avatar + '" alt="' + t.name + '" class="testimonial-avatar">' +
+            '<div>' +
+              '<span class="testimonial-person-name">' + t.name + '</span>' +
+              '<span class="testimonial-person-role">' + t.role + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
   }
 
   // Video
