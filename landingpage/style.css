@@ -970,14 +970,14 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 .testimonial-card-logo {
-  height: 44px;
+  height: 56px;
   display: flex;
   align-items: center;
 }
 
 .testimonial-card-logo img {
-  max-height: 44px;
-  max-width: 160px;
+  max-height: 56px;
+  max-width: 200px;
   width: auto;
   object-fit: contain;
 }
