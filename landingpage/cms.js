@@ -181,7 +181,8 @@ function transformStoryblokContent(sb) {
           name: c.name || '',
           subtitle: c.subtitle || '',
           image: c.image?.filename || '',
-          problem: c.problem || '',
+          problem_items: (c.problem_items || []).map(function(p) { return p.text || p; }),
+          process: (c.process || []).map(function(p) { return p.text || p; }),
           results: (c.results || []).map(function(r) { return r.text || r; }),
         };
       }),
@@ -347,8 +348,10 @@ function renderContent(c) {
     var casesContainer = $('[data-cms="cases.items"]');
     if (casesContainer && c.cases.items) {
       casesContainer.innerHTML = c.cases.items.map(function(cs) {
+        var problemHTML = (cs.problem_items || []).map(function(p) { return '<li>' + p + '</li>'; }).join('');
+        var processHTML = (cs.process || []).map(function(p) { return '<li>' + p + '</li>'; }).join('');
         var resultsHTML = cs.results.map(function(r) { return '<li>' + r + '</li>'; }).join('');
-        return '<div class="case-card" data-reveal><div class="case-card-image"><img src="' + cs.image + '" alt="' + cs.name + '" class="case-img"><span class="case-tag">' + cs.tag + '</span></div><div class="case-card-content"><h3>' + cs.name + '</h3><p class="case-subtitle">' + cs.subtitle + '</p><div class="case-details"><div class="case-detail"><h4>Ausgangslage</h4><p>' + cs.problem + '</p></div><div class="case-detail"><h4>Ergebnis</h4><ul>' + resultsHTML + '</ul></div></div></div></div>';
+        return '<div class="case-card" data-reveal><div class="case-card-image"><img src="' + cs.image + '" alt="' + cs.name + '" class="case-img"><span class="case-tag">' + cs.tag + '</span></div><div class="case-card-content"><h3>' + cs.name + '</h3><p class="case-subtitle">' + cs.subtitle + '</p><div class="case-details"><div class="case-detail"><h4>Ausgangssituation</h4><ul>' + problemHTML + '</ul></div><div class="case-detail"><h4>Was wir gemacht haben</h4><ul>' + processHTML + '</ul></div><div class="case-detail"><h4>Ergebnis</h4><ul>' + resultsHTML + '</ul></div></div></div></div>';
       }).join('');
     }
   }

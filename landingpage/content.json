@@ -83,12 +83,22 @@
         "name": "Universitätsklinikum Ulm",
         "subtitle": "Neuausrichtung der interdisziplinären Intensivversorgung",
         "image": "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=800&q=80",
-        "problem": "Hohe Belastung im Intensivbetrieb, unklare Führungsstrukturen zwischen Medizin, Pflege und Administration und Konflikte. Fehlende Formate für interdisziplinäre Zusammenarbeit.",
+        "problem_items": [
+          "Hohe Arbeitsbelastung im Intensivbetrieb bei wachsender organisatorischer Komplexität",
+          "Unklare Führungs- und Kommunikationsstrukturen zwischen ärztlicher Leitung, Pflege und Administration",
+          "Fehlende strukturierte Formate für interdisziplinäre Zusammenarbeit und Entscheidungsprozesse"
+        ],
+        "process": [
+          "Interviews und Analyse bestehender Führungs- und Kommunikationsstrukturen",
+          "Konzeption und Moderation von Workshops mit Leitung, Pflege und ärztlichem Dienst",
+          "Entwicklung und Einführung neuer Führungs- und Zusammenarbeitsformate im laufenden Klinikbetrieb",
+          "Begleitung der Führungskräfte bei der praktischen Umsetzung im Alltag der Intensivstation"
+        ],
         "results": [
-          "120+ Beteiligte aus Medizin, Pflege, Verwaltung",
-          "Aufwuchs von Intensivbetten von 24 auf 32 in einem Jahr",
-          "15+ Workshops und neue Führungsformate",
-          "Neues pflegerisches Leitungsteam etabliert"
+          "Aufbau und funktionierende Führung eines neuen Pflege-Führungsteams",
+          "Etablierte Lernkultur und neues Projektmanagementoffice",
+          "Stabilisieren und Ausbau der Intensivbetten auf 32",
+          "Neue Kommunikations- und Entscheidungsformate mit 200+ Mitarbeitenden"
         ]
       },
       {
@@ -96,11 +106,22 @@
         "name": "Bosch Health Campus",
         "subtitle": "Gemeinsame Strategieentwicklung über Einrichtungsgrenzen hinweg",
         "image": "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&q=80",
-        "problem": "Unterschiedliche strategische Zielbilder zwischen Medizin, Pflege und Verwaltung. Fehlende Plattform für die Abstimmung über Einrichtungen hinweg.",
+        "problem_items": [
+          "Unterschiedliche strategische Perspektiven zwischen Medizin, Pflege und Verwaltung",
+          "Fehlende gemeinsame Plattform für strategische Abstimmung der Führungskräfte",
+          "Große Veranstaltungen ohne klar strukturierte Beteiligungs- und Moderationsformate"
+        ],
+        "process": [
+          "Analyse der strategischen Themenfelder und Erwartungen der beteiligten Berufsgruppen",
+          "Konzeption eines kollaborativen Strategieprozesses für den Bosch Health Campus",
+          "Planung, Moderation und Nachbereitung von Führungskräftetreffen und Strategieworkshops",
+          "Entwicklung von Kommunikationsformaten zur internen Abstimmung der Strategie"
+        ],
         "results": [
-          "50 oberste Führungskräfte aktiv beteiligt",
-          "Gemeinsame und neue Gesamtstrategie entwickelt",
-          "Alle Führungskräfte für Veränderung aktiviert und aktiv eingebunden"
+          "Klare Strategie für die Neuausrichtung des Bosch Health Campus",
+          "Wirksame operative Fokussierung mit über 7 Jahren Laufzeit",
+          "Neue Wege der Zusammenarbeit in allen Professionen",
+          "Absicherung der Integration neuer akademisierter Pflegekräfte"
         ]
       },
       {
@@ -108,11 +129,23 @@
         "name": "Olgaschwestern Stuttgart",
         "subtitle": "Zukunftsvision und Neuausrichtung einer diakonischen Einrichtung",
         "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80",
-        "problem": "Tiefgreifender struktureller Wandel. Unterschiedliche Interessen von Träger, Mitarbeitenden und regionalen Stakeholdern. Keine gemeinsame Zukunftsvision.",
+        "problem_items": [
+          "Träger und Einrichtungen vor grundlegenden strukturellen Veränderungen",
+          "Unterschiedliche Erwartungen von Mitarbeitenden, Führungskräften und regionalen Stakeholdern",
+          "Fehlende gemeinsame Vision für Gebäudenutzung und Organisation",
+          "Schwierige wirtschaftliche Lage und unzureichende Auslastung"
+        ],
+        "process": [
+          "Qualitative Interviews mit Mitarbeitenden, Stakeholdern und regionalen Akteuren",
+          "Moderation mehrtägiger Visions- und Konzeptworkshops",
+          "Entwicklung einer Zukunftsvision und Strategie mit organisatorischen Entwicklungsfeldern",
+          "Coaching ausgewählter Führungskräfte und Etablieren neuer Gremien"
+        ],
         "results": [
-          "40+ Interviews mit Stakeholdern",
-          "2 Visionsworkshops à 5 Tage",
-          "Zukunftskonzept für 35.000 m² Gebäudefläche"
+          "Klare gemeinsame Ausrichtung, die Historie und Zukunft über 200 Jahre verbindet",
+          "Fokus auf wirtschaftlich relevante Geschäftsbereiche wie den Pflegedienst im Quartier",
+          "Neues Verständnis für eigene und mitarbeiterorientierte Führung",
+          "Grundlage zur Entscheidung über einen Neubau mit > 35 Mio. EUR Volumen"
         ]
       }
     ]

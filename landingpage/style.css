@@ -902,16 +902,25 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 .case-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.case-detail h4 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
 }
 
 .case-detail p,
 .case-detail li {
   font-size: 0.9rem;
   color: var(--grey);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .case-detail ul {
