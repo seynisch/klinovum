@@ -11,7 +11,7 @@
     "subline": "Strategie, Führung und Kultur gehören zusammen. Wir begleiten Ihre Klinik oder Ihren Betrieb im Gesundheitsbereich von der Analyse bis zur messbaren Wirkung im Betrieb. Mit über 30 Jahren Erfahrung und 350+ abgeschlossenen Projekten.",
     "cta_text": "Kostenfreies Erstgespräch vereinbaren",
     "cta_note": "30 Min., vertraulich, ohne Verkaufsdruck",
-    "image_main": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
+    "image_main": "assets/hero-klinikflur.png",
     "image_secondary": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
     "stat_number": "350+",
     "stat_label": "Kunden seit 1994",
@@ -43,7 +43,7 @@
     ],
     "quote": "Wir wissen, dass sich etwas ändern muss. Aber wir schaffen es nicht aus eigener Kraft.",
     "closing": "Das hören wir in fast jedem Erstgespräch. Der Wille ist da. Was fehlt, sind ein strukturierter Weg sowie eine neutrale Begleitung von außen.",
-    "image": "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&q=80"
+    "image": "assets/problem-mediation.png"
   },
   "solution": {
     "badge": "Unser Ansatz",
