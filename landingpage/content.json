@@ -11,8 +11,8 @@
     "subline": "Strategie, Führung und Kultur gehören zusammen. Wir begleiten Ihre Klinik oder Ihren Betrieb im Gesundheitsbereich von der Analyse bis zur messbaren Wirkung im Betrieb. Mit über 30 Jahren Erfahrung und 350+ abgeschlossenen Projekten.",
     "cta_text": "Kostenfreies Erstgespräch vereinbaren",
     "cta_note": "30 Min., vertraulich, ohne Verkaufsdruck",
-    "image_main": "assets/hero-klinikflur.png",
-    "image_secondary": "assets/hero-workshop.png",
+    "image_main": "assets/hero-klinikflur.webp",
+    "image_secondary": "assets/hero-workshop.webp",
     "stat_number": "350+",
     "stat_label": "Kunden seit 1994",
     "proof_items": [
@@ -53,17 +53,17 @@
       {
         "title": "Verstehen",
         "description": "Strukturierte Interviews, Ist-Analysen und Stakeholder-Mapping. Wir schaffen Klarheit über Dynamiken und Blockaden und begleiten Sie darin, Ihre Herausforderungen auch deutlich zu benennen.",
-        "image": "assets/approach/verstehen.png"
+        "image": "assets/approach/verstehen.webp"
       },
       {
         "title": "Verändern",
         "description": "Moderierte Workshops, neue Führungs- und Kommunikationsformate, begleitetes Projektmanagement. Gemeinsame und bedürfnisorientierte Entwicklung mit Ihren Führungskräften und Teams. Praxisorientierte Umsetzung, offene Kommunikation, klare Struktur und hohe Eigenverantwortung.",
-        "image": "assets/approach/veraendern.png"
+        "image": "assets/approach/veraendern.webp"
       },
       {
         "title": "Verankern",
         "description": "Reflexionsformate, Führungskräfte-Coaching und systematische Nachbegleitung stellen sicher, dass Veränderungen im 24/7-Betrieb bestehen bleiben. Wir bleiben mit Ihnen gemeinsam dran!",
-        "image": "assets/approach/verankern.png"
+        "image": "assets/approach/verankern.webp"
       }
     ],
     "differentiator": "Wir liefern keine Strategie-Folien und verschwinden. Wir begleiten die Umsetzung, auch wenn es politisch wird, Widerstände auftreten und Konflikte offen angesprochen und gelöst werden müssen. Wir sind für Sie da und begleiten Ihre Veränderung nachhaltig und wirksam!"
@@ -82,7 +82,7 @@
         "tag": "Universitätsklinikum",
         "name": "Universitätsklinikum Ulm",
         "subtitle": "Neuausrichtung der interdisziplinären Intensivversorgung",
-        "image": "assets/cases/uniklinik-ulm.jpg",
+        "image": "assets/cases/uniklinik-ulm.webp",
         "problem_items": [
           "Hohe Arbeitsbelastung im Intensivbetrieb bei wachsender organisatorischer Komplexität",
           "Unklare Führungs- und Kommunikationsstrukturen zwischen ärztlicher Leitung, Pflege und Administration",
@@ -105,7 +105,7 @@
         "tag": "Klinikverbund",
         "name": "Bosch Health Campus",
         "subtitle": "Gemeinsame Strategieentwicklung über Einrichtungsgrenzen hinweg",
-        "image": "assets/cases/bosch-health-campus.jpg",
+        "image": "assets/cases/bosch-health-campus.webp",
         "problem_items": [
           "Unterschiedliche strategische Perspektiven zwischen Medizin, Pflege und Verwaltung",
           "Fehlende gemeinsame Plattform für strategische Abstimmung der Führungskräfte",
@@ -178,7 +178,7 @@
     "headline": "Freiburger Akademie, seit 1994",
     "lead": "Klinovum ist das Gesundheitswesen-Angebot der Freiburger Akademie, einem inhabergeführten Beratungsunternehmen mit Sitz in Stuttgart und über 30 Jahren Erfahrung in der Organisationsentwicklung.",
     "body": "Unsere Berater vereinen Hintergründe aus Sozialarbeit, Sozialwirtschaft, Psychologie, Klinikmanagement und Industrie. Wir kennen die Realität von Schichtdienst, Budgetdruck und interdisziplinären Spannungsfeldern. Nicht aus Lehrbüchern, sondern aus über 350 Kundenprojekten.",
-    "image_1": "assets/freiburgerakademie.jpg",
+    "image_1": "assets/freiburgerakademie.webp",
     "image_2": "",
     "usps": [
       "Erfahrung aus Sozialwirtschaft und Industrie. Wir verstehen sowohl die menschliche als auch die betriebswirtschaftliche Seite von Veränderung.",
@@ -216,7 +216,7 @@
   "contact": {
     "headline": "Kostenfreies Erstgespräch",
     "subline": "30 Minuten, vertraulich. Wir hören zu, ordnen Ihre Situation ein und geben eine erste fachliche Einschätzung. Ohne Verkaufsdruck.",
-    "portrait": "assets/leon-mast.jpg",
+    "portrait": "assets/leon-mast.webp",
     "portrait_name": "Leon Mast",
     "portrait_role": "Geschäftsführer",
     "phone": "+49 163 847 1894",
