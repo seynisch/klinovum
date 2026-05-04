@@ -1617,6 +1617,13 @@ p { font-size: 1.1rem; line-height: 1.5; }
   padding: 2.5rem;
 }
 
+.contact-right .calendly-inline-widget {
+  background: #ffffff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 25px 50px -20px rgba(0, 0, 0, 0.4);
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
