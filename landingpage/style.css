@@ -1446,7 +1446,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 .about-image-grid--single .about-img-wrapper {
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 20px 50px -25px rgba(25, 89, 150, 0.35);
   position: relative;
   height: 100%;
@@ -1455,7 +1455,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
 .about-image-grid--single .about-img {
   min-height: 0;
   height: 100%;
-  object-position: center center;
+  object-position: center bottom;
 }
 
 .about-img-wrapper {
