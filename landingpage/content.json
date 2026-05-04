@@ -82,7 +82,7 @@
         "tag": "Universitätsklinikum",
         "name": "Universitätsklinikum Ulm",
         "subtitle": "Neuausrichtung der interdisziplinären Intensivversorgung",
-        "image": "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=800&q=80",
+        "image": "assets/cases/uniklinik-ulm.jpg",
         "problem_items": [
           "Hohe Arbeitsbelastung im Intensivbetrieb bei wachsender organisatorischer Komplexität",
           "Unklare Führungs- und Kommunikationsstrukturen zwischen ärztlicher Leitung, Pflege und Administration",
@@ -105,7 +105,7 @@
         "tag": "Klinikverbund",
         "name": "Bosch Health Campus",
         "subtitle": "Gemeinsame Strategieentwicklung über Einrichtungsgrenzen hinweg",
-        "image": "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&q=80",
+        "image": "assets/cases/bosch-health-campus.jpg",
         "problem_items": [
           "Unterschiedliche strategische Perspektiven zwischen Medizin, Pflege und Verwaltung",
           "Fehlende gemeinsame Plattform für strategische Abstimmung der Führungskräfte",
@@ -128,7 +128,7 @@
         "tag": "Diakonischer Träger",
         "name": "Olgaschwestern Stuttgart",
         "subtitle": "Zukunftsvision und Neuausrichtung des Diakonissen-Mutterhauses der Olgaschwestern (DMO)",
-        "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80",
+        "image": "assets/cases/olgaschwestern.jpg",
         "problem_items": [
           "Diakonissen-Mutterhaus der Olgaschwestern (DMO) vor grundlegendem strukturellem Wandel",
           "Unterschiedliche Erwartungen von Schwesternschaft, Mitarbeitenden, Führungskräften und regionalen Stakeholdern",
@@ -178,7 +178,7 @@
     "headline": "Freiburger Akademie, seit 1994",
     "lead": "Klinovum ist das Gesundheitswesen-Angebot der Freiburger Akademie, einem inhabergeführten Beratungsunternehmen mit Sitz in Stuttgart und über 30 Jahren Erfahrung in der Organisationsentwicklung.",
     "body": "Unsere Berater vereinen Hintergründe aus Sozialarbeit, Sozialwirtschaft, Psychologie, Klinikmanagement und Industrie. Wir kennen die Realität von Schichtdienst, Budgetdruck und interdisziplinären Spannungsfeldern. Nicht aus Lehrbüchern, sondern aus über 350 Kundenprojekten.",
-    "image_1": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80",
+    "image_1": "assets/freiburgerakademie.webp",
     "image_2": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=80",
     "usps": [
       "Erfahrung aus Sozialwirtschaft und Industrie. Wir verstehen sowohl die menschliche als auch die betriebswirtschaftliche Seite von Veränderung.",
