@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://klinovum.de/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://klinovum.de/assets/hero-klinikflur.webp</image:loc>
+      <image:title>Klinovum Beratungsgespräch im Klinikflur</image:title>
+      <image:caption>Organisationsentwicklung im Krankenhaus</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://klinovum.de/assets/freiburgerakademie.webp</image:loc>
+      <image:title>Freiburger Akademie Stuttgart</image:title>
+      <image:caption>Sitz der Freiburger Akademie, Mutterhaus von Klinovum</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://klinovum.de/assets/cases/uniklinik-ulm.webp</image:loc>
+      <image:title>Case Study Universitätsklinikum Ulm</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://klinovum.de/assets/cases/bosch-health-campus.webp</image:loc>
+      <image:title>Case Study Bosch Health Campus</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://klinovum.de/assets/cases/olgaschwestern.jpg</image:loc>
+      <image:title>Case Study Olgaschwestern Stuttgart</image:title>
+    </image:image>
+  </url>
+</urlset>
