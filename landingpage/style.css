@@ -202,9 +202,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
 .logo-dark { display: none; }
 
 .site-header {
-  background: rgba(25, 89, 150, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: transparent;
 }
 
 .btn-nav {
@@ -214,6 +212,8 @@ p { font-size: 1.1rem; line-height: 1.5; }
 
 .site-header.scrolled {
   background: var(--white);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 12px rgba(0,0,0,0.06);
   padding: 0.75rem 0;
 }
