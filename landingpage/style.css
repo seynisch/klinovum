@@ -1410,8 +1410,16 @@ p { font-size: 1.1rem; line-height: 1.5; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
+  align-items: stretch;
   margin-bottom: 4rem;
+}
+
+.about-right {
+  display: flex;
+}
+
+.about-right .about-image-grid {
+  flex: 1;
 }
 
 .about-lead {
@@ -1440,14 +1448,14 @@ p { font-size: 1.1rem; line-height: 1.5; }
 .about-image-grid--single .about-img-wrapper {
   border-radius: 16px;
   box-shadow: 0 20px 50px -25px rgba(25, 89, 150, 0.35);
-  aspect-ratio: 4 / 5;
   position: relative;
+  height: 100%;
 }
 
 .about-image-grid--single .about-img {
   min-height: 0;
   height: 100%;
-  object-position: center 35%;
+  object-position: center center;
 }
 
 .about-img-wrapper {
