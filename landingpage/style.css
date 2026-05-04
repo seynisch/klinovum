@@ -1433,6 +1433,10 @@ p { font-size: 1.1rem; line-height: 1.5; }
   gap: 1rem;
 }
 
+.about-image-grid--single {
+  grid-template-columns: 1fr;
+}
+
 .about-img-wrapper {
   overflow: hidden;
 }
