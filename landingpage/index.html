@@ -43,10 +43,7 @@
   <link rel="preload" as="image" href="assets/hero-klinikflur.webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
   <script src="cms.js" defer></script>
-  <script src="https://app.storyblok.com/f/storyblok-v2-latest.js" defer></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <!-- Structured data (JSON-LD) -->
   <script type="application/ld+json">
@@ -1062,6 +1059,58 @@
         item.style.transform = 'translateX(0)';
       });
     }, 100);
+  </script>
+
+  <!-- Lazy-load Calendly only when the contact section approaches the viewport -->
+  <script>
+    (function () {
+      var loaded = false;
+      function loadCalendly() {
+        if (loaded) return;
+        loaded = true;
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(css);
+        var js = document.createElement('script');
+        js.src = 'https://assets.calendly.com/assets/external/widget.js';
+        js.async = true;
+        document.body.appendChild(js);
+      }
+      var target = document.getElementById('kontakt');
+      if (!target || !('IntersectionObserver' in window)) {
+        // Fallback: load after first user interaction or 4s of idle time
+        var fired = false;
+        var fire = function () { if (!fired) { fired = true; loadCalendly(); } };
+        ['scroll', 'pointerdown', 'keydown'].forEach(function (e) {
+          window.addEventListener(e, fire, { once: true, passive: true });
+        });
+        setTimeout(fire, 4000);
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            loadCalendly();
+            io.disconnect();
+          }
+        });
+      }, { rootMargin: '600px 0px' });
+      io.observe(target);
+    })();
+  </script>
+
+  <!-- Storyblok visual-editor bridge: only load inside the Storyblok preview iframe -->
+  <script>
+    (function () {
+      var inEditor = false;
+      try { inEditor = window.self !== window.top; } catch (_) { inEditor = true; }
+      if (!inEditor && location.search.indexOf('_storyblok') === -1) return;
+      var s = document.createElement('script');
+      s.src = 'https://app.storyblok.com/f/storyblok-v2-latest.js';
+      s.async = true;
+      document.head.appendChild(s);
+    })();
   </script>
 
 </body>
