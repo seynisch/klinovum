@@ -1437,6 +1437,19 @@ p { font-size: 1.1rem; line-height: 1.5; }
   grid-template-columns: 1fr;
 }
 
+.about-image-grid--single .about-img-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 20px 50px -25px rgba(25, 89, 150, 0.35);
+  aspect-ratio: 4 / 5;
+  position: relative;
+}
+
+.about-image-grid--single .about-img {
+  min-height: 0;
+  height: 100%;
+  object-position: center 35%;
+}
+
 .about-img-wrapper {
   overflow: hidden;
 }
