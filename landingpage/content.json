@@ -16,7 +16,7 @@
     "stat_number": "350+",
     "stat_label": "Kunden seit 1994",
     "proof_items": [
-      "Uniklinikum Ulm: Intensivbetten von 24 auf 32 in einem Jahr",
+      "Uniklinikum Ulm: Kulturelle Transformation und Erweiterung der Intensivkapazitäten um +4 Betten",
       "Bosch Health Campus: Strategieprozess mit 50 Führungskräften",
       "20-25% Prozesseffizienzsteigerung im Durchschnitt"
     ]
@@ -81,7 +81,7 @@
       {
         "tag": "Universitätsklinikum",
         "name": "Universitätsklinikum Ulm",
-        "subtitle": "Neuausrichtung der interdisziplinären Intensivversorgung",
+        "subtitle": "Neuausrichtung der interdisziplinären operativen Intensivstation",
         "image": "assets/cases/uniklinik-ulm.webp",
         "problem_items": [
           "Hohe Arbeitsbelastung im Intensivbetrieb bei wachsender organisatorischer Komplexität",
@@ -96,8 +96,8 @@
         ],
         "results": [
           "Aufbau und funktionierende Führung eines neuen Pflege-Führungsteams",
-          "Etablierte Lernkultur und neues Projektmanagementoffice",
-          "Stabilisieren und Ausbau der Intensivbetten auf 32",
+          "Etablierte Lernkultur und ein für die IOI spezifisches Projektmanagementoffice",
+          "Stabilisierung und Erweiterung der Intensivkapazitäten um +4 Betten",
           "Neue Kommunikations- und Entscheidungsformate mit 200+ Mitarbeitenden"
         ]
       },
@@ -164,6 +164,13 @@
       "role": "Vorstand, Olgaschwestern Stuttgart e.V.",
       "logo": "assets/logos/olgaschwestern-new.svg",
       "avatar": "assets/team/ronny-brosende.jpg"
+    },
+    {
+      "quote": "Das Team der FRAK hat uns über zwei Jahre hinweg in einer hochkomplexen Transformationsphase begleitet. Auf unserer interdisziplinären operativen Intensivstation mit über 200 Mitarbeitenden ist es gelungen, klare Führungsstrukturen zu etablieren, neue Prozesse und eine Projektmanagement-Office-Struktur aufzubauen und die Zusammenarbeit zwischen Pflege und Ärzteschaft nachhaltig zu verbessern. Gleichzeitig konnten wir die Intensivkapazitäten um 4 Betten erweitern und das Team insgesamt stabilisieren. Heute sind wir für die zukünftigen Veränderungen, bedingt durch KHVVG und KHAG, bestens vorbereitet!",
+      "name": "Prof. Dr. Bettina Jungwirth",
+      "role": "Ärztliche Direktorin der Klinik für Anästhesiologie und Intensivmedizin, Universitätsklinikum Ulm",
+      "logo": "assets/logos/uniklinik-ulm.png",
+      "avatar": "assets/team/bettina-jungwirth.jpg"
     }
   ],
   "video": {

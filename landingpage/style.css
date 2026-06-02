@@ -963,19 +963,20 @@ p { font-size: 1.1rem; line-height: 1.5; }
 
 .testimonials-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   margin-bottom: 3.5rem;
+  align-items: stretch;
 }
 
 .testimonial-card {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2.25rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .testimonial-card-logo {
@@ -1003,12 +1004,12 @@ p { font-size: 1.1rem; line-height: 1.5; }
 }
 
 .testimonial-card-body blockquote {
-  font-size: 0.975rem;
-  line-height: 1.7;
+  font-size: 0.925rem;
+  line-height: 1.65;
   color: var(--black);
   font-weight: 400;
   font-style: italic;
-  padding-right: 2.5rem;
+  padding-right: 2.25rem;
 }
 
 .testimonial-card-person {
@@ -1381,7 +1382,7 @@ p { font-size: 1.1rem; line-height: 1.5; }
    RESPONSIVE additions
    ============================================ */
 @media (max-width: 1024px) {
-  .testimonials-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .testimonials-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   .testimonials-cta { text-align: left; }
   .team-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   .faq-layout { grid-template-columns: 1fr; gap: 2rem; }

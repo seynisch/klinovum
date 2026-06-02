@@ -108,5 +108,22 @@
 
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
+  <!-- Leadfeeder (Dealfront) Visitor-Tracking, laedt nur wenn auf der Hauptseite bereits "Verstanden" gewaehlt wurde -->
+  <script>
+    var LEADFEEDER_TRACKER_ID = 'lAxoEaKQlAo7OYGd';
+    (function () {
+      if (localStorage.getItem('klinovum_cookies') !== 'all') return;
+      if (!LEADFEEDER_TRACKER_ID || LEADFEEDER_TRACKER_ID.indexOf('REPLACE_WITH') === 0) return;
+      (function (ss, ex) {
+        window.ldfdr = window.ldfdr || function () { (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments)); };
+        (function (d, s) {
+          var fs = d.getElementsByTagName(s)[0];
+          function ce(src) { var cs = d.createElement(s); cs.src = src; cs.async = 1; fs.parentNode.insertBefore(cs, fs); }
+          ce('https://sc.lfeeder.com/lftracker_v1_' + ss + (ex ? '_' + ex : '') + '.js');
+        })(document, 'script');
+      })(LEADFEEDER_TRACKER_ID);
+    })();
+  </script>
+
 </body>
 </html>
