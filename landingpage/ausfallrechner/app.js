@@ -223,16 +223,17 @@
 
   /* ---------- Ergebnis Stufe 1 ---------- */
   function countUp(el, to, dur) {
-    if (reduced || !dur) { el.textContent = C.fmt(Math.round(to / 1000) * 1000); return; }
-    var t0 = null;
+    if (reduced || !dur) { el.textContent = C.fmt(Math.round(to / 5000) * 5000); return; }
+    var t0 = null, done = false;
     // Sicherheitsnetz: Browser pausieren Animationen in Hintergrund-Tabs, die Zahl soll trotzdem erscheinen
-    setTimeout(function () { el.textContent = C.fmt(Math.round(to / 1000) * 1000); }, dur + 600);
+    setTimeout(function () { done = true; el.textContent = C.fmt(Math.round(to / 5000) * 5000); }, dur + 600);
     function step(ts) {
+      if (done) return;
       if (!t0) t0 = ts;
       var p = Math.min(1, (ts - t0) / dur);
       var e = 1 - Math.pow(1 - p, 3);
-      el.textContent = C.fmt(Math.round(to * e / 1000) * 1000);
-      if (p < 1) requestAnimationFrame(step); else el.textContent = C.fmt(Math.round(to / 1000) * 1000);
+      el.textContent = C.fmt(Math.round(to * e / 5000) * 5000);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = C.fmt(Math.round(to / 5000) * 5000);
     }
     requestAnimationFrame(step);
   }
@@ -251,9 +252,9 @@
   function rResult1() {
     var c = currentCalc();
     var f = frame('result1', { kicker: S.haus ? S.haus : 'Ihr Ergebnis', title: 'Krankheitsausfälle kosten Ihr Haus im Jahr etwa' });
-    var numEl = h('span', { class: 'rc-result-num', 'aria-live': 'polite' }, [reduced ? C.fmt(Math.round(c.mid / 1000) * 1000) : '…']);
+    var numEl = h('span', { class: 'rc-result-num', 'aria-live': 'polite' }, [reduced ? C.fmt(Math.round(c.mid / 5000) * 5000) : '…']);
     f.body.appendChild(h('div', { class: 'rc-result' }, [numEl, h('span', { class: 'rc-result-cur', text: ' €' })]));
-    f.body.appendChild(h('p', { class: 'rc-result-range', text: 'Spanne: ' + C.eur(c.lo) + ' bis ' + C.eur(c.hi) + '. Eine Schätzung, ' + (c.exakt ? 'mit Ihrer Prozentangabe recht genau.' : 'eher grob.') }));
+    f.body.appendChild(h('p', { class: 'rc-result-range', text: 'Spanne: ' + C.eur(c.lo, 10000) + ' bis ' + C.eur(c.hi, 10000) + '. Eine Größenordnung, keine genaue Rechnung.' + (c.exakt ? '' : ' Mit Ihrer genauen Prozentzahl wird sie enger.') }));
     if (!reduced) setTimeout(function () { countUp(numEl, c.mid, 1400); }, 900); else countUp(numEl, c.mid, 0);
 
     var tm = tippMessage(c);
@@ -275,7 +276,11 @@
   }
 
   function summaryText(c) {
-    return 'Ausfall-Rechner (Klinovum): Krankheitsausfälle kosten ' + (S.haus ? S.haus : 'das Haus') + ' im Jahr etwa ' + C.eur(c.mid) + ' (Spanne ' + C.eur(c.lo) + ' bis ' + C.eur(c.hi) + '), das entspricht ' + C.dec1(c.av) + ' Vollkräften. Ein Prozentpunkt Krankenstand ist etwa ' + C.eur(c.pp) + ' im Jahr wert. Alle Werte sind Schätzungen.';
+    return 'Ausfall-Rechner (Klinovum): Krankheitsausfälle kosten ' + (S.haus ? S.haus : 'das Haus') + ' im Jahr etwa ' + C.eur(c.mid, 5000) + ' (Spanne ' + C.eur(c.lo, 10000) + ' bis ' + C.eur(c.hi, 10000) + '), das entspricht ' + C.dec1(c.av) + ' Vollkräften. Ein Prozentpunkt Krankenstand ist etwa ' + C.eur(c.pp, 1000) + ' im Jahr wert. Alle Werte sind Schätzungen.';
+  }
+
+  function srcItem(what, tag, text) {
+    return h('li', null, [h('b', { text: what + ' ' }), h('span', { class: 'rc-srctag ' + (tag === 'Annahme' ? 'assume' : 'ok'), text: tag }), h('span', { class: 'rc-src-t', text: text })]);
   }
 
   // Alles Zusätzliche steckt hinter einem Aufklapper
@@ -297,7 +302,14 @@
       h('div', { class: 'rc-field' }, [h('label', { for: 'rc-vk', text: 'Vollkräfte Pflege und Betreuung' }), vk]),
       h('div', { class: 'rc-field' }, [h('label', { for: 'rc-ko', text: 'Arbeitgeberkosten je Vollkraft und Jahr (€)' }), ko])
     ]));
-    d.appendChild(h('p', { class: 'rc-note', text: 'Vorgabe: ' + C.CFG.vkProPlatz + ' Vollkräfte je Platz und ' + C.fmt(C.CFG.kostenJeVk) + ' € je Vollkraft. Der Ersatz kostet je nach Weg ein Vielfaches der Normalstunde (Einspringen am freien Tag rund das 1,15-Fache, Springer das 1,05-Fache, Zeitarbeit das 1,8-Fache). Das sind Annahmen, keine Messwerte.' }));
+    d.appendChild(h('h4', { class: 'rc-src-h', text: 'Was belegt ist und was Annahme' }));
+    d.appendChild(h('ul', { class: 'rc-src' }, [
+      srcItem('Kosten je Vollkraft (' + C.fmt(C.CFG.kostenJeVk) + ' €)', 'abgeleitet', 'Altenpflege-Fachkraft im Median 4.153 € im Monat (Bundesagentur für Arbeit, 2024), Helfer rund 2.800 € (Schätzung), dazu rund 18 % Arbeitgeberanteil (IW Köln). Das Verhältnis 50:50 ist angenommen.'),
+      srcItem('Vollkräfte je Platz (' + C.CFG.vkProPlatz + ')', 'Annahme', 'Faustwert ohne Quelle. Bitte oben mit Ihrem Wert überschreiben, das macht die Spanne enger.'),
+      srcItem('Krankenstand je Karte', 'Orientierung', 'Das Gesundheits- und Sozialwesen lag bei der AOK Niedersachsen 2025 bei 7,7 %, die Altenpflege fehlt laut DAK deutlich öfter als der Durchschnitt. Die Bereiche der Karten sind eine Schätzung.'),
+      srcItem('Ersatzkosten (1,05 bis 1,8-fach)', 'Annahme', 'Zeitarbeit ist in der Pflege selten (rund 1,3 % der Pflegekräfte, Bundesagentur). Die Faktoren sind Annahmen; die Deutsche Krankenhausgesellschaft forderte, Leiharbeit auf das 1,5-Fache zu begrenzen, die Sätze lagen also darüber.'),
+      srcItem('Anteil Entgeltfortzahlung (65 %)', 'Annahme', 'Der Rest sind Ausfalltage über sechs Wochen, in denen die Krankenkasse zahlt.')
+    ]));
     d.appendChild(btn('Neu rechnen', 'btn-secondary', function () {
       var v = parseFloat(vk.value), k = parseFloat(ko.value);
       S.vk = v > 0 ? v : null; S.kosten = k > 0 ? k : null;
@@ -370,7 +382,7 @@
       h('p', { text: P.kern })
     ]));
     f.body.appendChild(h('p', { class: 'rc-summary' }, [
-      'Die Ausfälle kosten Sie etwa ', h('b', { text: C.eur(c.mid) }), ' im Jahr, das entspricht ', h('b', { text: C.dec1(c.av) + ' Vollkräften' }), '. Ein Prozentpunkt Krankenstand ist ', h('b', { text: C.eur(c.pp) }), ' wert.'
+      'Die Ausfälle kosten Sie etwa ', h('b', { text: C.eur(c.mid, 5000) }), ' im Jahr, das entspricht ', h('b', { text: C.dec1(c.av) + ' Vollkräften' }), '. Ein Prozentpunkt Krankenstand ist ', h('b', { text: C.eur(c.pp) }), ' wert.'
     ]));
 
     // 2. Fieberkurve

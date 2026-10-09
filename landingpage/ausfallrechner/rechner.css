@@ -147,6 +147,15 @@
 .rc-assume .rc-stack { margin-top: 0.25rem; }
 .rc-assume .rc-letter { margin-top: 0.25rem; }
 
+/* ---------- Herkunft der Annahmen ---------- */
+.rc-src-h { margin-top: 0.5rem; }
+.rc-src { display: grid; gap: 0.9rem; }
+.rc-src li { display: grid; gap: 0.25rem; font-size: 0.92rem; line-height: 1.45; }
+.rc-src-t { color: var(--grey); }
+.rc-srctag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.1rem 0.45rem; border-radius: var(--radius); width: fit-content; }
+.rc-srctag.ok { background: var(--bg-badge); color: var(--primary); }
+.rc-srctag.assume { background: #fdf0d8; color: #8a5a00; }
+
 /* ---------- Zwischenstand ---------- */
 .rc-fact { background: var(--bg-light); padding: 1.25rem 1.4rem; border-radius: var(--radius); display: grid; gap: 0.5rem; }
 .rc-fact p { font-size: 1.05rem; }

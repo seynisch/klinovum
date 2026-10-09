@@ -10,7 +10,9 @@
   /* ---------- Annahmen (sichtbar im Rechner, änderbar) ---------- */
   var CFG = {
     vkProPlatz: 0.55,      // Vollkräfte Pflege und Betreuung je Platz (Faustwert, vor Livegang prüfen)
-    kostenJeVk: 55000,     // Arbeitgeberkosten je Vollkraft und Jahr (Mix aus Fach- und Hilfskräften)
+    kostenJeVk: 50000,     // Arbeitgeberkosten je Vollkraft und Jahr: Fachkraft 4.153 €/Monat (BA 2024), Hilfskraft ca. 2.800 €, +18 % Arbeitgeberanteil (IW), Mix 50:50 angenommen
+    unsicherVk: 0.15,      // zusätzliche Unschärfe der Spanne, solange die Vollkräfte nur per Faustwert geschätzt sind
+    unsicherKosten: 0.05,  // dito für die Kosten je Vollkraft
     folgeAnteil: 0.35,     // Folgekosten (Fluktuation, Folgeausfälle) bis zu x Prozent der Kernzahl
     fzDefault: 0.65,       // Anteil der Ausfalltage in Entgeltfortzahlung (bis sechs Wochen), ohne eigene Frage
     spreadLo: 0.9,         // Unschärfe der Ersatzkosten nach unten
@@ -73,8 +75,10 @@
     }
     var ksMid = (ks.lo + ks.hi) / 2;
     var m = at(ksMid, 1);
-    var lo = at(ks.lo, CFG.spreadLo).total;
-    var hi = at(ks.hi, CFG.spreadHi).total;
+    // Spanne: Krankenstands-Bereich, Ersatzfaktor und, solange nur Faustwerte gelten, Vollkräfte und Kosten
+    var unc = (s.vk ? 0 : CFG.unsicherVk) + (s.kosten ? 0 : CFG.unsicherKosten);
+    var lo = at(ks.lo, CFG.spreadLo).total * (1 - unc);
+    var hi = at(ks.hi, CFG.spreadHi).total * (1 + unc);
     return {
       vk: vk, kosten: kosten, ksLo: ks.lo, ksHi: ks.hi, ksMid: ksMid,
       av: m.av, l1: m.l1, l2: m.l2, mid: m.total, lo: lo, hi: hi,
@@ -261,7 +265,7 @@
     lines.push('');
     lines.push('ich habe die Krankheitsausfälle in ' + haus + ' mit dem Ausfall-Rechner von Klinovum eingeschätzt. Alle Werte sind Schätzungen auf Basis meiner Angaben.');
     lines.push('');
-    lines.push('Zur Größenordnung: Die Ausfälle kosten uns im Jahr grob ' + eur(c.mid) + ' (Spanne ' + eur(c.lo) + ' bis ' + eur(c.hi) + '). Das entspricht etwa ' + dec1(c.av) + ' Vollkräften, die wir bezahlen und nicht im Dienst haben, oder rund ' + fmt(Math.round(c.perPlatzMonat / 10) * 10) + ' € je Platz und Monat. Ein Prozentpunkt weniger Krankenstand wäre etwa ' + eur(c.pp) + ' im Jahr wert.');
+    lines.push('Zur Größenordnung: Die Ausfälle kosten uns im Jahr grob ' + eur(c.mid, 5000) + ' (Spanne ' + eur(c.lo, 10000) + ' bis ' + eur(c.hi, 10000) + '). Das entspricht etwa ' + dec1(c.av) + ' Vollkräften, die wir bezahlen und nicht im Dienst haben, oder rund ' + fmt(Math.round(c.perPlatzMonat / 10) * 10) + ' € je Platz und Monat. Ein Prozentpunkt weniger Krankenstand wäre etwa ' + eur(c.pp, 1000) + ' im Jahr wert.');
     lines.push('');
     lines.push('Zur Ursache: Die Auswertung deutet auf das Muster „' + p.name.replace(/^(Der|Die|Das) /, '') + '“. ' + p.kern);
     lines.push('');
