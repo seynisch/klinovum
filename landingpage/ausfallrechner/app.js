@@ -364,7 +364,7 @@
       h('div', { class: 'rc-field' }, [h('label', { for: 'rc-vk', text: 'Vollkräfte Pflege und Betreuung' }), vk]),
       h('div', { class: 'rc-field' }, [h('label', { for: 'rc-ko', text: 'Arbeitgeberkosten je Vollkraft und Jahr (€)' }), ko])
     ]));
-    d.appendChild(h('p', { class: 'rc-note', text: 'Vorgabe: ' + C.CFG.vkProPlatz + ' Vollkräfte je Platz und ' + C.fmt(C.CFG.kostenJeVk) + ' € je Vollkraft (Mix aus Fach- und Hilfskräften). Der Ersatz kostet je nach Weg ein Vielfaches der Normalstunde: Einspringen aus dem Frei rund das 1,15-Fache bei 60 Prozent Abdeckung, Springer das 1,05-Fache, Zeitarbeit das 1,8-Fache. Das sind Annahmen, keine Messwerte.' }));
+    d.appendChild(h('p', { class: 'rc-note', text: 'Vorgabe: ' + C.CFG.vkProPlatz + ' Vollkräfte je Platz und ' + C.fmt(C.CFG.kostenJeVk) + ' € je Vollkraft (Mix aus Fach- und Hilfskräften). Der Ersatz kostet je nach Weg ein Vielfaches der Normalstunde: Einspringen am freien Tag rund das 1,15-Fache bei 60 Prozent Abdeckung, Springer das 1,05-Fache, Zeitarbeit das 1,8-Fache. Das sind Annahmen, keine Messwerte.' }));
     d.appendChild(btn('Neu rechnen', 'btn-secondary', function () {
       var v = parseFloat(vk.value), k = parseFloat(ko.value);
       S.vk = v > 0 ? v : null; S.kosten = k > 0 ? k : null;
@@ -597,7 +597,7 @@
     if (F.A < 40 && F.B < 40) return null;
     var a1 = S.answers.A1, b1 = S.answers.B1, e1 = S.answers.E1;
     function lab(id, a, fallback) { return a && Array.isArray(a) ? C.qById(id).opts[a[0]].t : fallback; }
-    var n2 = a1 && Array.isArray(a1) ? 'Aus dem Frei geholt: ' + lab('A1', a1) : 'Einspringen im Team';
+    var n2 = a1 && Array.isArray(a1) ? 'Eingesprungen am freien Tag: ' + lab('A1', a1) : 'Einspringen im Team';
     var n3 = 'Mehr Last beim Stammteam' + (b1 && Array.isArray(b1) ? ' (Schicht unter Soll: ' + lab('B1', b1) + ')' : '');
     var n4 = 'Weniger Erholung: nächster Ausfall oder Kündigung' + (e1 && Array.isArray(e1) ? ' (im letzten Jahr gegangen: ' + lab('E1', e1) + ')' : '');
     var nodes = ['Ein Ausfall', n2, n3, n4];

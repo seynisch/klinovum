@@ -27,7 +27,7 @@
 
   // r = Anteil der Ausfälle, der ersetzt wird; f = Kostenfaktor des Ersatzes gegenüber der Normalstunde
   var BRIDGE = {
-    frei: { t: 'Ich rufe jemanden aus dem Frei an', r: 0.6, f: 1.15 },
+    frei: { t: 'Ich rufe jemanden an, der eigentlich frei hat', r: 0.6, f: 1.15 },
     springer: { t: 'Ein Springer oder Springerpool übernimmt', r: 0.75, f: 1.05 },
     zeit: { t: 'Wir holen Zeitarbeit', r: 0.8, f: 1.8 },
     unter: { t: 'Wir arbeiten erst mal unterbesetzt', r: 0, f: 0 },
@@ -104,7 +104,7 @@
   }
 
   var QUESTIONS = [
-    { id: 'A1', f: 'A', text: 'Wann haben Sie zuletzt jemanden aus dem Frei geholt?',
+    { id: 'A1', f: 'A', text: 'Wann ist zuletzt jemand an seinem freien Tag eingesprungen?',
       opts: opts4('Heute', 'Diese Woche', 'Diesen Monat', 'Länger her', [3, 2, 1, 0]) },
     { id: 'A2', f: 'A', text: 'Wie lange hält Ihr Dienstplan, bevor er umgeworfen wird?',
       opts: opts4('Bis Monatsende', 'Etwa eine Woche', 'Ein paar Tage', 'Kaum bis morgen') },
@@ -223,7 +223,7 @@
       allein: 'Ein verbindliches Einspringe-Regelwerk: Limit pro Person und Monat, fester Ausgleich, klare Reihenfolge.',
       team: 'Planbare Springer-Schichten im Dienstplan, damit niemand am freien Tag angerufen wird.',
       traeger: 'Budget für einen kleinen Springerpool, begründet mit dem Wert eines Prozentpunkts Krankenstand.',
-      mess: 'Wie lange ist es her, dass jemand aus dem Frei geholt wurde? Fragen Sie das in acht Wochen noch einmal.'
+      mess: 'Wann ist zuletzt jemand an seinem freien Tag eingesprungen? Fragen Sie das in acht Wochen noch einmal.'
     },
     erschoepfung: {
       name: 'Das Erschöpfungs-Team', typ: 'Dauerlast zeigt sich in langen Ausfällen.',
