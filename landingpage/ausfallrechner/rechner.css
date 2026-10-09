@@ -138,6 +138,15 @@
 .rc-next h3 { margin-bottom: 0.4rem; }
 .rc-next-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
+/* ---------- Schlanke Ausgabe ---------- */
+.rc-tiles-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rc-summary { font-size: 1.05rem; line-height: 1.6; }
+.rc-summary b { color: var(--primary); font-weight: 600; }
+.rc-lever-main { font-size: 1.3rem; line-height: 1.4; }
+.rc-assume > :not(summary) { margin-bottom: 1rem; }
+.rc-assume .rc-stack { margin-top: 0.25rem; }
+.rc-assume .rc-letter { margin-top: 0.25rem; }
+
 /* ---------- Zwischenstand ---------- */
 .rc-fact { background: var(--bg-light); padding: 1.25rem 1.4rem; border-radius: var(--radius); display: grid; gap: 0.5rem; }
 .rc-fact p { font-size: 1.05rem; }
