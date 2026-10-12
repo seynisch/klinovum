@@ -171,23 +171,23 @@
   /* ---------- Muster ---------- */
   var PATTERNS = {
     spirale: {
-      name: 'Die Einspringen-Spirale', typ: 'Jeder Ausfall erzeugt den nächsten.',
-      kern: 'Ihre Decke ist dünn. Fällt jemand aus, springt ein anderer ein, und der trägt das Risiko des nächsten Ausfalls. Das ist ein Planungsmuster, keine Frage der Einstellung.',
+      name: 'Schwerpunkt Dienstplan und Einspringen', typ: 'Einspringen an freien Tagen verstärkt die Ausfälle.',
+      kern: 'Die Besetzung ist knapp. Fällt jemand aus, springt ein anderer ein, und dessen Erholungszeit fehlt. Das erhöht das Risiko weiterer Ausfälle. Die Ursache liegt meist in der Planung und nicht in der Einstellung des Teams.',
       allein: 'Ein verbindliches Einspringe-Regelwerk: Limit pro Person und Monat, fester Ausgleich, klare Reihenfolge.',
       team: 'Planbare Springer-Schichten im Dienstplan, damit niemand am freien Tag angerufen wird.',
       traeger: 'Budget für einen kleinen Springerpool, begründet mit dem Wert eines Prozentpunkts Krankenstand.',
       mess: 'Wann ist zuletzt jemand an seinem freien Tag eingesprungen? Fragen Sie das in acht Wochen noch einmal.'
     },
     erschoepfung: {
-      name: 'Das Erschöpfungs-Team', typ: 'Dauerlast zeigt sich in langen Ausfällen.',
-      kern: 'Dauerhaft knappe Besetzung zeigt sich oft in langen Ausfällen. Die kosten weniger Lohn, blockieren aber Stellen und lassen die Last beim Rest des Teams.',
+      name: 'Schwerpunkt Dauerbelastung', typ: 'Eine dauerhaft knappe Besetzung belastet das Team.',
+      kern: 'Wenn Schichten regelmäßig unter Soll starten, zeigt sich das oft in längeren Ausfällen. Diese kosten weniger Lohn, blockieren aber Stellen und lassen die Last beim übrigen Team.',
       allein: 'Belastungsspitzen im Wochenverlauf sichtbar machen und Erholungszeiten im Dienstplan schützen.',
       team: 'Eingliederungsgespräche konsequent führen und die Rückkehr stufenweise gestalten.',
       traeger: 'Ein Stellenanteil für Entlastung in den Spitzenzeiten, begründet mit den blockierten Stellen.',
       mess: 'Wie viele Langzeitausfälle haben Sie in sechs Monaten, und wie viele Personen kehren zurück?'
     },
     klima: {
-      name: 'Der Klima-Effekt', typ: 'Wiederkehrende Kurzausfälle sind oft ein Bindungssignal.',
+      name: 'Schwerpunkt Führung und Klima', typ: 'Wiederkehrende Kurzausfälle können ein Bindungssignal sein.',
       kern: 'Wer immer wieder kurz fehlt, sagt damit manchmal etwas über Wertschätzung und Klima, nicht nur über Gesundheit. Hier hilft Zuwendung mehr als Kontrolle.',
       allein: 'Rückkehrgespräche nach jeder Krankmeldung einführen: kurz, ohne Vorwurf, mit der Frage „Was braucht es?“.',
       team: 'Ein Teamgespräch zu Überlastung mit einer sichtbaren Rückmeldung innerhalb von zwei Wochen.',
@@ -195,7 +195,7 @@
       mess: 'Wie viele Rückkehrgespräche wurden geführt, und sinken die Kurzausfälle bei den Wiederholern?'
     },
     umbruch: {
-      name: 'Die Umbruch-Delle', typ: 'Zu viel Neues zugleich.',
+      name: 'Schwerpunkt Veränderungsdruck', typ: 'Viele Veränderungen in kurzer Zeit.',
       kern: 'Mehrere Veränderungen hintereinander ermüden ein Team, auch wenn jede einzelne sinnvoll ist. Es fehlt Orientierung, und Routine bricht weg.',
       allein: 'Veränderungen takten: Was bleibt, was ändert sich, was kommt als Nächstes, in einem Bild für alle.',
       team: 'Pro Veränderung eine feste Ansprechperson im Team und eine regelmäßige Fragerunde.',
@@ -203,7 +203,7 @@
       mess: 'Wie sicher fühlt sich das Team bei der letzten Neuerung? Eine einfache Ampelabfrage im Teamgespräch genügt.'
     },
     durchlauf: {
-      name: 'Der Durchlauferhitzer', typ: 'Ständig neue Gesichter.',
+      name: 'Schwerpunkt Teamstabilität und Einarbeitung', typ: 'Hohe Fluktuation und viele wechselnde Gesichter.',
       kern: 'Wenn viele gehen, kommen oder nur aushelfen, trägt das Stammteam die Einarbeitung und die Lücken. Das kostet Kraft und erzeugt Folgeausfälle.',
       allein: 'Einarbeitungsstandard mit Pate und Plan für die ersten sechs Wochen.',
       team: 'Paten im Dienstplan entlasten, damit Einarbeitung nicht nebenher läuft.',
@@ -211,7 +211,7 @@
       mess: 'Wie viele Neue sind nach sechs Monaten noch da?'
     },
     blindflug: {
-      name: 'Der Blindflug', typ: 'Es fehlt das Instrument.',
+      name: 'Fehlende Datengrundlage', typ: 'Eine Auswertung der Fehlzeiten fehlt.',
       kern: 'Sie steuern Ausfälle, ohne zu sehen, wie sie sich verteilen. Das ist keine Schwäche Ihrer Person, es fehlt schlicht eine einfache Auswertung.',
       allein: 'Ein Monatsblatt mit Ausfalltagen in kurz, mittel und lang und eine Liste der Eingliederungsverfahren.',
       team: 'Gemeinsam mit der Verwaltung festlegen, wer die Zahlen monatlich liefert.',
@@ -219,7 +219,7 @@
       mess: 'Können Sie die Fragen, die Sie heute nicht beantworten konnten, in acht Wochen ohne Raten beantworten?'
     },
     erreger: {
-      name: 'Das Erreger-Haus', typ: 'Überwiegend Saison und Alter.',
+      name: 'Kein auffälliger Schwerpunkt', typ: 'Die Ausfälle sind überwiegend saisonal und altersbedingt.',
       kern: 'Ihre Antworten zeigen in keinem Feld deutlichen Druck. Ausfälle bei Ihnen sind überwiegend Saison, Infekte und Alter, der Spielraum ist klein. Das Risiko liegt eher darin, dass wenige Schlüsselpersonen fehlen.',
       allein: 'Vertretung für Schlüsselrollen klären, etwa Wohnbereichsleitung, Nachtdienst und Wundmanagement.',
       team: 'Wissen aus Schlüsselrollen in Tandems absichern.',
@@ -330,7 +330,7 @@
     lines.push('');
     lines.push('Zur Größenordnung: Die Ausfälle kosten uns im Jahr grob ' + eur(c.mid, 5000) + ' (Spanne ' + eur(c.lo, 10000) + ' bis ' + eur(c.hi, 10000) + '). Das entspricht etwa ' + dec1(c.av) + ' Vollkräften, die wir bezahlen und nicht im Dienst haben, oder rund ' + fmt(Math.round(c.perPlatzMonat / 10) * 10) + ' € je Platz und Monat. Ein Prozentpunkt weniger Krankenstand wäre etwa ' + eur(c.pp, 1000) + ' im Jahr wert.');
     lines.push('');
-    lines.push('Zur Ursache: Die Auswertung deutet auf das Muster „' + p.name.replace(/^(Der|Die|Das) /, '') + '“. ' + p.kern);
+    lines.push('Zur Einordnung: ' + p.name + '. ' + p.kern);
     lines.push('');
     lines.push('Mein Vorschlag: ' + p.allein + ' Dazu bitte ich um Ihre Unterstützung: ' + p.traeger);
     lines.push('');
