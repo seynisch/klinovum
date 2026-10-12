@@ -436,14 +436,14 @@
     // 2. Handlungsbedarf je Feld
     var thermo = h('section', { class: 'rc-section-in' }, [
       h('h3', { text: 'Handlungsbedarf nach Feldern' }),
-      h('p', { class: 'rc-sub', text: 'Je länger der Balken, desto größer der Druck in diesem Feld.' })
+      h('p', { class: 'rc-sub', text: 'Je länger der Balken, desto größer der Handlungsbedarf in diesem Feld.' })
     ]);
     C.FIELDS.forEach(function (fl) {
       var v = F[fl.id], b = C.band(v);
       thermo.appendChild(h('div', { class: 'rc-thermo-row' }, [
         h('span', { class: 'rc-thermo-name', text: fl.name }),
         h('div', { class: 'rc-thermo-bar' }, [h('i', { class: b, style: 'width:' + Math.max(4, v) + '%' })]),
-        h('span', { class: 'rc-thermo-tag ' + b, text: C.BAND_LABEL[b] })
+        h('span', { class: 'rc-thermo-tag ' + b, text: C.BAND_TAG[b] })
       ]));
     });
     thermo.appendChild(h('p', { class: 'rc-tipp-msg', text: guessMessage(F, tops) }));

@@ -93,11 +93,11 @@
 
   /* ---------- Stufe 2: Felder, Fragen, Muster ---------- */
   var FIELDS = [
-    { id: 'A', name: 'Dienstplan-Verlässlichkeit', short: 'Dienstplan' },
+    { id: 'A', name: 'Dienstplan und Einspringen', short: 'Dienstplan' },
     { id: 'B', name: 'Belastungsdichte', short: 'Belastung' },
     { id: 'C', name: 'Führung und Klima', short: 'Führung und Klima' },
     { id: 'D', name: 'Veränderungsdruck', short: 'Veränderungen' },
-    { id: 'E', name: 'Teamstabilität und Einarbeitung', short: 'Teamstabilität' }
+    { id: 'E', name: 'Fluktuation und Einarbeitung', short: 'Fluktuation' }
   ];
 
   function opts4(a, b, c, d, scores) {
@@ -203,7 +203,7 @@
       mess: 'Wie sicher fühlt sich das Team bei der letzten Neuerung? Eine einfache Ampelabfrage im Teamgespräch genügt.'
     },
     durchlauf: {
-      name: 'Schwerpunkt Teamstabilität und Einarbeitung', typ: 'Hohe Fluktuation und viele wechselnde Gesichter.',
+      name: 'Schwerpunkt Fluktuation und Einarbeitung', typ: 'Hohe Fluktuation und viele wechselnde Gesichter.',
       kern: 'Wenn viele gehen, kommen oder nur aushelfen, trägt das Stammteam die Einarbeitung und die Lücken. Das kostet Kraft und erzeugt Folgeausfälle.',
       allein: 'Einarbeitungsstandard mit Pate und Plan für die ersten sechs Wochen.',
       team: 'Paten im Dienstplan entlasten, damit Einarbeitung nicht nebenher läuft.',
@@ -310,6 +310,8 @@
 
   function band(v) { return v >= 60 ? 'hi' : v >= 40 ? 'mid' : 'lo'; }
   var BAND_LABEL = { hi: 'Hoch', mid: 'Mittel', lo: 'Gering' };
+  // Zeilenbeschriftung im Balkendiagramm: eindeutig als Bedarf lesbar, nicht als Zustand des Feldes
+  var BAND_TAG = { hi: 'Hoher Bedarf', mid: 'Mittlerer Bedarf', lo: 'Geringer Bedarf' };
 
   /* ---------- Formatierung ---------- */
   var nf = new Intl.NumberFormat('de-DE');
@@ -344,7 +346,7 @@
   var api = {
     CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS, FIELD_ACTIONS: FIELD_ACTIONS, DATA_GAPS: DATA_GAPS,
     calc: calc, score: score, fieldScores: fieldScores, detect: detect, dkCount: dkCount, topFields: topFields,
-    band: band, BAND_LABEL: BAND_LABEL, qById: qById, isDk: isDk, buildLetter: buildLetter,
+    band: band, BAND_LABEL: BAND_LABEL, BAND_TAG: BAND_TAG, qById: qById, isDk: isDk, buildLetter: buildLetter,
     fmt: fmt, eur: eur, dec1: dec1
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
