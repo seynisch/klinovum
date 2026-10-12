@@ -366,27 +366,78 @@
     return 'Sie vermuteten „' + g.t + '“. Ihre Antworten zeigen „' + top.short + '“ als stärkstes Feld.';
   }
 
+  function levelChip(v) {
+    var b = C.band(v);
+    return h('span', { class: 'rc-lvl ' + b, text: 'Handlungsbedarf ' + C.BAND_LABEL[b].toLowerCase() });
+  }
+
+  // Ein Maßnahmenblock je Feld, nach Priorität sortiert
+  function measureBlock(t, i, F) {
+    var A = C.FIELD_ACTIONS[t.id];
+    return h('div', { class: 'rc-mb' }, [
+      h('div', { class: 'rc-mb-head' }, [
+        h('span', { class: 'rc-prio', text: 'Priorität ' + (i + 1) }),
+        levelChip(F[t.id])
+      ]),
+      h('strong', { class: 'rc-mb-title', text: t.name }),
+      h('p', { class: 'rc-mb-why', text: A.why }),
+      h('p', { class: 'rc-mb-label', text: 'Empfohlene Maßnahmen' }),
+      h('ol', { class: 'rc-mb-steps' }, A.steps.map(function (st) { return h('li', { text: st }); })),
+      h('p', { class: 'rc-mb-meta' }, [h('b', { text: 'Erfolgsmessung: ' }), A.measure]),
+      h('p', { class: 'rc-mb-meta' }, [h('b', { text: 'Zeithorizont: ' }), A.horizon])
+    ]);
+  }
+
+  function pitchSection() {
+    var ctaHref = stage.getAttribute('data-cta') || '../erstgesprach';
+    var soft = stage.getAttribute('data-variant') === 'b';
+    var items = [
+      ['Ergebnisse prüfen', 'Stimmen Zahlen und Einordnung mit Ihrer Wahrnehmung überein, und was fehlt noch?'],
+      ['Prioritäten setzen', 'Womit beginnen Sie, was braucht Vorlauf, und was erledigt sich von allein?'],
+      ['Fahrplan festlegen', 'Maßnahmen, Verantwortliche, Zeitplan und Messgrößen für die nächsten 90 Tage.']
+    ];
+    return h('section', { class: 'rc-section-in rc-pitch' }, [
+      h('h3', { text: 'Ergebnisse gemeinsam besprechen, Fahrplan festlegen' }),
+      h('p', { text: 'Diese Auswertung beruht auf sechs Antworten und Richtwerten aus öffentlichen Quellen. In einem Gespräch gehen wir sie mit Ihnen konkret durch und legen fest, was in Ihrem Haus notwendig ist:' }),
+      h('ul', { class: 'rc-pitch-list' }, items.map(function (it) { return h('li', null, [h('b', { text: it[0] + ': ' }), it[1]]); })),
+      soft
+        ? h('p', { class: 'rc-softcta' }, ['30 Minuten, vertraulich, ohne Verkaufsdruck. ', h('a', { href: ctaHref, text: 'Gespräch vereinbaren' })])
+        : h('div', { class: 'rc-pitch-cta' }, [
+            h('a', { class: 'btn btn-primary', href: ctaHref }, ['Gespräch vereinbaren', icon('arrow')]),
+            h('span', { class: 'rc-note', text: '30 Minuten, vertraulich, ohne Verkaufsdruck' })
+          ])
+    ]);
+  }
+
   function rBefund() {
     var c = currentCalc();
     var F = C.fieldScores(S.answers);
     var det = C.detect(F, S.answers);
     var P = C.PATTERNS[det.haupt.id];
     var tops = C.topFields(F);
-    var f = frame('befund', { kicker: S.haus ? S.haus : null, title: 'Ihr Befund' });
+    var today = new Date().toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+    var f = frame('befund', {
+      kicker: S.haus ? S.haus : null,
+      title: 'Auswertung Krankheitsausfälle',
+      sub: 'Stand ' + today + '. Grundlage sind Ihre Angaben und Richtwerte aus öffentlichen Quellen.'
+    });
 
-    // 1. Muster
+    // 1. Einordnung
     f.body.appendChild(h('section', { class: 'rc-typ' }, [
-      h('span', { class: 'badge badge-blue', text: 'Ihr Muster' }),
+      h('span', { class: 'badge badge-blue', text: 'Einordnung' }),
       h('h3', { text: P.name }),
       h('p', { class: 'rc-typ-sub', text: P.typ }),
       h('p', { text: P.kern })
     ]));
     f.body.appendChild(h('p', { class: 'rc-summary' }, [
-      'Die Ausfälle kosten Sie etwa ', h('b', { text: C.eur(c.mid, 5000) }), ' im Jahr, das entspricht ', h('b', { text: C.dec1(c.av) + ' Vollkräften' }), '. Ein Prozentpunkt Krankenstand ist ', h('b', { text: C.eur(c.pp) }), ' wert.'
+      'Die Ausfälle kosten Sie etwa ', h('b', { text: C.eur(c.mid, 5000) }), ' im Jahr (Spanne ' + C.eur(c.lo, 10000) + ' bis ' + C.eur(c.hi, 10000) + '), das entspricht ', h('b', { text: C.dec1(c.av) + ' Vollkräften' }), '. Ein Prozentpunkt Krankenstand ist ', h('b', { text: C.eur(c.pp, 1000) }), ' wert.'
     ]));
 
-    // 2. Fieberkurve
-    var thermo = h('section', { class: 'rc-section-in' }, [h('h3', { text: 'Wo der Druck sitzt' })]);
+    // 2. Handlungsbedarf je Feld
+    var thermo = h('section', { class: 'rc-section-in' }, [
+      h('h3', { text: 'Handlungsbedarf nach Feldern' }),
+      h('p', { class: 'rc-sub', text: 'Je länger der Balken, desto größer der Druck in diesem Feld.' })
+    ]);
     C.FIELDS.forEach(function (fl) {
       var v = F[fl.id], b = C.band(v);
       thermo.appendChild(h('div', { class: 'rc-thermo-row' }, [
@@ -398,39 +449,45 @@
     thermo.appendChild(h('p', { class: 'rc-tipp-msg', text: guessMessage(F, tops) }));
     f.body.appendChild(thermo);
 
-    // 3. Ein Hebel
-    f.body.appendChild(h('section', { class: 'rc-section-in' }, [
-      h('h3', { text: 'Ihr nächster Schritt' }),
-      h('p', { class: 'rc-lever-main', text: P.allein }),
-      h('p', { class: 'rc-note', text: 'Ob es wirkt: ' + P.mess })
-    ]));
+    // 3. Maßnahmen nach Priorität
+    var ranked = tops.filter(function (t) { return F[t.id] >= 40; }).slice(0, 3);
+    var plan = h('section', { class: 'rc-section-in' }, [h('h3', { text: 'Maßnahmen nach Priorität' })]);
+    if (ranked.length) {
+      plan.appendChild(h('p', { class: 'rc-sub', text: 'Nach Handlungsbedarf sortiert, höchstens drei Felder. Beginnen Sie mit Priorität 1.' }));
+      ranked.forEach(function (t, i) { plan.appendChild(measureBlock(t, i, F)); });
+    } else {
+      plan.appendChild(h('p', { class: 'rc-sub', text: 'In keinem Feld besteht deutlicher Handlungsbedarf. Zur Absicherung empfehlen wir:' }));
+      plan.appendChild(h('ol', { class: 'rc-mb-steps' }, [h('li', { text: P.allein }), h('li', { text: P.team })]));
+      plan.appendChild(h('p', { class: 'rc-mb-meta' }, [h('b', { text: 'Erfolgsmessung: ' }), P.mess]));
+    }
+    f.body.appendChild(plan);
 
-    // 4. Träger-Brief nur auf Wunsch
+    // 4. Datenlücken
+    var gaps = C.QUESTIONS.filter(function (q) { return C.isDk(S.answers[q.id]); });
+    if (gaps.length) {
+      f.body.appendChild(h('section', { class: 'rc-section-in' }, [
+        h('h3', { text: 'Was Sie als Nächstes erheben sollten' }),
+        h('p', { class: 'rc-sub', text: 'Bei diesen Fragen konnten Sie keine Angabe machen. Mit wenig Aufwand schaffen Sie die Grundlage:' }),
+        h('ul', { class: 'rc-plain' }, gaps.map(function (q) { return h('li', { text: C.DATA_GAPS[q.id] }); }))
+      ]));
+    }
+
+    // 5. Gemeinsam besprechen und Fahrplan festlegen
+    f.body.appendChild(pitchSection());
+
+    // 6. Träger-Brief nur auf Wunsch
     var letter = C.buildLetter(S, c, F, det);
     f.body.appendChild(h('details', { class: 'rc-assume' }, [
       h('summary', { text: 'Entwurf für Ihren Träger anzeigen' }),
       h('pre', { class: 'rc-letter', tabindex: '0' }, [letter]),
       h('div', { class: 'rc-actions-row' }, [
-        btn('Brief kopieren', 'btn-primary', function (e) { copy(letter, e.currentTarget, 'Kopiert'); }),
-        btn('Befund drucken', 'btn-secondary', function () { window.print(); })
+        btn('Brief kopieren', 'btn-primary', function (e) { copy(letter, e.currentTarget, 'Kopiert'); })
       ])
     ]));
 
-    f.body.appendChild(h('p', { class: 'rc-note', text: 'Orientierung auf Basis Ihrer Angaben, keine Diagnose. Alle Werte sind Schätzungen.' }));
+    f.body.appendChild(h('p', { class: 'rc-note', text: 'Orientierung auf Basis Ihrer Angaben, keine Diagnose und keine Aussage über einzelne Personen. Alle Werte sind Schätzungen.' }));
 
-    var ctaHref = stage.getAttribute('data-cta') || '../erstgesprach';
-    if (stage.getAttribute('data-variant') === 'b') {
-      // Ruhige Variante: ein Satz mit Link statt Aktionskarte
-      f.foot.appendChild(h('p', { class: 'rc-softcta' }, [
-        'Wenn Sie den Befund mit jemandem durchgehen möchten: Wir nehmen uns gern 30 Minuten dafür, vertraulich und ohne Verkaufsdruck. ',
-        h('a', { href: ctaHref, text: 'Gespräch vereinbaren' })
-      ]));
-    } else {
-      f.foot.appendChild(h('div', { class: 'rc-cta' }, [
-        h('div', {}, [h('h3', { text: 'Befund gemeinsam durchsprechen' }), h('p', { text: '30 Minuten, vertraulich, ohne Verkaufsdruck.' })]),
-        h('a', { class: 'btn btn-secondary is-white', href: ctaHref }, ['Erstgespräch vereinbaren', icon('arrow')])
-      ]));
-    }
+    f.foot.appendChild(btn('Auswertung drucken oder als PDF speichern', 'btn-secondary', function () { window.print(); }));
     f.foot.appendChild(h('button', { type: 'button', class: 'rc-link rc-restart', text: 'Neu starten', onclick: restart }));
   }
 

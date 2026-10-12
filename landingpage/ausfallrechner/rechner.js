@@ -227,6 +227,69 @@
       mess: 'Wie viele Schlüsselrollen haben eine eingearbeitete Vertretung?'
     }
   };
+  // Maßnahmen je Ursachenfeld für die Auswertung
+  var FIELD_ACTIONS = {
+    A: {
+      why: 'Kurzfristige Änderungen und Einspringen an freien Tagen nehmen dem Team Erholungszeit. Das erhöht das Risiko weiterer Ausfälle und belastet die Bindung.',
+      steps: [
+        'Eine verbindliche Einspringe-Regel festlegen: Wer wird zuerst gefragt, wie oft pro Monat, mit welchem Ausgleich?',
+        'Den Dienstplan mindestens zwei Wochen im Voraus verbindlich veröffentlichen und spätere Änderungen nur mit Begründung zulassen.',
+        'Springer-Schichten fest im Plan ausweisen, statt am freien Tag anzurufen.'
+      ],
+      measure: 'Zahl der Einspringe-Dienste pro Monat und Anteil der Dienste, die weniger als eine Woche vor Beginn geändert werden.',
+      horizon: 'Regel in 30 Tagen eingeführt, Wirkung nach 8 bis 12 Wochen sichtbar.'
+    },
+    B: {
+      why: 'Wenn Schichten regelmäßig unter Soll starten, fehlt der Puffer für Ausfälle. Jeder weitere Ausfall trifft sofort die Versorgung und das Team.',
+      steps: [
+        'Unterbesetzte Schichten vier Wochen lang erfassen (Tag, Schicht, Wohnbereich) und nach Mustern auswerten.',
+        'Schriftlich festlegen, welche Aufgaben bei knapper Besetzung entfallen oder verschoben werden.',
+        'Dauerhafte Besetzungslücken mit den erfassten Zahlen gegenüber dem Träger belegen.'
+      ],
+      measure: 'Anteil der Schichten, die unter Soll starten, pro Monat.',
+      horizon: 'Erfassung sofort, belastbare Auswertung nach vier Wochen, Maßnahmen über 3 Monate.'
+    },
+    C: {
+      why: 'Wird Überlastung nicht offen angesprochen, zeigt sie sich später in Krankmeldungen und Kündigungen. Gespräche und sichtbare Rückmeldung schaffen Bindung.',
+      steps: [
+        'Rückkehrgespräche nach jeder Krankmeldung einführen: kurz, ohne Vorwurf, mit der Frage „Was braucht es?“.',
+        'Feste Teamgespräche von 15 Minuten zur Belastung führen und innerhalb von zwei Wochen sichtbar zurückmelden, was daraus wird.',
+        'Wohnbereichsleitungen in Gesprächsführung und Konfliktklärung unterstützen.'
+      ],
+      measure: 'Anzahl geführter Rückkehrgespräche und eine einfache Ampelabfrage zur Stimmung im Team.',
+      horizon: 'Gespräche sofort, Wirkung auf Kurzausfälle nach etwa 3 Monaten.'
+    },
+    D: {
+      why: 'Mehrere Veränderungen in kurzer Zeit ermüden ein Team, auch wenn jede einzelne sinnvoll ist. Es fehlt Orientierung, und Routinen brechen weg.',
+      steps: [
+        'Alle laufenden und geplanten Veränderungen auf einer Seite sammeln und zeitlich takten: was jetzt, was später, was entfällt.',
+        'Für jede Veränderung eine feste Ansprechperson im Team und eine regelmäßige Fragerunde benennen.',
+        'Mit dem Träger abstimmen, welche Neuerungen sich verschieben lassen.'
+      ],
+      measure: 'Ampelabfrage im Team: Wie sicher fühlen Sie sich bei der letzten Neuerung?',
+      horizon: 'Übersicht in 2 Wochen, Wirkung über das nächste Quartal.'
+    },
+    E: {
+      why: 'Wenn viele gehen, kommen oder nur aushelfen, trägt das Stammteam Einarbeitung und Lücken. Das kostet Kraft und erzeugt Folgeausfälle.',
+      steps: [
+        'Einen Einarbeitungsstandard mit Pate und Plan für die ersten sechs Wochen festlegen.',
+        'Paten im Dienstplan entlasten, damit Einarbeitung nicht nebenher läuft.',
+        'Austrittsgespräche systematisch führen und die Gründe auswerten.'
+      ],
+      measure: 'Anteil der Neuen, die nach sechs Monaten noch im Haus sind, und Zahl der geführten Austrittsgespräche.',
+      horizon: 'Standard in 4 Wochen, Wirkung nach 6 bis 12 Monaten.'
+    }
+  };
+
+  // Was bei "weiß ich nicht" konkret zu erheben ist
+  var DATA_GAPS = {
+    A1: 'Zählen Sie vier Wochen lang, an welchen Tagen Mitarbeitende an ihrem freien Tag eingesprungen sind.',
+    B1: 'Erfassen Sie vier Wochen lang, welche Schichten mit weniger Personal als geplant starten.',
+    C1: 'Fragen Sie Ihre Wohnbereichsleitungen, ob und wie oft Rückkehrgespräche nach Krankmeldungen stattfinden.',
+    D1: 'Listen Sie auf einer Seite alle Veränderungen der letzten zwölf Monate auf (Träger, Leitung, Software, Umbau, Konzept).',
+    E1: 'Zählen Sie Austritte und Neueintritte der letzten zwölf Monate.'
+  };
+
   var FIELD_PATTERN = { A: 'spirale', B: 'erschoepfung', C: 'klima', D: 'umbruch', E: 'durchlauf' };
 
   // Jedes Feld mit Wert ab 60 ist ein Muster-Kandidat; das stärkste ist das Hauptmuster
@@ -246,7 +309,7 @@
   }
 
   function band(v) { return v >= 60 ? 'hi' : v >= 40 ? 'mid' : 'lo'; }
-  var BAND_LABEL = { hi: 'Fieber', mid: 'erhöht', lo: 'normal' };
+  var BAND_LABEL = { hi: 'Hoch', mid: 'Mittel', lo: 'Gering' };
 
   /* ---------- Formatierung ---------- */
   var nf = new Intl.NumberFormat('de-DE');
@@ -279,7 +342,7 @@
 
   /* ---------- Export für Tests ---------- */
   var api = {
-    CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS,
+    CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS, FIELD_ACTIONS: FIELD_ACTIONS, DATA_GAPS: DATA_GAPS,
     calc: calc, score: score, fieldScores: fieldScores, detect: detect, dkCount: dkCount, topFields: topFields,
     band: band, BAND_LABEL: BAND_LABEL, qById: qById, isDk: isDk, buildLetter: buildLetter,
     fmt: fmt, eur: eur, dec1: dec1

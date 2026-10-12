@@ -156,6 +156,28 @@
 .rc-srctag.ok { background: var(--bg-badge); color: var(--primary); }
 .rc-srctag.assume { background: #fdf0d8; color: #8a5a00; }
 
+/* ---------- Auswertung: Maßnahmen und Gesprächsangebot ---------- */
+.rc-lvl { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: var(--radius); }
+.rc-lvl.hi { background: #f8e3df; color: #9c3320; }
+.rc-lvl.mid { background: #fdf0d8; color: #8a5a00; }
+.rc-lvl.lo { background: var(--bg-badge); color: var(--primary); }
+.rc-mb { display: grid; gap: 0.6rem; padding: 1.25rem 0 1.5rem; border-top: 1px solid var(--border); }
+.rc-mb-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+.rc-prio { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); }
+.rc-mb-title { font-size: 1.3rem; font-weight: 600; line-height: 1.25; }
+.rc-mb-why { color: var(--grey); font-size: 1.02rem; line-height: 1.55; }
+.rc-mb-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--black); margin-top: 0.4rem; }
+.rc-mb-steps { padding-left: 1.3rem; display: grid; gap: 0.5rem; font-size: 1.02rem; line-height: 1.5; }
+.rc-mb-meta { font-size: 0.95rem; line-height: 1.5; color: var(--grey); }
+.rc-mb-meta b { color: var(--black); font-weight: 600; }
+.rc-pitch { background: var(--bg-light); padding: 1.5rem 1.5rem 1.75rem; border-radius: var(--radius); border-top: 0; margin-top: 0.5rem; }
+.rc-pitch p { font-size: 1.02rem; line-height: 1.55; }
+.rc-pitch-list { display: grid; gap: 0.5rem; list-style: none; }
+.rc-pitch-list li { font-size: 1.02rem; line-height: 1.5; padding-left: 1.1rem; position: relative; }
+.rc-pitch-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--primary-light); }
+.rc-pitch-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 0.25rem; }
+.b-page .rc-pitch { background: var(--white); border: 1px solid var(--border); }
+
 /* ---------- Zwischenstand ---------- */
 .rc-fact { background: var(--bg-light); padding: 1.25rem 1.4rem; border-radius: var(--radius); display: grid; gap: 0.5rem; }
 .rc-fact p { font-size: 1.05rem; }
@@ -248,4 +270,6 @@
   .rc-typ { background: #195996 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .rc-thermo-bar i { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none; }
   .rc-section-in { break-inside: avoid; }
+  .rc-mb { break-inside: avoid; }
+  .rc-pitch-cta, .rc-softcta { display: none !important; }
 }
