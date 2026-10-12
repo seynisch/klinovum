@@ -418,10 +418,19 @@
 
     f.body.appendChild(h('p', { class: 'rc-note', text: 'Orientierung auf Basis Ihrer Angaben, keine Diagnose. Alle Werte sind Schätzungen.' }));
 
-    f.foot.appendChild(h('div', { class: 'rc-cta' }, [
-      h('div', {}, [h('h3', { text: 'Befund gemeinsam durchsprechen' }), h('p', { text: '30 Minuten, vertraulich, ohne Verkaufsdruck.' })]),
-      h('a', { class: 'btn btn-secondary is-white', href: '../erstgesprach' }, ['Erstgespräch vereinbaren', icon('arrow')])
-    ]));
+    var ctaHref = stage.getAttribute('data-cta') || '../erstgesprach';
+    if (stage.getAttribute('data-variant') === 'b') {
+      // Ruhige Variante: ein Satz mit Link statt Aktionskarte
+      f.foot.appendChild(h('p', { class: 'rc-softcta' }, [
+        'Wenn Sie den Befund mit jemandem durchgehen möchten: Wir nehmen uns gern 30 Minuten dafür, vertraulich und ohne Verkaufsdruck. ',
+        h('a', { href: ctaHref, text: 'Gespräch vereinbaren' })
+      ]));
+    } else {
+      f.foot.appendChild(h('div', { class: 'rc-cta' }, [
+        h('div', {}, [h('h3', { text: 'Befund gemeinsam durchsprechen' }), h('p', { text: '30 Minuten, vertraulich, ohne Verkaufsdruck.' })]),
+        h('a', { class: 'btn btn-secondary is-white', href: ctaHref }, ['Erstgespräch vereinbaren', icon('arrow')])
+      ]));
+    }
     f.foot.appendChild(h('button', { type: 'button', class: 'rc-link rc-restart', text: 'Neu starten', onclick: restart }));
   }
 

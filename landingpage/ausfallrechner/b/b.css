@@ -1,0 +1,84 @@
+/* ============================================
+   Variante B: ruhiger Fachartikel statt Verkaufsseite
+   Lädt nach ../rechner.css und überschreibt nur, was Werbung ausmacht
+   ============================================ */
+
+.b-page { background: var(--white); }
+.b-wrap { max-width: 46rem; margin: 0 auto; padding-inline: clamp(1rem, 5vw, 2rem); }
+.b-wrap-tool { max-width: 52rem; }
+
+/* Kopf: still, ohne Verlauf */
+.b-header { border-bottom: 1px solid var(--border); padding: 0.9rem 0; }
+.b-header-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 52rem; }
+.b-logo { height: 46px; width: auto; }
+.b-header-note { font-size: 0.85rem; color: var(--grey); text-align: right; }
+
+/* Einstieg: Überschrift und kurzer Text, keine Versprechen-Fläche */
+.b-intro { padding-top: 3.5rem; display: grid; gap: 1.25rem; }
+.b-intro h4 { margin: 0; }
+.b-intro h1 { font-size: clamp(2rem, 4.6vw, 3rem); line-height: 1.12; color: var(--black); text-wrap: balance; }
+.b-lead { font-size: 1.2rem; line-height: 1.6; color: #333; max-width: 40rem; }
+.b-know { margin-top: 0.5rem; }
+.b-know li { padding: 0.9rem 0; border-top: 1px solid var(--border); font-size: 1.05rem; line-height: 1.5; color: #333; }
+.b-know li:last-child { border-bottom: 1px solid var(--border); }
+.b-know b { color: var(--black); font-weight: 600; }
+.b-know::before { content: 'Danach wissen Sie'; display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); margin-bottom: 0.6rem; }
+
+/* Werkzeug: Karte ohne Schatten, wie ein Formular im Fachtext */
+.b-tool { padding: 2.5rem 0 3.5rem; }
+.b-page .rc-card { box-shadow: none; border-color: var(--border); background: var(--bg-light); }
+.b-page .rc-opt { background: var(--white); }
+.b-page .rc-opt.is-selected { background: #eaf3fc; }
+.b-page .rc-tile { background: var(--white); border: 1px solid var(--border); }
+.b-page .rc-assume { background: var(--white); }
+.b-page .rc-tipp-msg { background: var(--white); }
+.b-page .rc-letter { background: var(--white); }
+.b-page .rc-versus .is-result { background: #eaf3fc; }
+
+/* Befund: Typkarte hell statt Werbefläche im Farbverlauf */
+.b-page .rc-typ { background: var(--white); color: var(--black); border: 1px solid var(--border); }
+.b-page .rc-typ h3 { color: var(--black); }
+.b-page .rc-typ p, .b-page .rc-typ .rc-typ-sub { color: #333; }
+.b-page .rc-typ .badge-blue { background: var(--bg-badge); color: var(--primary); }
+.rc-softcta { font-size: 1.02rem; line-height: 1.55; color: #333; max-width: 40rem; }
+.rc-softcta a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Text unter dem Werkzeug: Artikel-Lesespalte */
+.b-article { padding-bottom: 4rem; display: grid; gap: 1rem; }
+.b-article h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 2.5rem 0 0.25rem; }
+.b-article h2:first-child { margin-top: 0; }
+.b-article p { font-size: 1.08rem; line-height: 1.65; color: #333; max-width: 42rem; }
+.b-note { font-size: 0.95rem !important; color: var(--grey) !important; }
+.b-dl { display: grid; margin: 0.5rem 0; }
+.b-dl > div { display: grid; grid-template-columns: 13rem 1fr; gap: 0.25rem 1.5rem; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+.b-dl > div:last-child { border-bottom: 1px solid var(--border); }
+.b-dl dt { font-weight: 600; color: var(--black); }
+.b-dl dd { margin: 0; color: #333; line-height: 1.55; }
+.b-tablebox { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.b-table { border-collapse: collapse; width: 100%; min-width: 38rem; font-size: 0.95rem; line-height: 1.5; }
+.b-table th, .b-table td { text-align: left; vertical-align: top; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); }
+.b-table th { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey); background: var(--bg-light); font-weight: 600; }
+.b-table tr:last-child td { border-bottom: 0; }
+.b-table td:first-child { font-weight: 600; color: var(--black); white-space: nowrap; }
+.b-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.1rem 0.45rem; border-radius: var(--radius); margin-right: 0.35rem; }
+.b-tag.ok { background: var(--bg-badge); color: var(--primary); }
+.b-tag.assume { background: #fdf0d8; color: #8a5a00; }
+.b-sources { display: grid; gap: 0.5rem; font-size: 0.98rem; list-style: disc; padding-left: 1.2rem; }
+.b-sources a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Fuß: leise */
+.b-footer { border-top: 1px solid var(--border); padding: 2rem 0 3rem; font-size: 0.88rem; color: var(--grey); }
+.b-footer .b-wrap { display: grid; gap: 0.5rem; max-width: 52rem; }
+.b-footer p { font-size: inherit; line-height: 1.6; }
+.b-footer a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 640px) {
+  .b-header-note { display: none; }
+  .b-intro { padding-top: 2.25rem; }
+  .b-dl > div { grid-template-columns: 1fr; }
+  .b-table td:first-child { white-space: normal; }
+}
+@media print {
+  .b-header, .b-intro, .b-article, .b-footer { display: none !important; }
+  .b-page .rc-typ { background: #fff !important; }
+}
