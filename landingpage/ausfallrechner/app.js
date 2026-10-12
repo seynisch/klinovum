@@ -68,9 +68,9 @@
     var i1 = FLOW1.indexOf(key);
     if (i1 >= 0) return { pct: i1 / FLOW1.length, label: 'Die Zahl · Frage ' + (i1 + 1) + ' von ' + FLOW1.length };
     if (key === 'result1') return { pct: 1, label: 'Die Zahl · Ergebnis' };
-    if (key === 'befund') return { pct: 1, label: 'Das Muster · Befund' };
+    if (key === 'befund') return { pct: 1, label: 'Die Ursachen · Befund' };
     var i2 = SEQ2.indexOf(key);
-    return { pct: i2 / (SEQ2.length - 1), label: 'Das Muster · Frage ' + (i2 + 1) + ' von ' + (SEQ2.length - 1) };
+    return { pct: i2 / (SEQ2.length - 1), label: 'Die Ursachen · Frage ' + (i2 + 1) + ' von ' + (SEQ2.length - 1) };
   }
 
   function frame(key, o) {
@@ -269,7 +269,7 @@
     f.foot.appendChild(h('div', { class: 'rc-next' }, [
       h('div', {}, [h('h3', { text: 'Und woran liegt das?' }), h('p', { class: 'rc-sub', text: 'Sechs Fragen, etwa eine Minute.' })]),
       h('div', { class: 'rc-next-actions' }, [
-        btn('Muster-Check starten', 'btn-primary', next, true),
+        btn('Ursachen herausfinden', 'btn-primary', next, true),
         btn('Ergebnis kopieren', 'btn-secondary', function (e) { copy(summaryText(c), e.currentTarget, 'Kopiert'); })
       ])
     ]));
