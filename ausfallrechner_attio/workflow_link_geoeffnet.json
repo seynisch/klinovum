@@ -1,0 +1,262 @@
+{
+  "name": "Klinovum: Ausfall-Rechner Link geöffnet → Attio",
+  "nodes": [
+    {
+      "id": "68184a8e-dfb8-4600-8fd6-08944879b56f",
+      "name": "Link geöffnet (Webhook)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        200
+      ],
+      "webhookId": "__WEBHOOK_ID__",
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "__RECHNER_WEBHOOK_PFAD__",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "e50f6018-f405-4bb3-a928-9945c2928606",
+      "name": "Prüfen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        200
+      ],
+      "parameters": {
+        "jsCode": "\nconst SECRET = '__RECHNER_GEHEIMNIS__';\nconst item = $input.first().json;\nconst h = item.headers || {};\nconst q = item.query || {};\n\n// Nur Aufrufe, die von unserem Server kommen\nif (h['x-klinovum-secret'] !== SECRET) return [];\n// Nur echte Browser-Aufrufe der Seite, keine Skripte oder Link-Scanner\nif ((h['sec-fetch-dest'] || '') !== 'document') return [];\nconst ua = String(h['user-agent'] || '');\nif (/bot|crawl|spider|preview|scanner|headless|python|curl|wget|go-http|java\\/|okhttp|axios|node-fetch|safelinks|barracuda|proofpoint|mimecast|trendmicro|zscaler/i.test(ua)) return [];\n\nconst UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\nconst EMAIL = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/;\nconst lid = String(q.lid || '').trim();\nconst email = String(q.e || '').trim().toLowerCase();\nlet mode = null;\nif (UUID.test(lid)) mode = 'lid';\nelse if (EMAIL.test(email) && email.length < 200) mode = 'email';\nelse return [];\n\n// Ein Eintrag je Person und sechs Stunden (Neuladen und Weiterklicken erzeugt keine Notizflut)\nconst key = mode === 'lid' ? lid : email;\nconst sd = $getWorkflowStaticData('global');\nsd.seen = sd.seen || {};\nconst now = Date.now();\nfor (const k of Object.keys(sd.seen)) if (now - sd.seen[k] > 24 * 3600 * 1000) delete sd.seen[k];\nif (sd.seen[key] && now - sd.seen[key] < 6 * 3600 * 1000) return [];\nsd.seen[key] = now;\n\nconst clean = (s, n) => String(s || '').replace(/[\\r\\n]+/g, ' ').slice(0, n);\nconst d = new Date(now);\nconst datum = d.toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin' });\nconst uhr = d.toLocaleTimeString('de-DE', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' });\nconst iso = d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });\nreturn [{ json: { mode, lid, email, haus: clean(q.haus, 80), plaetze: clean(q.plaetze, 10), datum, uhr, iso } }];\n"
+      }
+    },
+    {
+      "id": "f9c7fd35-cf24-40a5-b7ef-84c94e5496a3",
+      "name": "Mit Kennung?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        480,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.mode }}",
+              "value2": "lid"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "1493c6f7-5171-43fb-9509-e235a43a1031",
+      "name": "Person per ID",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        100
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.attio.com/v2/objects/people/records/{{ $json.lid }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__ATTIO_CREDENTIAL_ID__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "87020957-8578-4501-9e4b-6fb88182a26b",
+      "name": "Person per E-Mail",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        320
+      ],
+      "parameters": {
+        "method": "PUT",
+        "url": "https://api.attio.com/v2/objects/people/records?matching_attribute=email_addresses",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ data: { values: { email_addresses: [ $json.email ] } } }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__ATTIO_CREDENTIAL_ID__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "f62b678d-fa6a-4469-a1e0-d4a7b26db424",
+      "name": "Datensatz",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        200
+      ],
+      "parameters": {
+        "jsCode": "\nconst ctx = $('Prüfen').first().json;\nconst r = $input.first().json;\nconst id = r && r.data && r.data.id && r.data.id.record_id;\nif (!id) return [];\nconst zeilen = [\n  'Der Vertriebsautopilot hat gesehen: Der Ausfall-Rechner wurde über den persönlichen Link geöffnet.',\n  'Zeit: ' + ctx.datum + ', ' + ctx.uhr + ' Uhr',\n];\nif (ctx.haus) zeilen.push('Haus laut Link: ' + ctx.haus);\nif (ctx.plaetze) zeilen.push('Plätze laut Link: ' + ctx.plaetze);\nzeilen.push('Hinweis: Das zeigt das Öffnen der Seite, nicht, ob der Rechner ausgefüllt wurde. Die Eingaben bleiben im Browser des Besuchers.');\nreturn [{ json: { ...ctx, recordId: id, noteContent: zeilen.join('\\n') } }];\n"
+      }
+    },
+    {
+      "id": "cace0529-f1fb-49a2-8962-2373d2df5ffa",
+      "name": "Notiz anlegen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.attio.com/v2/notes",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ data: { parent_object: 'people', parent_record_id: $json.recordId, title: 'Ausfall-Rechner geöffnet', format: 'plaintext', content: $json.noteContent } }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__ATTIO_CREDENTIAL_ID__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "edc47d44-a309-4843-9c36-4b458118369f",
+      "name": "Letzte Aktivität setzen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        200
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.attio.com/v2/objects/people/records/{{ $('Datensatz').first().json.recordId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ data: { values: { letzte_aktivitat: [ { value: $('Datensatz').first().json.iso } ] } } }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__ATTIO_CREDENTIAL_ID__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "Link geöffnet (Webhook)": {
+      "main": [
+        [
+          {
+            "node": "Prüfen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prüfen": {
+      "main": [
+        [
+          {
+            "node": "Mit Kennung?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mit Kennung?": {
+      "main": [
+        [
+          {
+            "node": "Person per ID",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Person per E-Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Person per ID": {
+      "main": [
+        [
+          {
+            "node": "Datensatz",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Person per E-Mail": {
+      "main": [
+        [
+          {
+            "node": "Datensatz",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datensatz": {
+      "main": [
+        [
+          {
+            "node": "Notiz anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notiz anlegen": {
+      "main": [
+        [
+          {
+            "node": "Letzte Aktivität setzen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
