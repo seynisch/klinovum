@@ -260,6 +260,8 @@
     f.body.appendChild(h('p', { class: 'rc-teaser', text: 'Das ist nur der sichtbare Preis. Was Ausfälle darüber hinaus kosten, nur nicht in Euro, steht direkt darunter.' }));
     if (!reduced) setTimeout(function () { countUp(numEl, c.mid, 1400); }, 900); else countUp(numEl, c.mid, 0);
 
+    f.body.appendChild(ursachenCta());
+
     var tm = tippMessage(c);
     if (tm) f.body.appendChild(h('p', { class: 'rc-tipp-msg ' + tm.cls, text: tm.t }));
 
@@ -275,10 +277,11 @@
     }));
     f.body.appendChild(calcDetails(c));
 
+    showSticky({ title: 'Und woran liegt das?', sub: 'Sechs Fragen, etwa eine Minute', action: btn('Ursachen herausfinden', 'btn-primary btn-lg', next, true), watch: '.rc-cta-ursachen, .rc-next' });
     f.foot.appendChild(h('div', { class: 'rc-next' }, [
       h('div', {}, [h('h3', { text: 'Und woran liegt das?' }), h('p', { class: 'rc-sub', text: 'Sechs Fragen, etwa eine Minute.' })]),
       h('div', { class: 'rc-next-actions' }, [
-        btn('Ursachen herausfinden', 'btn-primary', next, true),
+        btn('Ursachen herausfinden', 'btn-primary btn-lg', next, true),
         btn('Ergebnis kopieren', 'btn-secondary', function (e) { copy(summaryText(c), e.currentTarget, 'Kopiert'); })
       ])
     ]));
@@ -491,9 +494,9 @@
   function topCta() {
     return h('section', { class: 'rc-cta-top' }, [
       h('div', { class: 'rc-cta-top-copy' }, [
-        h('span', { class: 'rc-fx-eyebrow', text: 'Nächster Schritt' }),
-        h('h3', { text: 'Ihre Auswertung gemeinsam durchgehen' }),
-        h('p', { text: '30 Minuten: Ergebnisse prüfen, Prioritäten setzen und den Fahrplan für die nächsten 90 Tage festlegen.' })
+        h('span', { class: 'rc-fx-eyebrow', text: 'Kostenfrei' }),
+        h('h3', { text: 'Ihren Fahrplan für die kommenden Monate festlegen' }),
+        h('p', { text: 'In 30 Minuten legen wir gemeinsam anhand Ihrer Prioritäten fest, was in den kommenden Monaten zu tun ist, in welcher Reihenfolge und woran Sie Fortschritt messen. Völlig kostenfrei.' })
       ]),
       h('div', { class: 'rc-cta-top-action' }, [
         ctaButton('oben', 'Gespräch vereinbaren'),
@@ -503,16 +506,17 @@
     ]);
   }
 
-  // Mitlaufende Leiste am unteren Rand, solange kein anderer Gesprächs-Block im Bild ist
-  function showSticky() {
+  // Mitlaufende Leiste am unteren Rand, solange kein passender Block im Bild ist
+  // opts: title, sub, action (Knoten mit dem Button), watch (Selektor der Blöcke, die sie ersetzen)
+  function showSticky(opts) {
     removeSticky();
-    stickyEl = h('div', { class: 'rc-sticky', role: 'complementary', 'aria-label': 'Gespräch vereinbaren' }, [
+    stickyEl = h('div', { class: 'rc-sticky', role: 'complementary', 'aria-label': opts.title }, [
       h('div', { class: 'rc-sticky-inner' }, [
         h('div', { class: 'rc-sticky-text' }, [
-          h('b', { text: 'Auswertung gemeinsam besprechen' }),
-          h('small', { text: '30 Minuten, kostenfrei und vertraulich' })
+          h('b', { text: opts.title }),
+          h('small', { text: opts.sub })
         ]),
-        ctaButton('leiste', 'Gespräch vereinbaren')
+        opts.action
       ])
     ]);
     document.body.appendChild(stickyEl);
@@ -527,8 +531,27 @@
         });
         if (stickyEl) stickyEl.classList.toggle('is-hidden', seen.length > 0);
       });
-      Array.prototype.forEach.call(stage.querySelectorAll('.rc-cta-top, .rc-pitch'), function (el) { stickyObs.observe(el); });
+      // einen Takt später, damit auch Blöcke im Fuß der Karte schon im Dokument stehen
+      setTimeout(function () {
+        if (!stickyObs) return;
+        Array.prototype.forEach.call(stage.querySelectorAll(opts.watch), function (el) { stickyObs.observe(el); });
+      }, 0);
     }
+  }
+
+  // Ergebnis Stufe 1: Einladung zu den Ursachen, direkt unter der Euro-Zahl
+  function ursachenCta() {
+    return h('section', { class: 'rc-cta-top rc-cta-ursachen' }, [
+      h('div', { class: 'rc-cta-top-copy' }, [
+        h('span', { class: 'rc-fx-eyebrow', text: 'Nächster Schritt' }),
+        h('h3', { text: 'Und woran liegt das?' }),
+        h('p', { text: 'Sechs Fragen, etwa eine Minute. Danach wissen Sie, wo der Handlungsbedarf am größten ist, und erhalten Ihre Auswertung mit Maßnahmen. Auf Wunsch legen wir mit Ihnen anschließend kostenfrei Ihren Fahrplan fest.' })
+      ]),
+      h('div', { class: 'rc-cta-top-action' }, [
+        btn('Ursachen herausfinden', 'btn-primary btn-lg', next, true),
+        h('span', { class: 'rc-cta-micro', text: 'Jede Frage aus dem Kopf zu beantworten, „Weiß ich nicht“ ist erlaubt' })
+      ])
+    ]);
   }
 
   // Abschluss der Auswertung: Was im Gespräch passiert, mit Button
@@ -536,15 +559,15 @@
     var items = [
       ['Ergebnisse prüfen', 'Stimmen Zahlen und Einordnung mit Ihrer Wahrnehmung überein, und was fehlt noch?'],
       ['Prioritäten setzen', 'Womit beginnen Sie, was braucht Vorlauf, und was erledigt sich von allein?'],
-      ['Fahrplan festlegen', 'Maßnahmen, Verantwortliche, Zeitplan und Messgrößen für die nächsten 90 Tage.']
+      ['Fahrplan festlegen', 'Maßnahmen, Verantwortliche, Zeitplan und Messgrößen für die kommenden Monate, anhand Ihrer Prioritäten.']
     ];
     return h('section', { class: 'rc-section-in rc-pitch' }, [
-      h('h3', { text: 'Ergebnisse gemeinsam besprechen, Fahrplan festlegen' }),
-      h('p', { text: 'Diese Auswertung beruht auf sechs Antworten und Richtwerten aus öffentlichen Quellen. In einem Gespräch gehen wir sie mit Ihnen konkret durch und legen fest, was in Ihrem Haus notwendig ist:' }),
+      h('h3', { text: 'Ergebnisse besprechen, Fahrplan festlegen' }),
+      h('p', { text: 'Der Mehrwert dieses ersten Gesprächs: Sie gehen mit einem Fahrplan für die kommenden Monate heraus, abgeleitet aus Ihren Prioritäten und völlig kostenfrei. Dafür gehen wir die Auswertung konkret mit Ihnen durch:' }),
       h('ul', { class: 'rc-pitch-list' }, items.map(function (it) { return h('li', null, [h('b', { text: it[0] + ': ' }), it[1]]); })),
       h('div', { class: 'rc-pitch-cta' }, [
         ctaButton('abschluss', 'Gespräch vereinbaren'),
-        h('span', { class: 'rc-note', text: '30 Minuten, kostenfrei, vertraulich, ohne Verkaufsdruck' })
+        h('span', { class: 'rc-note', text: '30 Minuten, völlig kostenfrei, vertraulich, ohne Verkaufsdruck' })
       ])
     ]);
   }
@@ -644,7 +667,7 @@
 
     f.body.appendChild(h('p', { class: 'rc-note', text: 'Orientierung auf Basis Ihrer Angaben, keine Diagnose und keine Aussage über einzelne Personen. Alle Werte sind Schätzungen.' }));
 
-    showSticky();
+    showSticky({ title: 'Ihr Fahrplan für die kommenden Monate', sub: '30 Minuten, völlig kostenfrei', action: ctaButton('leiste', 'Gespräch vereinbaren'), watch: '.rc-cta-top, .rc-pitch' });
     f.foot.appendChild(btn('Auswertung drucken oder als PDF speichern', 'btn-secondary', function () { window.print(); }));
     f.foot.appendChild(h('button', { type: 'button', class: 'rc-link rc-restart', text: 'Neu starten', onclick: restart }));
   }
