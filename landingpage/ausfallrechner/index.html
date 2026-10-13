@@ -4,19 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ausfall-Rechner für Pflegeeinrichtungen | Klinovum</title>
-  <meta name="description" content="Was kosten Krankheitsausfälle Ihr Pflegeheim wirklich, und woran liegt es? Der Ausfall-Rechner nennt in 30 Sekunden die Zahl und zeigt danach, woran es liegen kann.">
-  <!-- Vorschau-Stand: noch nicht für Suchmaschinen freigeben, bis Leon die Seite abgenommen hat -->
+  <meta name="description" content="Ein Werkzeug für Einrichtungsleitungen: Was kosten Krankheitsausfälle in Ihrem Haus, und woran kann es liegen? Mit offenem Rechenweg und Quellen.">
+  <!-- Vorschau-Stand (Variante B): noch nicht für Suchmaschinen freigeben -->
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#163a64">
-
-  <link rel="canonical" href="https://klinovum.de/ausfallrechner">
-
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="de_DE">
-  <meta property="og:site_name" content="Klinovum">
-  <meta property="og:title" content="Ausfall-Rechner für Pflegeeinrichtungen | Klinovum">
-  <meta property="og:description" content="Was kosten Krankheitsausfälle Ihr Haus wirklich? Die Zahl in 30 Sekunden, die Ursachen in einer Minute.">
-  <meta property="og:url" content="https://klinovum.de/ausfallrechner">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://klinovum.de/ausfallrechner/">
 
   <link rel="icon" href="../assets/favicon.ico" sizes="any">
   <link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32">
@@ -26,171 +18,109 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="rechner.css">
+  <link rel="stylesheet" href="b.css">
 </head>
-<body>
+<body class="b-page">
 
-  <header class="site-header" id="header">
-    <div class="page-padding">
-      <div class="container">
-        <div class="header-inner">
-          <a href="../"><img src="../assets/logoaufdunkel_klinovum.svg" alt="Klinovum" class="logo logo-light"><img src="../assets/logoaufweiss_klinovum.svg" alt="Klinovum" class="logo logo-dark"></a>
-        </div>
-      </div>
+  <header class="b-header">
+    <div class="b-wrap b-header-row">
+      <a href="../" aria-label="Klinovum Startseite"><img src="../assets/logoaufweiss_klinovum.svg" alt="Klinovum" class="b-logo"></a>
+      <span class="b-header-note">Werkzeug für Einrichtungsleitungen</span>
     </div>
   </header>
 
-  <section class="hero rc-hero">
-    <div class="hero-bg"><div class="hero-bg-gradient"></div></div>
-    <div class="page-padding">
-      <div class="container">
-        <div class="rc-hero-layout">
-          <div>
-            <div class="hero-qualifier"><span class="badge badge-blue">Für Pflegeheime, Altenheime &amp; Betreutes Wohnen</span></div>
-            <h1>Was kosten Krankheitsausfälle Ihr Haus <span class="h1-accent">wirklich,</span> <span class="h1-accent">und woran liegt es?</span></h1>
-            <p class="hero-sub">Der Ausfall-Rechner nennt in 30 Sekunden die Zahl, die Sie Ihrem Träger vorlegen können. Danach zeigt er in einer Minute, woran die Ausfälle liegen können und wo Sie ansetzen können.</p>
-            <div class="rc-hero-actions">
-              <a href="#rechner" class="btn btn-primary" data-rc-start>Rechner starten <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-              <span class="rc-hero-note">Kostenfrei, ohne Anmeldung, jede Frage aus dem Kopf zu beantworten</span>
-            </div>
-            <div class="rc-proof">
-              <div class="rc-proof-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Ergebnis als Spanne in Euro pro Jahr</span></div>
-              <div class="rc-proof-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Ein Muster und ein nächster Schritt, dazu ein Entwurf für Ihren Träger</span></div>
-              <div class="rc-proof-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Ihre Angaben bleiben in Ihrem Browser</span></div>
-            </div>
-          </div>
-          <aside class="rc-sample" aria-label="Beispiel eines Ergebnisses">
-            <h4>So sieht Ihr Ergebnis aus</h4>
-            <div class="rc-sample-num">360.000 €</div>
-            <p class="rc-sample-range">pro Jahr, Spanne 310.000 bis 420.000 €</p>
-            <div class="rc-sample-grid">
-              <div><b>5,4</b><span>Vollkräfte bezahlt und nicht im Dienst</span></div>
-              <div><b>380 €</b><span>je Platz und Monat</span></div>
-            </div>
-            <p class="rc-sample-tag">Beispielwerte, keine Kundendaten</p>
-          </aside>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <main>
-    <section class="rc-section" id="rechner">
-      <div class="page-padding">
-        <div class="container">
-          <div class="rc-intro">
-            <h2>In 30 Sekunden zur Zahl</h2>
-            <p>Drei Fragen zum Antippen. Schätzen ist ausdrücklich erlaubt, wir rechnen mit Spannen. Wer mehr weiß, kann die Werte anpassen.</p>
-          </div>
-          <div class="rc-card" id="rc-stage" aria-live="polite">
-            <noscript><p>Für den Rechner wird JavaScript benötigt. Ohne JavaScript sprechen Sie uns gern direkt an: <a href="../erstgesprach">Erstgespräch vereinbaren</a>.</p></noscript>
-          </div>
+    <div class="b-wrap b-intro">
+      <h4>Pflegeheime, Altenheime und Betreutes Wohnen</h4>
+      <h1>Was kosten Krankheitsausfälle in Ihrem Haus, und woran liegen sie?</h1>
+      <p class="b-lead">Dieses Werkzeug rechnet die Kosten von Krankheitsausfällen als Größenordnung durch und zeigt, woran es liegen kann. Für die Zahl brauchen Sie drei Angaben und etwa 30 Sekunden, für die Einordnung eine weitere Minute. Alles läuft in Ihrem Browser, nichts wird gespeichert oder gesendet.</p>
+      <ul class="b-know">
+        <li><b>Die Kosten</b> pro Jahr als Spanne und in Vollkräften, die bezahlt werden und nicht im Dienst sind.</li>
+        <li><b>Das stärkste Feld</b> unter fünf möglichen: Dienstplan, Belastung, Führung, Veränderungen oder Fluktuation.</li>
+        <li><b>Ein erster Schritt,</b> den Sie ohne Budget anstoßen können, und ein Entwurf, mit dem Sie das Thema Ihrem Träger vorlegen.</li>
+      </ul>
+    </div>
+
+    <section class="b-tool" id="rechner">
+      <div class="b-wrap b-wrap-tool">
+        <div class="rc-card" id="rc-stage" aria-live="polite" data-variant="b" data-cta="../erstgesprach/">
+          <noscript><p>Für den Rechner wird JavaScript benötigt.</p></noscript>
         </div>
       </div>
     </section>
 
-    <section class="rc-info">
-      <div class="page-padding">
-        <div class="container">
-          <h2>So rechnen wir</h2>
-          <div class="rc-info-grid">
-            <div><h3>Was die Buchhaltung sieht</h3><p>Entgeltfortzahlung bis sechs Wochen und der Arbeitgeberanteil zur Sozialversicherung. Das ist der Teil, den jeder Träger nachrechnen kann.</p></div>
-            <div><h3>Was in Überstunden steckt</h3><p>Einspringen mit Zuschlag, Springerpool, Zeitarbeit. Die Faktoren sind Annahmen, die Sie im Ergebnis ansehen und anpassen können.</p></div>
-            <div><h3>Was nicht auf der Rechnung steht</h3><p>Folgeausfälle bei denen, die einspringen, und Fluktuation durch Überlast. Wir nennen sie getrennt als „bis zu“ und rechnen sie nicht in die Kernzahl.</p></div>
-          </div>
-          <div class="rc-info-grid" style="margin-top:2.5rem">
-            <div><h3>Und was passiert mit meinen Angaben?</h3><p>Die Berechnung läuft vollständig in Ihrem Browser. Es werden keine Angaben übertragen oder gespeichert. Bitte tragen Sie keine Namen von Mitarbeitenden ein.</p></div>
-            <div><h3>Wie belastbar ist das Ergebnis?</h3><p>Es ist eine Schätzung auf Basis Ihrer Angaben und keine Diagnose. Der Befund zeigt Tendenzen und Richtungen. Für eine genaue Analyse sprechen wir gern mit Ihnen.</p></div>
-          </div>
-          <div class="rc-sources">
-            <span>Quellen für Richtwerte:</span>
-            <a href="https://www.iwkoeln.de/fileadmin/user_upload/Studien/Kurzberichte/PDF/2026/IW-Kurzbericht_2026-Entgeltfortzahlung-Krankheitsfall.pdf" target="_blank" rel="noopener">IW Köln, Kurzbericht 2026: Entgeltfortzahlung im Krankheitsfall</a>
-            <a href="https://www.aok.de/pp/fileadmin/bereiche/niedersachsen/Pressemitteilungen/2025/Pressemitteilung_AOKN_Fehlzeiten-Report.pdf" target="_blank" rel="noopener">AOK Niedersachsen, Fehlzeiten-Report 2025</a>
-            <a href="https://www.dak.de/presse/landesthemen/rheinland-pfalz/gesundheitsreport/erkaeltungswelle-haelt-krankenstand-in-rheinland-pfalz-auf-hohem-niveau_144968" target="_blank" rel="noopener">DAK-Gesundheitsreport 2025, Rheinland-Pfalz</a>
-            <a href="https://statistik.arbeitsagentur.de/DE/Statischer-Content/Statistiken/Themen-im-Fokus/Berufe/Generische-Publikationen/Arbeitsmarktsituation-in-Pflegeberufen.pdf" target="_blank" rel="noopener">Bundesagentur für Arbeit, Arbeitsmarktsituation in Pflegeberufen</a>
-            <a href="https://www.wido.de/news-presse/pressemitteilungen/2025/40-prozent-aller-fehltage-2024-wegen-langzeit-erkrankungen/" target="_blank" rel="noopener">WIdO, 10.03.2025: 40 Prozent aller Fehltage 2024 wegen Langzeit-Erkrankungen</a>
-            <a href="https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Gesundheit/Pflege/Tabellen/personal-pflegeeinrichtungen.html" target="_blank" rel="noopener">Statistisches Bundesamt, Personal in Pflegeheimen (Stichtag 15.12.2023)</a>
-            <a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/12/PD24_478_224.html" target="_blank" rel="noopener">Statistisches Bundesamt, Pressemitteilung Nr. 478 vom 18.12.2024: 5,7 Millionen Pflegebedürftige</a>
-            <a href="https://www.medi-karriere.de/magazin/einspringen-aus-dem-frei-noch-immer-die-regel/" target="_blank" rel="noopener">Landespflegekammer Rheinland-Pfalz und Allensbach, Befragung zum Einspringen (zitiert nach medi-karriere.de)</a>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/12387650/" target="_blank" rel="noopener">Aiken et al., JAMA 2002: Hospital nurse staffing and patient mortality, nurse burnout, and job dissatisfaction</a>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/16843237/" target="_blank" rel="noopener">Bostick et al., JAMDA 2006: Systematic review of studies of staffing and quality in nursing homes</a>
-            <a href="https://www.sciencedirect.com/science/article/abs/pii/S1525861013007962" target="_blank" rel="noopener">Backhaus et al., JAMDA 2014: Nurse staffing impact on quality of care in nursing homes</a>
-            <a href="https://dguv.de/fb-gesundheitimbetrieb/sachgebiete/sg-psyche/erfahrungsschatz/arbeitsorganisation/arbeitsintensitaet/index.jsp" target="_blank" rel="noopener">DGUV, Arbeitsintensität: Kurzfristiger Personalausfall (Praxisbeispiel Altenpflege)</a>
-            <a href="https://www.aerzteblatt.de/nachrichten/136531/Springerkonzepte-fuer-Pflege-vorgeschlagen" target="_blank" rel="noopener">Ärzteblatt, 8.8.2022: Springerkonzepte für Pflege vorgeschlagen</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="b-wrap b-article">
+      <h2>Der Erreger erklärt nicht das ganze Bild</h2>
+      <p>Wer Grippe hat, hat Grippe. Trotzdem werden manche Teams deutlich öfter krank als andere, und das liegt selten am Virus. Der Erreger löst die Krankheit aus. Wie oft er trifft, hängt auch davon ab, wie belastbar ein Team gerade ist.</p>
+      <p>Das Werkzeug trennt deshalb zwei Dinge: den Anteil, den kein Haus verhindert (Saison, Infekte, Alter), und den Anteil, auf den Rahmenbedingungen Einfluss haben. Diese Rahmenbedingungen lassen sich in fünf Felder ordnen. Zu jedem stellt der Rechner genau eine Frage.</p>
+      <dl class="b-dl">
+        <div><dt>Dienstplan und Einspringen</dt><dd>Wie planbar ist die Freizeit? Wer häufig an freien Tagen einspringt, kommt schlechter zur Erholung.</dd></div>
+        <div><dt>Belastungsdichte</dt><dd>Wie oft ist eine Schicht knapper besetzt als geplant? Dauerhafte Enge lässt wenig Raum für Ausfälle.</dd></div>
+        <div><dt>Führung und Klima</dt><dd>Wird Überlastung angesprochen, und hat das Folgen? Wo das fehlt, bleibt sie oft unausgesprochen und zeigt sich erst in Krankmeldungen.</dd></div>
+        <div><dt>Veränderungsdruck</dt><dd>Wie viel Neues kam in kurzer Zeit? Auch sinnvolle Veränderungen kosten Kraft.</dd></div>
+        <div><dt>Fluktuation und Einarbeitung</dt><dd>Wie viele gehen, kommen oder helfen nur aus? Das Stammteam trägt Einarbeitung und Lücken.</dd></div>
+      </dl>
+      <p class="b-note">Das sind Ordnungsfelder, keine Messgrößen. Sie zeigen, wo es sich lohnt, genauer hinzusehen.</p>
 
-    <section class="rc-band">
-      <div class="page-padding">
-        <div class="container">
-          <div class="rc-band-inner">
-            <div>
-              <h2>Klinovum begleitet Veränderungsprozesse im Gesundheitswesen</h2>
-              <p>Strategie, Führung und Kultur gehören zusammen. Mit über 30 Jahren Erfahrung und 350+ abgeschlossenen Projekten.</p>
-            </div>
-            <a href="../erstgesprach" class="btn btn-secondary is-white">Kostenfreies Erstgespräch vereinbaren <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
+      <h2>So wird gerechnet</h2>
+      <p>Die Kosten setzen sich aus drei Schichten zusammen. Die Kernzahl enthält die ersten beiden.</p>
+      <dl class="b-dl">
+        <div><dt>Entgeltfortzahlung</dt><dd>Lohn und Arbeitgeberanteil für Ausfalltage bis zur sechsten Woche.</dd></div>
+        <div><dt>Ersatz</dt><dd>Einspringen mit Zuschlag, Springerpool, Zeitarbeit. Was nicht ersetzt wird, kostet kein Geld, aber Belastung.</dd></div>
+        <div><dt>Folgekosten</dt><dd>Folgeausfälle bei denen, die einspringen, und Fluktuation. Der Rechner nennt sie getrennt als „bis zu“, sie stecken nicht in der Kernzahl.</dd></div>
+      </dl>
+      <p>Grundlage ist: Vollkräfte × Krankenstand × Kosten je Vollkraft, getrennt nach Entgeltfortzahlung und Ersatz. Diese Werte liegen zugrunde:</p>
+      <div class="b-tablebox">
+        <table class="b-table">
+          <thead><tr><th>Annahme</th><th>Wert</th><th>Herkunft</th></tr></thead>
+          <tbody>
+            <tr><td>Kosten je Vollkraft</td><td>50.000 € im Jahr</td><td><span class="b-tag ok">abgeleitet</span> Fachkraft im Median 4.153 € im Monat (Bundesagentur für Arbeit, 2024), Helfer rund 2.800 € (Schätzung), rund 18 % Arbeitgeberanteil (IW Köln), Mischung 50:50 angenommen</td></tr>
+            <tr><td>Vollkräfte je Platz</td><td>0,55</td><td><span class="b-tag ok">abgeleitet</span> 817.711 Beschäftigte in Pflegeheimen, davon 240.963 in Vollzeit (Statistisches Bundesamt, Dezember 2023), bei rund 800.000 vollstationär Versorgten. Mit halber Teilzeit rund 0,65 Vollkräfte je Bewohner, davon rund 0,55 in Pflege und Betreuung (Anteil von 80 bis 85 % angenommen)</td></tr>
+            <tr><td>Krankenstand je Antwortkarte</td><td>4 bis 15 % in vier Stufen</td><td><span class="b-tag ok">Orientierung</span> Gesundheits- und Sozialwesen 7,7 % (AOK Niedersachsen 2025), Altenpflege laut DAK deutlich über dem Durchschnitt</td></tr>
+            <tr><td>Kosten des Ersatzes</td><td>1,05- bis 1,8-fach der Normalstunde</td><td><span class="b-tag assume">Annahme</span> Zeitarbeit ist in der Pflege selten (rund 1,3 % der Pflegekräfte, Bundesagentur für Arbeit). Zu den Mehrkosten gibt es keine belastbare öffentliche Zahl</td></tr>
+            <tr><td>Anteil Entgeltfortzahlung</td><td>65 % der Ausfalltage</td><td><span class="b-tag ok">abgeleitet</span> Knapp 40 % der Fehltage entfielen 2024 auf Krankmeldungen über sechs Wochen (WIdO, AOK-Versicherte). Auch dort zahlt der Arbeitgeber die ersten sechs Wochen, der Anteil liegt also über 60 %. Wir rechnen vorsichtig mit 65 %</td></tr>
+          </tbody>
+        </table>
       </div>
-    </section>
+      <p>Jeden dieser Werte können Sie im Ergebnis unter „So haben wir gerechnet“ mit Ihren eigenen Zahlen überschreiben. Die Spanne wird dann enger.</p>
+
+      <h2>Über die Euro hinaus: Was Ausfälle sonst kosten</h2>
+      <p>Die Kosten in Euro sind nur der sichtbare Preis, und sie kann jeder selbst nachrechnen. Ausfälle kosten ein Haus mehr, nur nicht in Euro: Versorgung, Team, Führung, Kommunikation und am Ende die Leitung. Wo es Zahlen und Studien dazu gibt, nennen wir sie mit Quelle.</p>
+      <div id="rc-effects-article" class="b-fx"></div>
+
+      <h2>Grenzen</h2>
+      <p>Das Ergebnis ist eine Größenordnung mit deutlicher Unschärfe, solange Vollkräfte und Kosten nicht mit eigenen Werten überschrieben sind. Es ersetzt keine Auswertung Ihrer tatsächlichen Fehlzeiten. Ob ein Ausfall weitere Ausfälle auslöst, lässt sich für Pflegeheime nicht belegen, belegt sind nur die Zwischenschritte wie häufiges Einspringen und Erschöpfung. Der Befund beschreibt Muster und keine gesicherten Ursachen, und er sagt nichts über einzelne Personen. Bitte tragen Sie keine Namen oder Gesundheitsdaten von Mitarbeitenden ein.</p>
+
+      <h2>Quellen</h2>
+      <p class="b-note">Stand der Recherche: Oktober 2026.</p>
+      <ul class="b-sources">
+        <li><a href="https://www.iwkoeln.de/fileadmin/user_upload/Studien/Kurzberichte/PDF/2026/IW-Kurzbericht_2026-Entgeltfortzahlung-Krankheitsfall.pdf" target="_blank" rel="noopener">IW Köln, Kurzbericht 2026: Entgeltfortzahlung im Krankheitsfall</a></li>
+        <li><a href="https://www.evangelisch.de/inhalte/245969/28-07-2025/altenpflegekraefte-verdienen-im-mittel-ueber-4000-euro" target="_blank" rel="noopener">Entgelt Altenpflegefachkräfte 2024, Bundesagentur für Arbeit (zitiert nach evangelisch.de)</a></li>
+        <li><a href="https://www.aok.de/pp/fileadmin/bereiche/niedersachsen/Pressemitteilungen/2025/Pressemitteilung_AOKN_Fehlzeiten-Report.pdf" target="_blank" rel="noopener">AOK Niedersachsen, Fehlzeiten-Report 2025</a></li>
+        <li><a href="https://www.dak.de/presse/landesthemen/rheinland-pfalz/gesundheitsreport/erkaeltungswelle-haelt-krankenstand-in-rheinland-pfalz-auf-hohem-niveau_144968" target="_blank" rel="noopener">DAK-Gesundheitsreport 2025, Rheinland-Pfalz</a></li>
+        <li><a href="https://www.wido.de/news-presse/pressemitteilungen/2025/40-prozent-aller-fehltage-2024-wegen-langzeit-erkrankungen/" target="_blank" rel="noopener">WIdO, 10.03.2025: 40 Prozent aller Fehltage 2024 wegen Langzeit-Erkrankungen</a></li>
+        <li><a href="https://statistik.arbeitsagentur.de/DE/Statischer-Content/Statistiken/Themen-im-Fokus/Berufe/Generische-Publikationen/Arbeitsmarktsituation-in-Pflegeberufen.pdf" target="_blank" rel="noopener">Bundesagentur für Arbeit, Arbeitsmarktsituation in Pflegeberufen</a></li>
+        <li><a href="https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Gesundheit/Pflege/Tabellen/personal-pflegeeinrichtungen.html" target="_blank" rel="noopener">Statistisches Bundesamt, Personal in Pflegeheimen (Stichtag 15.12.2023)</a></li>
+        <li><a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/12/PD24_478_224.html" target="_blank" rel="noopener">Statistisches Bundesamt, Pressemitteilung Nr. 478 vom 18.12.2024: 5,7 Millionen Pflegebedürftige</a></li>
+        <li><a href="https://www.medi-karriere.de/magazin/einspringen-aus-dem-frei-noch-immer-die-regel/" target="_blank" rel="noopener">Landespflegekammer Rheinland-Pfalz und Allensbach, Befragung zum Einspringen (zitiert nach medi-karriere.de)</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/12387650/" target="_blank" rel="noopener">Aiken et al., JAMA 2002: Hospital nurse staffing and patient mortality, nurse burnout, and job dissatisfaction</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/16843237/" target="_blank" rel="noopener">Bostick et al., JAMDA 2006: Systematic review of studies of staffing and quality in nursing homes</a></li>
+        <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S1525861013007962" target="_blank" rel="noopener">Backhaus et al., JAMDA 2014: Nurse staffing impact on quality of care in nursing homes</a></li>
+        <li><a href="https://dguv.de/fb-gesundheitimbetrieb/sachgebiete/sg-psyche/erfahrungsschatz/arbeitsorganisation/arbeitsintensitaet/index.jsp" target="_blank" rel="noopener">DGUV, Arbeitsintensität: Kurzfristiger Personalausfall (Praxisbeispiel Altenpflege)</a></li>
+        <li><a href="https://www.aerzteblatt.de/nachrichten/136531/Springerkonzepte-fuer-Pflege-vorgeschlagen" target="_blank" rel="noopener">Ärzteblatt, 8.8.2022: Springerkonzepte für Pflege vorgeschlagen</a></li>
+      </ul>
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="page-padding">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-col">
-            <a href="../"><img src="../assets/logoaufweiss_klinovum.svg" alt="Klinovum" class="footer-logo"></a>
-            <p>Ein Angebot der Freiburger Akademie<br>Beratungsdienstleistungen GmbH &amp; Co. KG</p>
-          </div>
-          <div class="footer-col">
-            <h4>Kontakt</h4>
-            <p>Hackländerstraße 23<br>70184 Stuttgart</p>
-            <p><a href="tel:+4971150496603">+49 711 5049 6603</a></p>
-            <p><a href="mailto:leon.mast@freiburger-akademie.de">leon.mast@freiburger-akademie.de</a></p>
-          </div>
-          <div class="footer-col">
-            <h4>Rechtliches</h4>
-            <p><a href="https://www.freiburger-akademie.de/legal/impressum" target="_blank" rel="noopener">Impressum</a></p>
-            <p><a href="https://www.freiburger-akademie.de/legal/datenschutz" target="_blank" rel="noopener">Datenschutz</a></p>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2026 Klinovum / Freiburger Akademie</p>
-        </div>
-      </div>
+  <footer class="b-footer">
+    <div class="b-wrap">
+      <p>Ein Werkzeug von Klinovum, einem Angebot der Freiburger Akademie Beratungsdienstleistungen GmbH &amp; Co. KG, Hackländerstraße 23, 70184 Stuttgart.</p>
+      <p>Fragen oder Anmerkungen: <a href="mailto:leon.mast@freiburger-akademie.de">leon.mast@freiburger-akademie.de</a></p>
+      <p><a href="https://www.freiburger-akademie.de/legal/impressum" target="_blank" rel="noopener">Impressum</a> · <a href="https://www.freiburger-akademie.de/legal/datenschutz" target="_blank" rel="noopener">Datenschutz</a></p>
     </div>
   </footer>
 
   <script src="rechner.js"></script>
   <script src="app.js"></script>
-  <script>
-    // Header wie auf der Startseite: transparent am Seitenanfang, weiß beim Scrollen
-    (function () {
-      var header = document.getElementById('header');
-      function onScroll() { header.classList.toggle('scrolled', window.scrollY > 40); }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
-  </script>
-
-  <!-- Leadfeeder (Dealfront) Visitor-Tracking, laedt nur wenn auf der Hauptseite bereits "Verstanden" gewaehlt wurde -->
-  <script>
-    var LEADFEEDER_TRACKER_ID = 'lAxoEaKQlAo7OYGd';
-    (function () {
-      if (localStorage.getItem('klinovum_cookies') !== 'all') return;
-      if (!LEADFEEDER_TRACKER_ID || LEADFEEDER_TRACKER_ID.indexOf('REPLACE_WITH') === 0) return;
-      (function (ss, ex) {
-        window.ldfdr = window.ldfdr || function () { (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments)); };
-        (function (d, s) {
-          var fs = d.getElementsByTagName(s)[0];
-          function ce(src) { var cs = d.createElement(s); cs.src = src; cs.async = 1; fs.parentNode.insertBefore(cs, fs); }
-          ce('https://sc.lfeeder.com/lftracker_v1_' + ss + (ex ? '_' + ex : '') + '.js');
-        })(document, 'script');
-      })(LEADFEEDER_TRACKER_ID);
-    })();
-  </script>
-
 </body>
 </html>

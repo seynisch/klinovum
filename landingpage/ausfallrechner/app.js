@@ -483,7 +483,7 @@
 
   // Link zum Terminbuchen; die Position hängt als Parameter an, damit sich die Wirkung je Platzierung messen lässt
   function ctaHref(pos) {
-    var base = stage.getAttribute('data-cta') || '../erstgesprach';
+    var base = stage.getAttribute('data-cta') || '../erstgesprach/';
     return base + (base.indexOf('?') < 0 ? '?' : '&') + 'utm_source=ausfallrechner&utm_medium=auswertung&utm_content=' + pos;
   }
   function ctaButton(pos, label, extra) {
