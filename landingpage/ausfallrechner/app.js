@@ -175,10 +175,11 @@
   }
 
   function rTipp() {
-    var max = Math.round(S.platz * C.CFG.tippProPlatz / 10000) * 10000;
+    var max = Math.max(1000000, Math.round(S.platz * C.CFG.tippProPlatz / 50000) * 50000);
+    var step = max > 2000000 ? 50000 : 10000;
     var f = frame('tipp', { title: 'Was schätzen Sie: Was kosten Krankheitsausfälle Ihr Haus im Jahr?', sub: 'Aus dem Bauch. Danach zeigen wir, wie nah Sie waren.' });
     var out = h('output', { class: 'rc-bignum rc-bignum-muted', for: 'rc-tipp' }, ['Bitte ziehen']);
-    var range = h('input', { type: 'range', id: 'rc-tipp', class: 'rc-range', min: '0', max: String(max), step: '10000', value: String(Math.round(max / 2 / 10000) * 10000), 'aria-label': 'Ihr Tipp in Euro pro Jahr' });
+    var range = h('input', { type: 'range', id: 'rc-tipp', class: 'rc-range', min: '0', max: String(max), step: String(step), value: String(Math.round(max / 2 / step) * step), 'aria-label': 'Ihr Tipp in Euro pro Jahr' });
     var ok = btn('Tipp abgeben', 'btn-primary', function () { S.tipp = +range.value; next(); }, true);
     ok.disabled = true;
     function upd() { out.textContent = C.eur(+range.value, 10000); out.classList.remove('rc-bignum-muted'); ok.disabled = false; }
@@ -264,6 +265,13 @@
       tile(C.dec1(c.av), 'Vollkräfte, die Sie bezahlen und nicht im Dienst haben'),
       tile(C.fmt(Math.round(c.perPlatzMonat / 10) * 10) + ' €', 'je Platz und Monat')
     ]));
+    var fx = h('section', { class: 'rc-section-in' }, [
+      h('h3', { text: 'Die Zahl ist nur der sichtbare Preis' }),
+      h('p', { class: 'rc-sub', text: 'Über die Kosten in Euro hinaus haben Ausfälle Folgen, die sich nicht beziffern lassen. Sie prägen Ihr Haus und Ihre Arbeit als Leitung:' })
+    ]);
+    C.EFFECTS.forEach(function (e) { fx.appendChild(effectRow(e)); });
+    fx.appendChild(limitNote());
+    f.body.appendChild(fx);
     f.body.appendChild(calcDetails(c));
 
     f.foot.appendChild(h('div', { class: 'rc-next' }, [
@@ -305,10 +313,10 @@
     d.appendChild(h('h4', { class: 'rc-src-h', text: 'Was belegt ist und was Annahme' }));
     d.appendChild(h('ul', { class: 'rc-src' }, [
       srcItem('Kosten je Vollkraft (' + C.fmt(C.CFG.kostenJeVk) + ' €)', 'abgeleitet', 'Altenpflege-Fachkraft im Median 4.153 € im Monat (Bundesagentur für Arbeit, 2024), Helfer rund 2.800 € (Schätzung), dazu rund 18 % Arbeitgeberanteil (IW Köln). Das Verhältnis 50:50 ist angenommen.'),
-      srcItem('Vollkräfte je Platz (' + C.CFG.vkProPlatz + ')', 'Annahme', 'Faustwert ohne Quelle. Bitte oben mit Ihrem Wert überschreiben, das macht die Spanne enger.'),
+      srcItem('Vollkräfte je Platz (' + C.CFG.vkProPlatz + ')', 'abgeleitet', 'Das Statistische Bundesamt zählte im Dezember 2023 817.711 Beschäftigte in Pflegeheimen, davon 240.963 in Vollzeit, bei rund 800.000 vollstationär Versorgten. Mit halber Teilzeit sind das etwa 0,65 Vollkräfte je Bewohner, davon rund 0,55 in Pflege und Betreuung (Anteil von 80 bis 85 % angenommen).'),
       srcItem('Krankenstand je Karte', 'Orientierung', 'Das Gesundheits- und Sozialwesen lag bei der AOK Niedersachsen 2025 bei 7,7 %, die Altenpflege fehlt laut DAK deutlich öfter als der Durchschnitt. Die Bereiche der Karten sind eine Schätzung.'),
-      srcItem('Ersatzkosten (1,05 bis 1,8-fach)', 'Annahme', 'Zeitarbeit ist in der Pflege selten (rund 1,3 % der Pflegekräfte, Bundesagentur). Die Faktoren sind Annahmen; die Deutsche Krankenhausgesellschaft forderte, Leiharbeit auf das 1,5-Fache zu begrenzen, die Sätze lagen also darüber.'),
-      srcItem('Anteil Entgeltfortzahlung (65 %)', 'Annahme', 'Der Rest sind Ausfalltage über sechs Wochen, in denen die Krankenkasse zahlt.')
+      srcItem('Anteil Entgeltfortzahlung (65 %)', 'abgeleitet', 'Knapp 40 % der Fehltage entfielen 2024 auf Krankmeldungen über sechs Wochen (WIdO, AOK-Versicherte). Auch dort zahlt der Arbeitgeber die ersten sechs Wochen, der Anteil liegt also über 60 %. Wir rechnen vorsichtig mit 65 %.'),
+      srcItem('Kosten des Ersatzes (1,05- bis 1,8-fach)', 'Annahme', 'Zeitarbeit ist in der Pflege selten (rund 1,3 % der Pflegekräfte, Bundesagentur für Arbeit). Zu den Mehrkosten gibt es keine belastbare öffentliche Zahl.')
     ]));
     d.appendChild(btn('Neu rechnen', 'btn-secondary', function () {
       var v = parseFloat(vk.value), k = parseFloat(ko.value);
@@ -366,6 +374,31 @@
     return 'Sie vermuteten „' + g.t + '“. Ihre Antworten zeigen „' + top.short + '“ als stärkstes Feld.';
   }
 
+  function srcLink(id) {
+    var q = C.SRC[id];
+    return h('a', { href: q.url, target: '_blank', rel: 'noopener', text: q.name });
+  }
+
+  // Eine Auswirkung mit Beleg: Zahl, Quelle, Art der Studie
+  function effectRow(e) {
+    var kids = [h('strong', { class: 'rc-fx-title', text: e.title }), h('p', { class: 'rc-fx-text', text: e.text })];
+    e.proofs.forEach(function (p) {
+      kids.push(h('p', { class: 'rc-fx-proof' }, [
+        h('span', { class: 'rc-fx-tag', text: 'Beleg' }),
+        p.t + ' ',
+        h('span', { class: 'rc-fx-src' }, ['Quelle: ', srcLink(p.src), ' (' + C.SRC[p.src].note + ').'])
+      ]));
+    });
+    return h('div', { class: 'rc-fx' }, kids);
+  }
+
+  function limitNote() {
+    return h('p', { class: 'rc-note' }, [
+      'Die meisten dieser Studien sind Beobachtungsstudien und zeigen Zusammenhänge, keine Ursachen. Für Pflegeheime ist die Studienlage zur Besetzung nicht einheitlich, eine Übersicht von 2014 fand den Zusammenhang nur teilweise (',
+      srcLink('backhaus'), ').'
+    ]);
+  }
+
   function levelChip(v) {
     var b = C.band(v);
     return h('span', { class: 'rc-lvl ' + b, text: 'Handlungsbedarf ' + C.BAND_LABEL[b].toLowerCase() });
@@ -374,7 +407,7 @@
   // Ein Maßnahmenblock je Feld, nach Priorität sortiert
   function measureBlock(t, i, F) {
     var A = C.FIELD_ACTIONS[t.id];
-    return h('div', { class: 'rc-mb' }, [
+    var blk = h('div', { class: 'rc-mb' }, [
       h('div', { class: 'rc-mb-head' }, [
         h('span', { class: 'rc-prio', text: 'Priorität ' + (i + 1) }),
         levelChip(F[t.id])
@@ -386,6 +419,10 @@
       h('p', { class: 'rc-mb-meta' }, [h('b', { text: 'Erfolgsmessung: ' }), A.measure]),
       h('p', { class: 'rc-mb-meta' }, [h('b', { text: 'Zeithorizont: ' }), A.horizon])
     ]);
+    if (A.hint) {
+      blk.appendChild(h('p', { class: 'rc-mb-meta' }, [h('b', { text: 'Hinweis: ' }), A.hint.t + ' Quelle: ', srcLink(A.hint.src), '.']));
+    }
+    return blk;
   }
 
   function pitchSection() {
@@ -449,6 +486,20 @@
     thermo.appendChild(h('p', { class: 'rc-tipp-msg', text: guessMessage(F, tops) }));
     f.body.appendChild(thermo);
 
+    // Auswirkungen jenseits von Euro, passend zu den Schwerpunkten
+    var focusIds = tops.filter(function (t) { return F[t.id] >= 40; }).slice(0, 2).map(function (t) { return t.id; });
+    if (!focusIds.length) focusIds = [tops[0].id];
+    var rel = C.EFFECTS.filter(function (e) {
+      return e.id !== 'leitung' && e.fields.some(function (fl) { return focusIds.indexOf(fl) >= 0; });
+    }).slice(0, 3);
+    rel.push(C.EFFECTS.filter(function (e) { return e.id === 'leitung'; })[0]);
+    var fxSec = h('section', { class: 'rc-section-in' }, [
+      h('h3', { text: 'Was das für Führung, Prozesse und Kommunikation bedeutet' }),
+      h('p', { class: 'rc-sub', text: 'Zu Ihren Schwerpunkten gehören diese Auswirkungen, die nicht in Euro stehen:' })
+    ]);
+    rel.forEach(function (e) { fxSec.appendChild(effectRow(e)); });
+    f.body.appendChild(fxSec);
+
     // 3. Maßnahmen nach Priorität
     var ranked = tops.filter(function (t) { return F[t.id] >= 40; }).slice(0, 3);
     var plan = h('section', { class: 'rc-section-in' }, [h('h3', { text: 'Maßnahmen nach Priorität' })]);
@@ -504,6 +555,11 @@
       if (sec) sec.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     });
   });
+  var fxMount = document.getElementById('rc-effects-article');
+  if (fxMount) {
+    C.EFFECTS.forEach(function (e) { fxMount.appendChild(effectRow(e)); });
+    fxMount.appendChild(limitNote());
+  }
   // Erster Bildschirm ohne Scrollen und ohne Fokus-Wechsel
   path = [FLOW1[0]]; current = FLOW1[0]; render(current);
 })();

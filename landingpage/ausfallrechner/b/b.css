@@ -62,9 +62,13 @@
 .b-table td:first-child { font-weight: 600; color: var(--black); white-space: nowrap; }
 .b-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.1rem 0.45rem; border-radius: var(--radius); margin-right: 0.35rem; }
 .b-tag.ok { background: var(--bg-badge); color: var(--primary); }
-.b-tag.assume { background: #fdf0d8; color: #8a5a00; }
+.b-tag.assume { background: var(--bg-badge); color: var(--primary); }
 .b-sources { display: grid; gap: 0.5rem; font-size: 0.98rem; list-style: disc; padding-left: 1.2rem; }
 .b-sources a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+
+.b-fx { display: grid; max-width: 42rem; }
+.b-fx .rc-fx:first-child { border-top: 0; }
+.b-fx .rc-note { margin-top: 0.5rem; }
 
 /* Fuß: leise */
 .b-footer { border-top: 1px solid var(--border); padding: 2rem 0 3rem; font-size: 0.88rem; color: var(--grey); }

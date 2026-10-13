@@ -9,15 +9,15 @@
 
   /* ---------- Annahmen (sichtbar im Rechner, änderbar) ---------- */
   var CFG = {
-    vkProPlatz: 0.55,      // Vollkräfte Pflege und Betreuung je Platz (Faustwert, vor Livegang prüfen)
+    vkProPlatz: 0.55,      // Vollkräfte Pflege und Betreuung je Platz: Destatis 2023, 817.711 Beschäftigte (29 % Vollzeit) bei rund 800.000 vollstationär Versorgten, Teilzeit zu 50 % angesetzt, davon rund 80 bis 85 % Pflege und Betreuung
     kostenJeVk: 50000,     // Arbeitgeberkosten je Vollkraft und Jahr: Fachkraft 4.153 €/Monat (BA 2024), Hilfskraft ca. 2.800 €, +18 % Arbeitgeberanteil (IW), Mix 50:50 angenommen
     unsicherVk: 0.15,      // zusätzliche Unschärfe der Spanne, solange die Vollkräfte nur per Faustwert geschätzt sind
     unsicherKosten: 0.05,  // dito für die Kosten je Vollkraft
     folgeAnteil: 0.35,     // Folgekosten (Fluktuation, Folgeausfälle) bis zu x Prozent der Kernzahl
-    fzDefault: 0.65,       // Anteil der Ausfalltage in Entgeltfortzahlung (bis sechs Wochen), ohne eigene Frage
+    fzDefault: 0.65,       // Anteil der Ausfalltage in Entgeltfortzahlung: knapp 40 % der Fehltage entfallen auf Fälle über sechs Wochen (WIdO/AOK 2024), und auch dort zahlt der Arbeitgeber die ersten sechs Wochen, der Anteil liegt also über 60 %
     spreadLo: 0.9,         // Unschärfe der Ersatzkosten nach unten
     spreadHi: 1.1,         // Unschärfe der Ersatzkosten nach oben
-    tippProPlatz: 15000    // Maximum des Tipp-Reglers je Platz
+    tippProPlatz: 25000    // Maximum des Tipp-Reglers je Platz
   };
 
   /* ---------- Stufe 1: Antwortkarten ---------- */
@@ -43,6 +43,54 @@
     { t: 'Ja, einer', sub: 'Eine Person länger krank', fz: 0.6 },
     { t: 'Ein paar', sub: 'Zwei bis vier Personen', fz: 0.5 },
     { t: 'Mehrere', sub: 'Mehr als vier Personen', fz: 0.4 }
+  ];
+
+  /* ---------- Quellen (jede Zahl in der Auswertung verweist hierher) ---------- */
+  var SRC = {
+    rlp: { name: 'Landespflegekammer Rheinland-Pfalz und Institut für Demoskopie Allensbach', url: 'https://www.medi-karriere.de/magazin/einspringen-aus-dem-frei-noch-immer-die-regel/', note: 'Befragung vor Corona, rund 2.660 Pflegefachpersonen, zitiert nach medi-karriere.de' },
+    aiken: { name: 'Aiken et al., JAMA 2002', url: 'https://pubmed.ncbi.nlm.nih.gov/12387650/', note: 'Krankenhäuser in Pennsylvania, 10.184 Pflegekräfte, Querschnittsstudie' },
+    bostick: { name: 'Bostick et al., JAMDA 2006', url: 'https://pubmed.ncbi.nlm.nih.gov/16843237/', note: 'systematische Übersichtsarbeit zu Pflegeheimen' },
+    dguv: { name: 'DGUV, Fachbereich Gesundheit im Betrieb', url: 'https://dguv.de/fb-gesundheitimbetrieb/sachgebiete/sg-psyche/erfahrungsschatz/arbeitsorganisation/arbeitsintensitaet/index.jsp', note: 'Praxisbeispiel Altenpflege' },
+    backhaus: { name: 'Backhaus et al., JAMDA 2014', url: 'https://www.sciencedirect.com/science/article/abs/pii/S1525861013007962', note: 'Übersichtsarbeit zu Längsschnittstudien in Pflegeheimen' },
+    diakonie: { name: 'Ärzteblatt, 8. August 2022', url: 'https://www.aerzteblatt.de/nachrichten/136531/Springerkonzepte-fuer-Pflege-vorgeschlagen', note: 'Meldung der Katholischen Nachrichten-Agentur zu einem Springer-Projekt der Diakonie Bayern' }
+  };
+
+  /* ---------- Auswirkungen, die nicht in Euro stehen ---------- */
+  // fields: Felder, bei denen die Auswirkung besonders greift (für die Auswertung)
+  var EFFECTS = [
+    {
+      id: 'versorgung', title: 'Versorgung und Qualität', fields: ['B', 'E'],
+      text: 'Bei knapper Besetzung bleibt weniger Zeit für das, was nicht sofort drängt: Vorbeugung, Mobilisation, Dokumentation, Gespräche mit Bewohnern und Angehörigen.',
+      proofs: [{ t: 'In Pflegeheimen hängt eine höhere Besetzung, vor allem mit Fachkräften, mit besserer Versorgungsqualität zusammen, hohe Fluktuation mit schlechteren Ergebnissen für die Bewohner. Am deutlichsten reagieren Dekubitus, Gewichtsverlust und Funktionsfähigkeit.', src: 'bostick' }]
+    },
+    {
+      id: 'team', title: 'Team und Gesundheit', fields: ['A', 'B'],
+      text: 'Wer an freien Tagen einspringt, erholt sich weniger. Das erhöht das Risiko für Erschöpfung und weitere Ausfälle. Wie viele zusätzliche Ausfälle ein einzelner Ausfall auslöst, lässt sich für Pflegeheime nicht beziffern, dazu haben wir keine belastbare Messung gefunden.',
+      proofs: [
+        { t: '65 % der Pflegekräfte im Schichtdienst springen häufig bis sehr häufig in ihrer Freizeit ein, bei den übrigen Pflegekräften sind es 57 %.', src: 'rlp' },
+        { t: 'In Krankenhäusern erhöhte jeder zusätzliche Patient je Pflegekraft die Chance auf Burnout um 23 %.', src: 'aiken' }
+      ]
+    },
+    {
+      id: 'fuehrung', title: 'Führung und Prozesse', fields: ['A', 'C', 'D'],
+      text: 'Kurzfristige Umplanung bindet Leitungszeit: Anrufe, Absprachen, Dienstplanumbau. Übergaben werden knapper, Zuständigkeiten unklarer, und Entscheidungen werden vertagt, weil der Tag voll ist.',
+      proofs: [{ t: 'Die DGUV nennt häufige Unterbesetzung als Risiko für die Verlässlichkeit der Dienstplanung und empfiehlt unter anderem Dienstpläne mindestens zwei Wochen im Voraus sowie mindestens elf Stunden Ruhezeit.', src: 'dguv' }]
+    },
+    {
+      id: 'kommunikation', title: 'Kommunikation und Wissen', fields: ['D', 'E'],
+      text: 'Mit wechselnden Gesichtern und Aushilfen gehen Wissen über Bewohner und Absprachen verloren. Übergaben dauern länger, Informationen müssen mehrfach gegeben werden, Missverständnisse nehmen zu.',
+      proofs: []
+    },
+    {
+      id: 'bindung', title: 'Bindung und Personalgewinnung', fields: ['C', 'E'],
+      text: 'Dauerhafte Ausfälle belasten das Stammteam. Wer überlastet ist, denkt eher ans Aufhören, und jede Kündigung vergrößert die Lücke.',
+      proofs: [{ t: '42 % der Befragten denken manchmal wegen der Arbeitsbelastung daran, den Beruf zu verlassen.', src: 'rlp' }]
+    },
+    {
+      id: 'leitung', title: 'Für Sie als Leitung', fields: ['A', 'B', 'C', 'D', 'E'],
+      text: 'Sie arbeiten dann mehr im System als am System: Der Tag besteht aus Löcher stopfen, und für Führung, Entwicklung und Gespräche bleibt wenig Zeit. Dazu kommt Druck von zwei Seiten, vom Team und vom Träger. Auf Dauer wird das zu einer eigenen Belastung für Sie.',
+      proofs: []
+    }
   ];
 
   /* ---------- Rechenkern ---------- */
@@ -236,6 +284,7 @@
         'Den Dienstplan mindestens zwei Wochen im Voraus verbindlich veröffentlichen und spätere Änderungen nur mit Begründung zulassen.',
         'Springer-Schichten fest im Plan ausweisen, statt am freien Tag anzurufen.'
       ],
+      hint: { t: 'In einem Springer-Projekt der Diakonie Bayern sanken laut bayerischem Gesundheitsminister Krankmeldungen und Überstunden erheblich, Zahlen nannte er nicht.', src: 'diakonie' },
       measure: 'Zahl der Einspringe-Dienste pro Monat und Anteil der Dienste, die weniger als eine Woche vor Beginn geändert werden.',
       horizon: 'Regel in 30 Tagen eingeführt, Wirkung nach 8 bis 12 Wochen sichtbar.'
     },
@@ -344,7 +393,7 @@
 
   /* ---------- Export für Tests ---------- */
   var api = {
-    CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS, FIELD_ACTIONS: FIELD_ACTIONS, DATA_GAPS: DATA_GAPS,
+    CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS, FIELD_ACTIONS: FIELD_ACTIONS, DATA_GAPS: DATA_GAPS, EFFECTS: EFFECTS, SRC: SRC,
     calc: calc, score: score, fieldScores: fieldScores, detect: detect, dkCount: dkCount, topFields: topFields,
     band: band, BAND_LABEL: BAND_LABEL, BAND_TAG: BAND_TAG, qById: qById, isDk: isDk, buildLetter: buildLetter,
     fmt: fmt, eur: eur, dec1: dec1

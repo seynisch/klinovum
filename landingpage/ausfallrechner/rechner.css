@@ -154,7 +154,7 @@
 .rc-src-t { color: var(--grey); }
 .rc-srctag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.1rem 0.45rem; border-radius: var(--radius); width: fit-content; }
 .rc-srctag.ok { background: var(--bg-badge); color: var(--primary); }
-.rc-srctag.assume { background: #fdf0d8; color: #8a5a00; }
+.rc-srctag.assume { background: var(--bg-badge); color: var(--primary); }
 
 /* ---------- Auswertung: Maßnahmen und Gesprächsangebot ---------- */
 .rc-lvl { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: var(--radius); }
@@ -177,6 +177,15 @@
 .rc-pitch-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--primary-light); }
 .rc-pitch-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 0.25rem; }
 .b-page .rc-pitch { background: var(--white); border: 1px solid var(--border); }
+
+/* ---------- Auswirkungen jenseits von Euro ---------- */
+.rc-fx { display: grid; gap: 0.4rem; padding: 1rem 0 1.1rem; border-top: 1px solid var(--border); }
+.rc-fx-title { font-size: 1.12rem; font-weight: 600; line-height: 1.3; }
+.rc-fx-text { font-size: 1.02rem; line-height: 1.55; }
+.rc-fx-proof { font-size: 0.9rem; line-height: 1.5; color: var(--grey); background: var(--bg-light); padding: 0.6rem 0.8rem; border-radius: var(--radius); }
+.rc-fx-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; background: var(--bg-badge); color: var(--primary); padding: 0.1rem 0.45rem; border-radius: var(--radius); margin-right: 0.4rem; }
+.rc-fx-src a, .rc-note a, .rc-mb-meta a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.b-page .rc-fx-proof { background: var(--white); border: 1px solid var(--border); }
 
 /* ---------- Zwischenstand ---------- */
 .rc-fact { background: var(--bg-light); padding: 1.25rem 1.4rem; border-radius: var(--radius); display: grid; gap: 0.5rem; }
