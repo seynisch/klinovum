@@ -253,6 +253,7 @@
             <div class="hero-actions">
               <a href="#kontakt" class="btn btn-primary">Kostenfreies Erstgespräch vereinbaren <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
               <span class="hero-cta-note" data-cms="hero.cta_note">30 Min., vertraulich, ohne Verkaufsdruck</span>
+              <a href="/ausfallrechner/" class="hero-rechner-link">Für Pflegeeinrichtungen: Kostenfreier Ausfall-Rechner <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
             <div class="hero-proof" data-cms="hero.proof">
               <div class="hero-proof-item">
@@ -312,6 +313,50 @@
             <div class="logo-item"><img src="assets/logos/mercedes-benz.svg" alt="Mercedes-Benz Werksärzte" title="Mercedes-Benz Werksärzte" loading="lazy" decoding="async"></div>
             <div class="logo-item"><img src="assets/logos/franziskanerinnen.png" alt="Franziskanerinnen von Reute" loading="lazy" decoding="async"></div>
             <div class="logo-item"><img src="assets/logos/olgaschwestern-new.svg" alt="Diakonissenmutterhaus der Olgaschwestern" loading="lazy" decoding="async"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUSFALL-RECHNER (Angebot für Pflegeeinrichtungen) -->
+  <section class="rechner-teaser" id="ausfall-rechner">
+    <style>
+      .hero-rechner-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; padding-left: 0.25rem; font-size: 0.95rem; font-weight: 600; color: rgba(255,255,255,0.9); text-decoration: underline; text-underline-offset: 3px; }
+      .hero-rechner-link:hover { color: #fff; }
+      .rechner-teaser { background: var(--bg-light); padding: 5rem 0; }
+      .rechner-teaser-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+      .rechner-teaser h2 { margin-bottom: 1.25rem; }
+      .rechner-teaser-text { color: var(--grey); max-width: 38rem; margin-bottom: 1.75rem; }
+      .rechner-teaser-note { display: block; font-size: 0.85rem; color: var(--grey-light); margin-top: 0.75rem; }
+      .rechner-teaser-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: 0 8px 28px rgba(25, 89, 150, 0.08); }
+      .rechner-teaser-card h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+      .rechner-teaser-card ul { display: grid; gap: 0.85rem; }
+      .rechner-teaser-card li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 1rem; line-height: 1.45; }
+      .rechner-teaser-card li svg { flex-shrink: 0; margin-top: 0.1rem; }
+      @media (max-width: 900px) {
+        .rechner-teaser { padding: 3.5rem 0; }
+        .rechner-teaser-layout { grid-template-columns: 1fr; gap: 2rem; }
+      }
+    </style>
+    <div class="page-padding">
+      <div class="container">
+        <div class="rechner-teaser-layout">
+          <div>
+            <span class="badge">Kostenfrei für Pflegeeinrichtungen</span>
+            <h2>Was kosten Krankheitsausfälle in Ihrem Haus, und woran liegen sie?</h2>
+            <p class="rechner-teaser-text">Der Ausfall-Rechner nennt in 30 Sekunden die Kosten als Größenordnung und zeigt in einer Minute, wo der Handlungsbedarf am größten ist. Mit offenem Rechenweg und Quellen, ohne Anmeldung. Ihre Angaben bleiben in Ihrem Browser.</p>
+            <a href="/ausfallrechner/" class="btn btn-primary">Ausfall-Rechner starten <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="rechner-teaser-note">Für Pflegeheime, Altenheime und Betreutes Wohnen</span>
+          </div>
+          <div class="rechner-teaser-card">
+            <h3>Das erhalten Sie</h3>
+            <ul>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Die Kosten von Krankheitsausfällen als Spanne in Euro und in Vollkräften</span></li>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Die Folgen jenseits von Euro für Versorgung, Team, Führung und Leitung, mit Quellen</span></li>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Eine Auswertung mit priorisierten Maßnahmen</span></li>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 10l2 2 4-4" stroke="#268ced" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="9" stroke="#268ced" stroke-width="1.5"/></svg><span>Auf Wunsch einen kostenfreien Fahrplan für die kommenden Monate in einem Gespräch von 30 Minuten</span></li>
+            </ul>
           </div>
         </div>
       </div>
