@@ -60,38 +60,80 @@
   var EFFECTS = [
     {
       id: 'versorgung', title: 'Versorgung und Qualität', fields: ['B', 'E'],
-      text: 'Bei knapper Besetzung bleibt weniger Zeit für das, was nicht sofort drängt: Vorbeugung, Mobilisation, Dokumentation, Gespräche mit Bewohnern und Angehörigen.',
+      text: 'Wo Zeit fehlt, leidet zuerst, was nicht sofort drängt.',
+      points: [
+        'Weniger Zeit für Vorbeugung, Mobilisation und Begleitung beim Essen und Trinken',
+        'Dokumentation wird nachgeholt statt zeitnah geführt',
+        'Weniger Gespräche mit Bewohnern und Angehörigen'
+      ],
       proofs: [{ t: 'In Pflegeheimen hängt eine höhere Besetzung, vor allem mit Fachkräften, mit besserer Versorgungsqualität zusammen, hohe Fluktuation mit schlechteren Ergebnissen für die Bewohner. Am deutlichsten reagieren Dekubitus, Gewichtsverlust und Funktionsfähigkeit.', src: 'bostick' }]
     },
     {
       id: 'team', title: 'Team und Gesundheit', fields: ['A', 'B'],
-      text: 'Wer an freien Tagen einspringt, erholt sich weniger. Das erhöht das Risiko für Erschöpfung und weitere Ausfälle. Wie viele zusätzliche Ausfälle ein einzelner Ausfall auslöst, lässt sich für Pflegeheime nicht beziffern, dazu haben wir keine belastbare Messung gefunden.',
+      text: 'Wer an freien Tagen einspringt, erholt sich weniger. Das erhöht das Risiko für Erschöpfung und weitere Ausfälle.',
+      points: [
+        'Weniger Erholung zwischen den Diensten',
+        'Mehr Erschöpfung, damit ein höheres Risiko für den nächsten Ausfall',
+        'Wer oft einspringt, sagt irgendwann nicht mehr zu'
+      ],
+      note: 'Wie viele zusätzliche Ausfälle ein einzelner Ausfall auslöst, lässt sich für Pflegeheime nicht beziffern. Dazu haben wir keine belastbare Messung gefunden.',
       proofs: [
-        { t: '65 % der Pflegekräfte im Schichtdienst springen häufig bis sehr häufig in ihrer Freizeit ein, bei den übrigen Pflegekräften sind es 57 %.', src: 'rlp' },
-        { t: 'In Krankenhäusern erhöhte jeder zusätzliche Patient je Pflegekraft die Chance auf Burnout um 23 %.', src: 'aiken' }
+        { t: '65 % der Pflegekräfte im Schichtdienst springen häufig bis sehr häufig in ihrer Freizeit ein, bei den übrigen Pflegekräften sind es 57 %.', src: 'rlp', inStats: true },
+        { t: 'In Krankenhäusern erhöhte jeder zusätzliche Patient je Pflegekraft die Chance auf Burnout um 23 %.', src: 'aiken', inStats: true }
       ]
     },
     {
       id: 'fuehrung', title: 'Führung und Prozesse', fields: ['A', 'C', 'D'],
-      text: 'Kurzfristige Umplanung bindet Leitungszeit: Anrufe, Absprachen, Dienstplanumbau. Übergaben werden knapper, Zuständigkeiten unklarer, und Entscheidungen werden vertagt, weil der Tag voll ist.',
+      text: 'Kurzfristige Personalplanung sorgt für Drucksituationen, aus denen neue Ausfälle entstehen.',
+      points: [
+        'Der Dienstplan wird zur Daueraufgabe: Anrufe, Umplanung, Absprachen',
+        'Mehr Übergaben und unklare Schnittstellen kosten Zeit',
+        'Entscheidungen werden vertagt, weil der Tag voll ist'
+      ],
       proofs: [{ t: 'Die DGUV nennt häufige Unterbesetzung als Risiko für die Verlässlichkeit der Dienstplanung und empfiehlt unter anderem Dienstpläne mindestens zwei Wochen im Voraus sowie mindestens elf Stunden Ruhezeit.', src: 'dguv' }]
     },
     {
       id: 'kommunikation', title: 'Kommunikation und Wissen', fields: ['D', 'E'],
-      text: 'Mit wechselnden Gesichtern und Aushilfen gehen Wissen über Bewohner und Absprachen verloren. Übergaben dauern länger, Informationen müssen mehrfach gegeben werden, Missverständnisse nehmen zu.',
+      text: 'Mit jedem Wechsel geht Wissen verloren.',
+      points: [
+        'Wissen über Bewohner und Absprachen verschwindet mit den Menschen, die gehen oder nur aushelfen',
+        'Informationen müssen mehrfach gegeben werden',
+        'Missverständnisse und Rückfragen nehmen zu'
+      ],
       proofs: []
     },
     {
       id: 'bindung', title: 'Bindung und Personalgewinnung', fields: ['C', 'E'],
-      text: 'Dauerhafte Ausfälle belasten das Stammteam. Wer überlastet ist, denkt eher ans Aufhören, und jede Kündigung vergrößert die Lücke.',
-      proofs: [{ t: '42 % der Befragten denken manchmal wegen der Arbeitsbelastung daran, den Beruf zu verlassen.', src: 'rlp' }]
+      text: 'Dauerhafte Ausfälle belasten das Stammteam, und jede Kündigung vergrößert die Lücke.',
+      points: [
+        'Wer überlastet ist, denkt eher ans Aufhören',
+        'Die Verbleibenden tragen die Lücke und die Einarbeitung der Neuen',
+        'Neue Kräfte zu gewinnen und einzuarbeiten bindet noch mehr Zeit'
+      ],
+      proofs: [{ t: '42 % der Befragten denken manchmal wegen der Arbeitsbelastung daran, den Beruf zu verlassen.', src: 'rlp', inStats: true }]
     },
     {
       id: 'leitung', title: 'Für Sie als Leitung', fields: ['A', 'B', 'C', 'D', 'E'],
-      text: 'Sie arbeiten dann mehr im System als am System: Der Tag besteht aus Löcher stopfen, und für Führung, Entwicklung und Gespräche bleibt wenig Zeit. Dazu kommt Druck von zwei Seiten, vom Team und vom Träger. Auf Dauer wird das zu einer eigenen Belastung für Sie.',
+      text: 'Am Ende dieser Kette stehen Sie: mehr im System als am System.',
+      points: [
+        'Der Tag besteht aus Löcher stopfen, nicht aus Führen',
+        'Für Entwicklung, Gespräche und Entscheidungen bleibt wenig Zeit',
+        'Druck von zwei Seiten: vom Team und vom Träger',
+        'Auf Dauer wird das zu einer eigenen Belastung für Sie'
+      ],
       proofs: []
     }
   ];
+
+  // Die stärksten Belege, groß gezeigt
+  var FX_STATS = [
+    { n: '65 %', t: 'der Pflegekräfte im Schichtdienst springen häufig bis sehr häufig an freien Tagen ein', src: 'rlp' },
+    { n: '+23 %', t: 'höhere Chance auf Burnout je zusätzlichem Patienten pro Pflegekraft (Krankenhäuser)', src: 'aiken' },
+    { n: '42 %', t: 'denken manchmal wegen der Arbeitsbelastung an einen Berufsausstieg', src: 'rlp' }
+  ];
+
+  // Die Kette der Folgen, von der Ursache bis zur Leitung
+  var FX_CHAIN = ['Ausfall', 'Einspringen und Umplanung', 'Druck im Team', 'Qualität und Kommunikation leiden', 'Führung im Krisenmodus', 'Sie als Leitung'];
 
   /* ---------- Rechenkern ---------- */
   function ksRange(s) {
@@ -393,7 +435,7 @@
 
   /* ---------- Export für Tests ---------- */
   var api = {
-    CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS, FIELD_ACTIONS: FIELD_ACTIONS, DATA_GAPS: DATA_GAPS, EFFECTS: EFFECTS, SRC: SRC,
+    CFG: CFG, KS: KS, BRIDGE: BRIDGE, LANG: LANG, FIELDS: FIELDS, QUESTIONS: QUESTIONS, GUESS: GUESS, PATTERNS: PATTERNS, FIELD_ACTIONS: FIELD_ACTIONS, DATA_GAPS: DATA_GAPS, EFFECTS: EFFECTS, FX_STATS: FX_STATS, FX_CHAIN: FX_CHAIN, SRC: SRC,
     calc: calc, score: score, fieldScores: fieldScores, detect: detect, dkCount: dkCount, topFields: topFields,
     band: band, BAND_LABEL: BAND_LABEL, BAND_TAG: BAND_TAG, qById: qById, isDk: isDk, buildLetter: buildLetter,
     fmt: fmt, eur: eur, dec1: dec1

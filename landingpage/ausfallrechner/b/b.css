@@ -66,7 +66,7 @@
 .b-sources { display: grid; gap: 0.5rem; font-size: 0.98rem; list-style: disc; padding-left: 1.2rem; }
 .b-sources a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
 
-.b-fx { display: grid; max-width: 42rem; }
+.b-fx { display: grid; }
 .b-fx .rc-fx:first-child { border-top: 0; }
 .b-fx .rc-note { margin-top: 0.5rem; }
 

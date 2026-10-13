@@ -256,6 +256,7 @@
     var numEl = h('span', { class: 'rc-result-num', 'aria-live': 'polite' }, [reduced ? C.fmt(Math.round(c.mid / 5000) * 5000) : '…']);
     f.body.appendChild(h('div', { class: 'rc-result' }, [numEl, h('span', { class: 'rc-result-cur', text: ' €' })]));
     f.body.appendChild(h('p', { class: 'rc-result-range', text: 'Spanne: ' + C.eur(c.lo, 10000) + ' bis ' + C.eur(c.hi, 10000) + '. Eine Größenordnung, keine genaue Rechnung.' + (c.exakt ? '' : ' Mit Ihrer genauen Prozentzahl wird sie enger.') }));
+    f.body.appendChild(h('p', { class: 'rc-teaser', text: 'Das ist nur der sichtbare Preis. Was Ausfälle darüber hinaus kosten, nur nicht in Euro, steht direkt darunter.' }));
     if (!reduced) setTimeout(function () { countUp(numEl, c.mid, 1400); }, 900); else countUp(numEl, c.mid, 0);
 
     var tm = tippMessage(c);
@@ -265,13 +266,12 @@
       tile(C.dec1(c.av), 'Vollkräfte, die Sie bezahlen und nicht im Dienst haben'),
       tile(C.fmt(Math.round(c.perPlatzMonat / 10) * 10) + ' €', 'je Platz und Monat')
     ]));
-    var fx = h('section', { class: 'rc-section-in' }, [
-      h('h3', { text: 'Die Zahl ist nur der sichtbare Preis' }),
-      h('p', { class: 'rc-sub', text: 'Über die Kosten in Euro hinaus haben Ausfälle Folgen, die sich nicht beziffern lassen. Sie prägen Ihr Haus und Ihre Arbeit als Leitung:' })
-    ]);
-    C.EFFECTS.forEach(function (e) { fx.appendChild(effectRow(e)); });
-    fx.appendChild(limitNote());
-    f.body.appendChild(fx);
+    f.body.appendChild(fxBlock(C.EFFECTS, {
+      full: true,
+      eyebrow: 'Über die Euro hinaus',
+      heading: 'Die Zahl ist nur der sichtbare Preis',
+      sub: 'Die Kosten oben kann jeder nachrechnen. Was Ausfälle darüber hinaus kosten, steht in keiner Bilanz: für Versorgung, Team, Führung und Kommunikation und am Ende für Sie als Leitung.'
+    }));
     f.body.appendChild(calcDetails(c));
 
     f.foot.appendChild(h('div', { class: 'rc-next' }, [
@@ -379,17 +379,59 @@
     return h('a', { href: q.url, target: '_blank', rel: 'noopener', text: q.name });
   }
 
-  // Eine Auswirkung mit Beleg: Zahl, Quelle, Art der Studie
-  function effectRow(e) {
-    var kids = [h('strong', { class: 'rc-fx-title', text: e.title }), h('p', { class: 'rc-fx-text', text: e.text })];
+  // Eine Auswirkung als Karte: Aussage, konkrete Folgen, Belege
+  function effectCard(e, statsShown) {
+    var kids = [h('strong', { class: 'rc-fxc-title', text: e.title }), h('p', { class: 'rc-fxc-text', text: e.text })];
+    if (e.points && e.points.length) {
+      kids.push(h('ul', { class: 'rc-fxc-points' }, e.points.map(function (pt) { return h('li', { text: pt }); })));
+    }
+    if (e.note) kids.push(h('p', { class: 'rc-fxc-note', text: e.note }));
     e.proofs.forEach(function (p) {
+      if (statsShown && p.inStats) return;
       kids.push(h('p', { class: 'rc-fx-proof' }, [
         h('span', { class: 'rc-fx-tag', text: 'Beleg' }),
         p.t + ' ',
         h('span', { class: 'rc-fx-src' }, ['Quelle: ', srcLink(p.src), ' (' + C.SRC[p.src].note + ').'])
       ]));
     });
-    return h('div', { class: 'rc-fx' }, kids);
+    return h('div', { class: 'rc-fxc' + (e.id === 'leitung' ? ' is-last' : '') }, kids);
+  }
+
+  // Die stärksten Belege, groß gezeigt
+  function fxStats() {
+    return h('div', { class: 'rc-stats' }, C.FX_STATS.map(function (st) {
+      return h('div', { class: 'rc-stat' }, [
+        h('b', { text: st.n }),
+        h('span', { text: st.t }),
+        h('small', null, ['Quelle: ', srcLink(st.src)])
+      ]);
+    }));
+  }
+
+  // Kette der Folgen, von der Ursache bis zur Leitung
+  function fxChain() {
+    var chain = h('div', { class: 'rc-chain', role: 'list', 'aria-label': 'Kette der Folgen eines Ausfalls' });
+    C.FX_CHAIN.forEach(function (t, i) {
+      chain.appendChild(h('span', { class: 'n' + (i === C.FX_CHAIN.length - 1 ? ' last' : ''), role: 'listitem', text: t }));
+    });
+    return chain;
+  }
+
+  // Zweiter Hauptteil des Ergebnisses: Folgen jenseits von Euro
+  // opts.full: Kennzahlen und Kette zeigen; opts.heading: Überschrift im Block
+  function fxBlock(list, opts) {
+    var box = h('section', { class: 'rc-fxbox' });
+    if (opts.heading) {
+      box.appendChild(h('span', { class: 'rc-fx-eyebrow', text: opts.eyebrow || 'Über die Euro hinaus' }));
+      box.appendChild(h('h3', { class: 'rc-fxbox-title', text: opts.heading }));
+    }
+    if (opts.sub) box.appendChild(h('p', { class: 'rc-fxbox-sub', text: opts.sub }));
+    if (opts.full) { box.appendChild(fxStats()); box.appendChild(fxChain()); }
+    var grid = h('div', { class: 'rc-fxgrid' });
+    list.forEach(function (e) { grid.appendChild(effectCard(e, !!opts.full)); });
+    box.appendChild(grid);
+    box.appendChild(limitNote());
+    return box;
   }
 
   function limitNote() {
@@ -493,12 +535,12 @@
       return e.id !== 'leitung' && e.fields.some(function (fl) { return focusIds.indexOf(fl) >= 0; });
     }).slice(0, 3);
     rel.push(C.EFFECTS.filter(function (e) { return e.id === 'leitung'; })[0]);
-    var fxSec = h('section', { class: 'rc-section-in' }, [
-      h('h3', { text: 'Was das für Führung, Prozesse und Kommunikation bedeutet' }),
-      h('p', { class: 'rc-sub', text: 'Zu Ihren Schwerpunkten gehören diese Auswirkungen, die nicht in Euro stehen:' })
-    ]);
-    rel.forEach(function (e) { fxSec.appendChild(effectRow(e)); });
-    f.body.appendChild(fxSec);
+    f.body.appendChild(fxBlock(rel, {
+      full: false,
+      eyebrow: 'Über die Euro hinaus',
+      heading: 'Was das für Führung, Prozesse und Kommunikation bedeutet',
+      sub: 'Zu Ihren Schwerpunkten gehören diese Folgen, die in keiner Rechnung auftauchen:'
+    }));
 
     // 3. Maßnahmen nach Priorität
     var ranked = tops.filter(function (t) { return F[t.id] >= 40; }).slice(0, 3);
@@ -557,8 +599,7 @@
   });
   var fxMount = document.getElementById('rc-effects-article');
   if (fxMount) {
-    C.EFFECTS.forEach(function (e) { fxMount.appendChild(effectRow(e)); });
-    fxMount.appendChild(limitNote());
+    fxMount.appendChild(fxBlock(C.EFFECTS, { full: true }));
   }
   // Erster Bildschirm ohne Scrollen und ohne Fokus-Wechsel
   path = [FLOW1[0]]; current = FLOW1[0]; render(current);
