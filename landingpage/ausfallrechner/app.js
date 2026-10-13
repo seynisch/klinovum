@@ -136,6 +136,7 @@
   function next() { go(nextFrom(current)); }
 
   function render(key) {
+    removeSticky();
     if (key === 'haus') return rHaus();
     if (key === 'tipp') return rTipp();
     if (key === 'ks') return rKs();
@@ -467,9 +468,71 @@
     return blk;
   }
 
+  /* ---------- Gespräch vereinbaren: oben, mitlaufend und im Abschluss ---------- */
+  var stickyEl = null;
+  var stickyObs = null;
+
+  function removeSticky() {
+    if (stickyObs) { stickyObs.disconnect(); stickyObs = null; }
+    if (stickyEl) { stickyEl.remove(); stickyEl = null; }
+    document.body.classList.remove('rc-has-sticky');
+  }
+
+  // Link zum Terminbuchen; die Position hängt als Parameter an, damit sich die Wirkung je Platzierung messen lässt
+  function ctaHref(pos) {
+    var base = stage.getAttribute('data-cta') || '../erstgesprach';
+    return base + (base.indexOf('?') < 0 ? '?' : '&') + 'utm_source=ausfallrechner&utm_medium=auswertung&utm_content=' + pos;
+  }
+  function ctaButton(pos, label, extra) {
+    return h('a', { class: 'btn btn-primary btn-lg' + (extra ? ' ' + extra : ''), href: ctaHref(pos), target: '_blank', rel: 'noopener' }, [label, icon('arrow')]);
+  }
+
+  // Großer Block direkt unter der Einordnung, im ersten Bildschirm der Auswertung
+  function topCta() {
+    return h('section', { class: 'rc-cta-top' }, [
+      h('div', { class: 'rc-cta-top-copy' }, [
+        h('span', { class: 'rc-fx-eyebrow', text: 'Nächster Schritt' }),
+        h('h3', { text: 'Ihre Auswertung gemeinsam durchgehen' }),
+        h('p', { text: '30 Minuten: Ergebnisse prüfen, Prioritäten setzen und den Fahrplan für die nächsten 90 Tage festlegen.' })
+      ]),
+      h('div', { class: 'rc-cta-top-action' }, [
+        ctaButton('oben', 'Gespräch vereinbaren'),
+        h('span', { class: 'rc-cta-micro', text: 'Kostenfrei · vertraulich · ohne Verkaufsdruck · Termin direkt wählen' }),
+        h('button', { type: 'button', class: 'rc-link', onclick: function () { window.print(); } }, ['Auswertung vorher als PDF speichern'])
+      ])
+    ]);
+  }
+
+  // Mitlaufende Leiste am unteren Rand, solange kein anderer Gesprächs-Block im Bild ist
+  function showSticky() {
+    removeSticky();
+    stickyEl = h('div', { class: 'rc-sticky', role: 'complementary', 'aria-label': 'Gespräch vereinbaren' }, [
+      h('div', { class: 'rc-sticky-inner' }, [
+        h('div', { class: 'rc-sticky-text' }, [
+          h('b', { text: 'Auswertung gemeinsam besprechen' }),
+          h('small', { text: '30 Minuten, kostenfrei und vertraulich' })
+        ]),
+        ctaButton('leiste', 'Gespräch vereinbaren')
+      ])
+    ]);
+    document.body.appendChild(stickyEl);
+    document.body.classList.add('rc-has-sticky');
+    if ('IntersectionObserver' in window) {
+      var seen = [];
+      stickyObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var k = seen.indexOf(en.target);
+          if (en.isIntersecting && k < 0) seen.push(en.target);
+          if (!en.isIntersecting && k >= 0) seen.splice(k, 1);
+        });
+        if (stickyEl) stickyEl.classList.toggle('is-hidden', seen.length > 0);
+      });
+      Array.prototype.forEach.call(stage.querySelectorAll('.rc-cta-top, .rc-pitch'), function (el) { stickyObs.observe(el); });
+    }
+  }
+
+  // Abschluss der Auswertung: Was im Gespräch passiert, mit Button
   function pitchSection() {
-    var ctaHref = stage.getAttribute('data-cta') || '../erstgesprach';
-    var soft = stage.getAttribute('data-variant') === 'b';
     var items = [
       ['Ergebnisse prüfen', 'Stimmen Zahlen und Einordnung mit Ihrer Wahrnehmung überein, und was fehlt noch?'],
       ['Prioritäten setzen', 'Womit beginnen Sie, was braucht Vorlauf, und was erledigt sich von allein?'],
@@ -479,12 +542,10 @@
       h('h3', { text: 'Ergebnisse gemeinsam besprechen, Fahrplan festlegen' }),
       h('p', { text: 'Diese Auswertung beruht auf sechs Antworten und Richtwerten aus öffentlichen Quellen. In einem Gespräch gehen wir sie mit Ihnen konkret durch und legen fest, was in Ihrem Haus notwendig ist:' }),
       h('ul', { class: 'rc-pitch-list' }, items.map(function (it) { return h('li', null, [h('b', { text: it[0] + ': ' }), it[1]]); })),
-      soft
-        ? h('p', { class: 'rc-softcta' }, ['30 Minuten, vertraulich, ohne Verkaufsdruck. ', h('a', { href: ctaHref, text: 'Gespräch vereinbaren' })])
-        : h('div', { class: 'rc-pitch-cta' }, [
-            h('a', { class: 'btn btn-primary', href: ctaHref }, ['Gespräch vereinbaren', icon('arrow')]),
-            h('span', { class: 'rc-note', text: '30 Minuten, vertraulich, ohne Verkaufsdruck' })
-          ])
+      h('div', { class: 'rc-pitch-cta' }, [
+        ctaButton('abschluss', 'Gespräch vereinbaren'),
+        h('span', { class: 'rc-note', text: '30 Minuten, kostenfrei, vertraulich, ohne Verkaufsdruck' })
+      ])
     ]);
   }
 
@@ -500,6 +561,9 @@
       title: 'Auswertung Krankheitsausfälle',
       sub: 'Stand ' + today + '. Grundlage sind Ihre Angaben und Richtwerte aus öffentlichen Quellen.'
     });
+
+    // Gespräch vereinbaren: direkt unter der Überschrift, im ersten Bildschirm
+    f.body.appendChild(topCta());
 
     // 1. Einordnung
     f.body.appendChild(h('section', { class: 'rc-typ' }, [
@@ -580,6 +644,7 @@
 
     f.body.appendChild(h('p', { class: 'rc-note', text: 'Orientierung auf Basis Ihrer Angaben, keine Diagnose und keine Aussage über einzelne Personen. Alle Werte sind Schätzungen.' }));
 
+    showSticky();
     f.foot.appendChild(btn('Auswertung drucken oder als PDF speichern', 'btn-secondary', function () { window.print(); }));
     f.foot.appendChild(h('button', { type: 'button', class: 'rc-link rc-restart', text: 'Neu starten', onclick: restart }));
   }

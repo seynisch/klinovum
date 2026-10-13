@@ -221,6 +221,34 @@
 }
 @media print { .rc-fxc { break-inside: avoid; } }
 
+/* ---------- Gespräch-CTA ---------- */
+.btn-lg { padding: 1.1rem 2.2rem; font-size: 1.1rem; }
+.rc-cta-top { background: #eaf3fc; border: 1px solid var(--primary-light); border-radius: var(--radius); padding: 1.3rem 1.5rem 1.25rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.9fr); gap: 1.25rem 1.75rem; align-items: center; }
+.rc-cta-top-copy { display: grid; gap: 0.5rem; }
+.rc-cta-top h3 { font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 400; line-height: 1.15; margin: 0; }
+.rc-cta-top p { font-size: 1.02rem; line-height: 1.5; color: #333; }
+.rc-cta-top-action { display: grid; gap: 0.7rem; justify-items: start; }
+.rc-cta-top-action .btn { width: 100%; justify-content: center; white-space: nowrap; padding-inline: 1.2rem; }
+.rc-cta-micro { font-size: 0.85rem; line-height: 1.4; color: var(--grey); }
+.rc-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--white); border-top: 1px solid var(--border); box-shadow: 0 -6px 24px rgba(25, 89, 150, 0.14); padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px)); transition: transform 0.25s ease; }
+.rc-sticky.is-hidden { transform: translateY(115%); }
+.rc-sticky-inner { max-width: 52rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.rc-sticky-text b { display: block; font-size: 1.02rem; line-height: 1.25; }
+.rc-sticky-text small { font-size: 0.85rem; color: var(--grey); }
+.rc-sticky .btn { padding: 0.85rem 1.6rem; font-size: 1rem; white-space: nowrap; }
+body.rc-has-sticky { padding-bottom: 5.5rem; }
+.rc-pitch-cta .btn-lg { padding: 1rem 2rem; }
+@media (max-width: 760px) {
+  .rc-cta-top { grid-template-columns: 1fr; padding: 1.3rem 1.1rem 1.2rem; }
+}
+@media (max-width: 640px) {
+  .rc-sticky-text small { display: none; }
+  .rc-sticky-inner { gap: 0.6rem; }
+  .rc-sticky .btn { flex: 1 1 auto; justify-content: center; padding: 0.85rem 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .rc-sticky { transition: none; } }
+@media print { .rc-sticky, .rc-cta-top-action { display: none !important; } }
+
 /* ---------- Zwischenstand ---------- */
 .rc-fact { background: var(--bg-light); padding: 1.25rem 1.4rem; border-radius: var(--radius); display: grid; gap: 0.5rem; }
 .rc-fact p { font-size: 1.05rem; }
