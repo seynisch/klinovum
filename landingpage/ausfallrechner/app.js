@@ -8,6 +8,26 @@
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var params = new URLSearchParams(window.location.search);
+
+  // Vorbelegung aus dem Link in der Sitzung merken und die Adressleiste aufräumen:
+  // Der Link bleibt sauber, und ein Neuladen behält Haus und Plätze.
+  var PRE_KEY = 'rc_prefill';
+  if (params.has('haus') || params.has('plaetze')) {
+    try { sessionStorage.setItem(PRE_KEY, JSON.stringify({ haus: params.get('haus') || '', plaetze: params.get('plaetze') || '' })); } catch (e) { /* ohne Speicher weiter */ }
+  } else {
+    try {
+      var saved = JSON.parse(sessionStorage.getItem(PRE_KEY) || 'null');
+      if (saved) {
+        params = new URLSearchParams();
+        if (saved.haus) params.set('haus', saved.haus);
+        if (saved.plaetze) params.set('plaetze', saved.plaetze);
+      }
+    } catch (e) { /* ohne Speicher weiter */ }
+  }
+  if (window.location.search && window.history && window.history.replaceState) {
+    try { window.history.replaceState(null, '', window.location.pathname + window.location.hash); } catch (e) { /* egal */ }
+  }
+
   var hasPrefill = params.has('plaetze');
 
   var S = {

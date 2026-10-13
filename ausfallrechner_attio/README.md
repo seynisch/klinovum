@@ -39,6 +39,24 @@ Die Seite wurde geöffnet. Ob der Rechner ausgefüllt wurde, wissen wir nicht: D
   `/opt/klinovum/backup-index-20261013-before-rechner.html`.
 - Noch offen: Ein Prozess, der die Kennung (`lid` oder `e`) in die Links einbaut, die an Leads gehen.
 
+## Kurzlinks statt langer Links
+
+Lange Links mit Parametern wirken wie Phishing. Deshalb gibt es persönliche Kurzlinks:
+
+- Format: `https://klinovum.de/r/k3p9tm` (sechs Zeichen).
+- **Erzeugen:** n8n-Formular "Rechner-Link erstellen" (E-Mail der Person, Name des Hauses, Anzahl Plätze). Es legt die Person in Attio
+  an, falls es sie noch nicht gibt, erzeugt den Kurzlink und legt ihn als Notiz "Ausfall-Rechner-Link erstellt" an der Person ab.
+  Dieselben Angaben ergeben denselben Link. Adresse des Formulars: nur intern, steht nicht im Repo.
+- **Auflösen:** nginx auf klinovum.de gibt `/r/<code>` an einen n8n-Webhook weiter. Der leitet auf
+  `/ausfallrechner/?haus=...&plaetze=...&lid=...` weiter, nginx spiegelt diesen Aufruf wie oben an den Attio-Vermerk.
+  Ein unbekannter Code führt auf `/ausfallrechner/`, fällt n8n aus, ebenfalls.
+- **Aufräumen der Adresse:** `app.js` entfernt die Parameter nach dem Laden aus der Adressleiste (`history.replaceState`)
+  und merkt Haus und Plätze für die Sitzung, ein Neuladen behält die Vorbelegung.
+- Die Zuordnung Kurzcode zu Person liegt in den Workflow-Daten von n8n ("Klinovum: Rechner-Kurzlinks", Export in
+  `workflow_kurzlinks.json`, ohne Geheimnisse). Schablone für nginx: `nginx_snippet_kurzlink.conf`.
+- Test über die echte Domain am 13.10.2026: Kurzlink erzeugt, mit Browser-Kennung geöffnet, Weiterleitung unter 0,2 s,
+  Notiz "Ausfall-Rechner geöffnet" in Attio, Test-Person gelöscht.
+
 ## Abschalten
 
 - Workflow in n8n deaktivieren, oder

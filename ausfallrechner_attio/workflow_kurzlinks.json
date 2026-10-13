@@ -1,0 +1,273 @@
+{
+  "name": "Klinovum: Rechner-Kurzlinks",
+  "nodes": [
+    {
+      "id": "9984bf1f-0393-4213-9650-aa6b6877b6ea",
+      "name": "Kurzlink aufgerufen",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "__WEBHOOK_ID__",
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "__GEHEIM__",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "2eecb461-7025-446d-950c-e1cb8631b912",
+      "name": "Auflösen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst q = $input.first().json.query || {};\nconst c = String(q.c || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 12);\nconst sd = $getWorkflowStaticData('global');\nconst e = (sd.links || {})[c];\nlet location = '/ausfallrechner/';\nif (e) {\n  const p = [];\n  if (e.haus) p.push('haus=' + encodeURIComponent(e.haus));\n  if (e.plaetze) p.push('plaetze=' + e.plaetze);\n  if (e.lid) p.push('lid=' + e.lid);\n  location = '/ausfallrechner/' + (p.length ? '?' + p.join('&') : '');\n}\nreturn [{ json: { location } }];\n"
+      }
+    },
+    {
+      "id": "30dcb1d1-737c-4a5a-99f6-4e3ed23f5415",
+      "name": "Weiterleiten",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 302,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Location",
+                "value": "={{ $json.location }}"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "a0dae72d-eba1-4e62-8a7f-8e69b2eecf53",
+      "name": "Formular Rechner-Link",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "__WEBHOOK_ID__",
+      "parameters": {
+        "path": "__GEHEIM__",
+        "formTitle": "Rechner-Link erstellen",
+        "formDescription": "Erzeugt einen persönlichen Kurzlink zum Ausfall-Rechner. Öffnet die Person den Link, wird das in Attio vermerkt.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "E-Mail der Person",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Name des Hauses",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Anzahl Plätze",
+              "fieldType": "number"
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "a2b28e91-de99-4fbc-9342-730e58e6cd06",
+      "name": "Prüfen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {
+        "jsCode": "\nconst f = $input.first().json;\nconst email = String(f['E-Mail der Person'] || '').trim().toLowerCase();\nif (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email)) throw new Error('Ungültige E-Mail-Adresse');\nconst haus = String(f['Name des Hauses'] || '').replace(/\\s+/g, ' ').trim().slice(0, 80);\nlet plaetze = parseInt(f['Anzahl Plätze'], 10);\nif (!(plaetze >= 10 && plaetze <= 300)) plaetze = null;\nreturn [{ json: { email, haus, plaetze } }];\n"
+      }
+    },
+    {
+      "id": "139437da-613f-4897-ad27-320f7bc6dd35",
+      "name": "Person finden oder anlegen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        300
+      ],
+      "parameters": {
+        "method": "PUT",
+        "url": "https://api.attio.com/v2/objects/people/records?matching_attribute=email_addresses",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ data: { values: { email_addresses: [ $json.email ] } } }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__GEHEIM__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "1eac7933-0ce6-4e3e-8d7a-f0c46a246eb9",
+      "name": "Kurzlink",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        300
+      ],
+      "parameters": {
+        "jsCode": "\nconst ctx = $('Prüfen').first().json;\nconst rec = $input.first().json;\nconst lid = rec && rec.data && rec.data.id && rec.data.id.record_id;\nif (!lid) throw new Error('Person in Attio nicht gefunden oder angelegt');\nconst sd = $getWorkflowStaticData('global');\nsd.links = sd.links || {};\n// gleicher Link für dieselbe Person und dieselben Angaben\nfor (const [c, v] of Object.entries(sd.links)) {\n  if (v.lid === lid && v.haus === ctx.haus && v.plaetze === ctx.plaetze) {\n    return [{ json: { ...ctx, lid, code: c, url: 'https://klinovum.de/r/' + c, reused: true } }];\n  }\n}\nconst ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';\nlet code;\ndo {\n  code = Array.from({ length: 6 }, () => ALPHA[Math.floor(Math.random() * ALPHA.length)]).join('');\n} while (sd.links[code]);\nsd.links[code] = { lid, haus: ctx.haus, plaetze: ctx.plaetze, created: new Date().toISOString() };\nreturn [{ json: { ...ctx, lid, code, url: 'https://klinovum.de/r/' + code, reused: false } }];\n"
+      }
+    },
+    {
+      "id": "737bf454-fa3d-4af0-ab0a-82250e1cba3a",
+      "name": "Notiz mit Link",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.attio.com/v2/notes",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ data: { parent_object: 'people', parent_record_id: $json.lid, title: 'Ausfall-Rechner-Link erstellt', format: 'plaintext', content: 'Persönlicher Rechner-Link: ' + $json.url + '\\nHaus: ' + ($json.haus || '-') + '\\nPlätze: ' + ($json.plaetze || '-') + '\\nÖffnet die Person den Link, erscheint hier die Notiz Ausfall-Rechner geöffnet.' } }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__GEHEIM__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "eb6f504e-4e7f-443f-91f2-2660371aee9e",
+      "name": "Fertig anzeigen",
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        300
+      ],
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Link erstellt",
+        "completionMessage": "={{ 'Persönlicher Link für ' + $('Kurzlink').first().json.email + ': ' + $('Kurzlink').first().json.url + ' (auch als Notiz in Attio hinterlegt)' }}",
+        "options": {}
+      },
+      "webhookId": "__WEBHOOK_ID__"
+    }
+  ],
+  "connections": {
+    "Kurzlink aufgerufen": {
+      "main": [
+        [
+          {
+            "node": "Auflösen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auflösen": {
+      "main": [
+        [
+          {
+            "node": "Weiterleiten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formular Rechner-Link": {
+      "main": [
+        [
+          {
+            "node": "Prüfen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prüfen": {
+      "main": [
+        [
+          {
+            "node": "Person finden oder anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Person finden oder anlegen": {
+      "main": [
+        [
+          {
+            "node": "Kurzlink",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kurzlink": {
+      "main": [
+        [
+          {
+            "node": "Notiz mit Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notiz mit Link": {
+      "main": [
+        [
+          {
+            "node": "Fertig anzeigen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
