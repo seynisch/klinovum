@@ -30,12 +30,14 @@ Die Seite wurde geöffnet. Ob der Rechner ausgefüllt wurde, wissen wir nicht: D
 
 ## Stand 13.10.2026
 
-- n8n-Workflow: angelegt, aktiv, isoliert getestet (Erfolg, Duplikat, falsches Geheimnis, Skript, Bot, ungültige Kennung).
-- nginx auf klinovum.de: Konfiguration in `/opt/klinovum/nginx.conf` geschrieben und mit `nginx -t` geprüft,
-  **aber noch nicht neu geladen**. Aktivieren: `docker exec klinovum-klinovum-1 nginx -s reload`.
-  Danach einmal End-to-End testen (Test-Person anlegen, Link mit `lid` per Browser-Header aufrufen, Notiz prüfen, Test-Person löschen).
+- Aktiv und End-to-End getestet über die echte Domain: Aufruf von `klinovum.de/ausfallrechner/?lid=...` mit Browser-Kennung
+  legt nach rund zwei Sekunden die Notiz in Attio an. Ohne Kennung, mit Bot-Kennung oder ohne Browser-Header passiert nichts,
+  ein zweiter Aufruf innerhalb von sechs Stunden erzeugt keinen zweiten Vermerk. Die Antwortzeit der Seite bleibt bei rund 80 ms.
+- n8n-Workflow aktiv. nginx-Konfiguration in `/opt/klinovum/nginx.conf` (nur in-place beschreiben, die Datei ist in den Container gemountet)
+  und mit `nginx -s reload` geladen.
 - Sicherungen auf dem Server: `/opt/klinovum/nginx.conf.bak-20261013-152158`,
   `/opt/klinovum/backup-index-20261013-before-rechner.html`.
+- Noch offen: Ein Prozess, der die Kennung (`lid` oder `e`) in die Links einbaut, die an Leads gehen.
 
 ## Abschalten
 
