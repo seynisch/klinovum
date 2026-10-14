@@ -66,7 +66,10 @@ automatisch (Formular "Rechner-Link erstellen"), der Workflow setzt an der Perso
 - **Nächster Schritt am:** zwei Werktage nach dem Erzeugen (Wochenende übersprungen). Damit taucht die Person in der Ansicht
   "Nachfassen fällig" auf, sobald der Termin da ist.
 - **Letzte Aktivität:** heute.
-- Die Phase bleibt unverändert, eine Notiz "Ausfall-Rechner-Link erstellt" hält den Link fest.
+- **Phase:** springt auf "Anrufen" (eigene Spalte in der Pipeline-Ansicht), aber nur aus frühen Phasen (Neu, Angeschrieben,
+  Video gestartet, E-Mail beantwortet, Angerufen nicht erreicht, Terminierung). Qualifizierung, Abschluss, Kunde,
+  Kein Interesse und Blacklist bleiben unberührt. Nach dem Anruf setzt Emanuel die Phase von Hand weiter.
+- Eine Notiz "Ausfall-Rechner-Link erstellt" hält den Link fest.
 - Öffnet die Person den Link, kommt automatisch die Notiz "Ausfall-Rechner geöffnet". Emanuel sieht beim Anruf also,
   ob der Rechner schon angesehen wurde.
 

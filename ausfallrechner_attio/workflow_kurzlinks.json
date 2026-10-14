@@ -182,7 +182,7 @@
       "parameters": {
         "operation": "completion",
         "completionTitle": "Link erstellt",
-        "completionMessage": "={{ 'Persönlicher Link für ' + $('Kurzlink').first().json.email + ': ' + $('Kurzlink').first().json.url + ' (als Notiz in Attio hinterlegt). In Attio steht jetzt Nächster Schritt: Anrufen am ' + $('Nachfass-Termin').first().json.faellig }}",
+        "completionMessage": "={{ 'Persönlicher Link für ' + $('Kurzlink').first().json.email + ': ' + $('Kurzlink').first().json.url + ' (als Notiz in Attio hinterlegt). ' + ($('Nachfass-Termin').first().json.phaseSetzen ? 'Die Person steht jetzt in der Phase Anrufen (Nachfassen am ' : 'Nachfassen am ') + $('Nachfass-Termin').first().json.faellig + ($('Nachfass-Termin').first().json.phaseSetzen ? ').' : ', Phase unverändert.') }}",
         "options": {}
       },
       "webhookId": "__WEBHOOK_ID__"
@@ -197,7 +197,7 @@
         300
       ],
       "parameters": {
-        "jsCode": "\n// Nachfass-Termin: 2 Werktage nach Erstellung des Links (Wochenende überspringen)\nconst ctx = $('Kurzlink').first().json;\nconst d = new Date();\nlet n = 0;\nwhile (n < 2) {\n  d.setDate(d.getDate() + 1);\n  const w = d.getDay();\n  if (w !== 0 && w !== 6) n++;\n}\nconst iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');\nconst heute = new Date();\nconst h = heute.getFullYear() + '-' + String(heute.getMonth() + 1).padStart(2, '0') + '-' + String(heute.getDate()).padStart(2, '0');\nreturn [{ json: { ...ctx, faellig: iso, heute: h } }];\n"
+        "jsCode": "\n// Nachfass-Termin: 2 Werktage nach Erstellung des Links (Wochenende überspringen)\nconst ctx = $('Kurzlink').first().json;\nconst d = new Date();\nlet n = 0;\nwhile (n < 2) {\n  d.setDate(d.getDate() + 1);\n  const w = d.getDay();\n  if (w !== 0 && w !== 6) n++;\n}\nconst iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');\nconst heute = new Date();\nconst h = heute.getFullYear() + '-' + String(heute.getMonth() + 1).padStart(2, '0') + '-' + String(heute.getDate()).padStart(2, '0');\n// Phase nur in frühen Phasen auf \"Anrufen\" setzen, spätere und Absagen bleiben unberührt\nconst rec = $('Person finden oder anlegen').first().json;\nconst ph = rec && rec.data && rec.data.values && rec.data.values.phase && rec.data.values.phase[0] && rec.data.values.phase[0].status && rec.data.values.phase[0].status.title;\nconst FRUEH = [null, undefined, 'Neu', 'Angeschrieben', 'Video gestartet', 'Video-Seite geöffnet', 'E-Mail beantwortet', 'Angerufen, nicht erreicht', 'Terminierung', 'Anrufen'];\nconst phaseSetzen = FRUEH.includes(ph);\nreturn [{ json: { ...ctx, faellig: iso, heute: h, phaseSetzen } }];\n"
       }
     },
     {
@@ -224,7 +224,7 @@
         "options": {},
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ data: { values: { nachster_schritt: [{ value: 'Anrufen: Rechner-Link per Mail geschickt, nachfassen, 30-Min-Gespräch vereinbaren' }], nachster_schritt_am: [{ value: $json.faellig }], letzte_aktivitat: [{ value: $json.heute }] } } }) }}"
+        "jsonBody": "={{ JSON.stringify({ data: { values: { nachster_schritt: [{ value: 'Anrufen: Rechner-Link per Mail geschickt, nachfassen, 30-Min-Gespräch vereinbaren' }], nachster_schritt_am: [{ value: $json.faellig }], letzte_aktivitat: [{ value: $json.heute }], ...($json.phaseSetzen ? { phase: [{ status: 'Anrufen' }] } : {}) } } }) }}"
       }
     }
   ],
