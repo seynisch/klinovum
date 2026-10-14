@@ -224,7 +224,7 @@
         "options": {},
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ data: { values: { nachster_schritt: [{ value: 'ANRUFEN (Emanuel): Rechner-Link wurde per Mail geschickt, nachfassen und 30-Min-Gespräch vereinbaren' }], nachster_schritt_am: [{ value: $json.faellig }], letzte_aktivitat: [{ value: $json.heute }] } } }) }}"
+        "jsonBody": "={{ JSON.stringify({ data: { values: { nachster_schritt: [{ value: 'Anrufen: Rechner-Link per Mail geschickt, nachfassen, 30-Min-Gespräch vereinbaren' }], nachster_schritt_am: [{ value: $json.faellig }], letzte_aktivitat: [{ value: $json.heute }] } } }) }}"
       }
     }
   ],

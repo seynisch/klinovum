@@ -62,7 +62,7 @@ Lange Links mit Parametern wirken wie Phishing. Deshalb gibt es persönliche Kur
 Wer einen Rechner-Link per Mail bekommt, soll in Attio als "anrufen" sichtbar sein. Das passiert beim Erzeugen des Kurzlinks
 automatisch (Formular "Rechner-Link erstellen"), der Workflow setzt an der Person:
 
-- **Nächster Schritt:** "ANRUFEN (Emanuel): Rechner-Link wurde per Mail geschickt, nachfassen und 30-Min-Gespräch vereinbaren"
+- **Nächster Schritt:** "Anrufen: Rechner-Link per Mail geschickt, nachfassen, 30-Min-Gespräch vereinbaren" (steht auf den Karten der Pipeline-Ansicht)
 - **Nächster Schritt am:** zwei Werktage nach dem Erzeugen (Wochenende übersprungen). Damit taucht die Person in der Ansicht
   "Nachfassen fällig" auf, sobald der Termin da ist.
 - **Letzte Aktivität:** heute.
