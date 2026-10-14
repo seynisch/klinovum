@@ -57,6 +57,22 @@ Lange Links mit Parametern wirken wie Phishing. Deshalb gibt es persönliche Kur
 - Test über die echte Domain am 13.10.2026: Kurzlink erzeugt, mit Browser-Kennung geöffnet, Weiterleitung unter 0,2 s,
   Notiz "Ausfall-Rechner geöffnet" in Attio, Test-Person gelöscht.
 
+## Nachfassen: Mail raus, Emanuel ruft an
+
+Wer einen Rechner-Link per Mail bekommt, soll in Attio als "anrufen" sichtbar sein. Das passiert beim Erzeugen des Kurzlinks
+automatisch (Formular "Rechner-Link erstellen"), der Workflow setzt an der Person:
+
+- **Nächster Schritt:** "ANRUFEN (Emanuel): Rechner-Link wurde per Mail geschickt, nachfassen und 30-Min-Gespräch vereinbaren"
+- **Nächster Schritt am:** zwei Werktage nach dem Erzeugen (Wochenende übersprungen). Damit taucht die Person in der Ansicht
+  "Nachfassen fällig" auf, sobald der Termin da ist.
+- **Letzte Aktivität:** heute.
+- Die Phase bleibt unverändert, eine Notiz "Ausfall-Rechner-Link erstellt" hält den Link fest.
+- Öffnet die Person den Link, kommt automatisch die Notiz "Ausfall-Rechner geöffnet". Emanuel sieht beim Anruf also,
+  ob der Rechner schon angesehen wurde.
+
+Attio-Aufgaben (Tasks) lassen sich mit dem vorhandenen API-Zugang nicht anlegen (fehlender Scope), deshalb laufen die
+Felder "Nächster Schritt" und "Nächster Schritt am". Nach dem Anruf trägt Emanuel das Ergebnis dort ein.
+
 ## Abschalten
 
 - Workflow in n8n deaktivieren, oder

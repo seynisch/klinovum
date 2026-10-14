@@ -176,16 +176,56 @@
       "type": "n8n-nodes-base.form",
       "typeVersion": 1,
       "position": [
-        1200,
+        1680,
         300
       ],
       "parameters": {
         "operation": "completion",
         "completionTitle": "Link erstellt",
-        "completionMessage": "={{ 'Persönlicher Link für ' + $('Kurzlink').first().json.email + ': ' + $('Kurzlink').first().json.url + ' (auch als Notiz in Attio hinterlegt)' }}",
+        "completionMessage": "={{ 'Persönlicher Link für ' + $('Kurzlink').first().json.email + ': ' + $('Kurzlink').first().json.url + ' (als Notiz in Attio hinterlegt). In Attio steht jetzt Nächster Schritt: Anrufen am ' + $('Nachfass-Termin').first().json.faellig }}",
         "options": {}
       },
       "webhookId": "__WEBHOOK_ID__"
+    },
+    {
+      "id": "0289e2d3-ad9b-4aee-a725-a827a7865f86",
+      "name": "Nachfass-Termin",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        300
+      ],
+      "parameters": {
+        "jsCode": "\n// Nachfass-Termin: 2 Werktage nach Erstellung des Links (Wochenende überspringen)\nconst ctx = $('Kurzlink').first().json;\nconst d = new Date();\nlet n = 0;\nwhile (n < 2) {\n  d.setDate(d.getDate() + 1);\n  const w = d.getDay();\n  if (w !== 0 && w !== 6) n++;\n}\nconst iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');\nconst heute = new Date();\nconst h = heute.getFullYear() + '-' + String(heute.getMonth() + 1).padStart(2, '0') + '-' + String(heute.getDate()).padStart(2, '0');\nreturn [{ json: { ...ctx, faellig: iso, heute: h } }];\n"
+      }
+    },
+    {
+      "id": "6dfbf0fa-8366-4491-84d3-372ec4afdd94",
+      "name": "Nachfassen setzen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "__GEHEIM__",
+          "name": "Attio (Klinovum Vertriebsautopilot)"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://api.attio.com/v2/objects/people/records/' + $json.lid }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ data: { values: { nachster_schritt: [{ value: 'ANRUFEN (Emanuel): Rechner-Link wurde per Mail geschickt, nachfassen und 30-Min-Gespräch vereinbaren' }], nachster_schritt_am: [{ value: $json.faellig }], letzte_aktivitat: [{ value: $json.heute }] } } }) }}"
+      }
     }
   ],
   "connections": {
@@ -256,6 +296,28 @@
       ]
     },
     "Notiz mit Link": {
+      "main": [
+        [
+          {
+            "node": "Nachfass-Termin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nachfass-Termin": {
+      "main": [
+        [
+          {
+            "node": "Nachfassen setzen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nachfassen setzen": {
       "main": [
         [
           {
